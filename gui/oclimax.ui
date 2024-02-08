@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OCLIMAX</class>
+ <widget class="QWidget" name="OCLIMAX">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>697</width>
+    <height>484</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Set up simulation</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Phonon calculation</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Q mesh</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox_mesh1">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox_mesh2">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox_mesh3">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_ph_default">
+          <property name="text">
+           <string>Default</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_ph_save">
+          <property name="text">
+           <string>Save mesh</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>OCLIMAX parameters                                                                                                                  Single crystal parameters</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="7" column="2">
+         <widget class="QLineEdit" name="lineEdit_Emax"/>
+        </item>
+        <item row="10" column="2">
+         <widget class="QLineEdit" name="lineEdit_Eres"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Temperature</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QLineEdit" name="lineEdit_output"/>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLineEdit" name="lineEdit_temp"/>
+        </item>
+        <item row="1" column="4">
+         <widget class="QLineEdit" name="lineEdit_maxo"/>
+        </item>
+        <item row="6" column="2">
+         <widget class="QLineEdit" name="lineEdit_Emin"/>
+        </item>
+        <item row="7" column="4">
+         <widget class="QLineEdit" name="lineEdit_Qmax"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Emax</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>E Unit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="4">
+         <widget class="QLineEdit" name="lineEdit_Qres"/>
+        </item>
+        <item row="7" column="3">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Qmax</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Qmin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>Output</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>ERES</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QComboBox" name="comboBox_task">
+          <item>
+           <property name="text">
+            <string>1D VISION/TOSCA inc</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2D S(Q,E) inc</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1D VISION/TOSCA full</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2D S(Q,E) full</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2D S(Q,E) single crystal</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2D S(Q,Q) single crystal</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Others (defined in params file)</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QComboBox" name="comboBox_Eunit">
+          <item>
+           <property name="text">
+            <string>cm\u207B\u00B9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>meV</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>THz</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Task</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="3">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>dQ</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_19">
+          <property name="text">
+           <string>Mask</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="4">
+         <widget class="QLineEdit" name="lineEdit_dQ"/>
+        </item>
+        <item row="6" column="4">
+         <widget class="QLineEdit" name="lineEdit_Qmin"/>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>MAXO</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLineEdit" name="lineEdit_theta"/>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="label_21">
+          <property name="text">
+           <string>Theta</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLineEdit" name="lineEdit_mask"/>
+        </item>
+        <item row="9" column="2">
+         <widget class="QLineEdit" name="lineEdit_dE"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Emin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>dE</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="3">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>QRES</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Ecut</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>Ei</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2">
+         <widget class="QLineEdit" name="lineEdit_Ei"/>
+        </item>
+        <item row="5" column="4">
+         <widget class="QLineEdit" name="lineEdit_Ecut"/>
+        </item>
+        <item row="4" column="3">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Norm</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="4">
+         <widget class="QLineEdit" name="lineEdit_norm"/>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton_oclimax_load">
+          <property name="text">
+           <string>Load parameters</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_oclimax_default">
+          <property name="text">
+           <string>Use default</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_oclimax_save">
+          <property name="text">
+           <string>Save parameters</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="1">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_Q2"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_24">
+          <property name="text">
+           <string>Q2_bin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_25">
+          <property name="text">
+           <string>Q3_bin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Q1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_Q1"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Q3</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_23">
+          <property name="text">
+           <string>Q1_bin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_27">
+          <property name="text">
+           <string>x-axis</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="lineEdit_Q1bin"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Q2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_Q3"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_26">
+          <property name="text">
+           <string>E_bin</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_28">
+          <property name="text">
+           <string>y-axis</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="lineEdit_Q2bin"/>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLineEdit" name="lineEdit_Q3bin"/>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="lineEdit_Ebin"/>
+        </item>
+        <item row="7" column="1">
+         <widget class="QComboBox" name="comboBox_xaxis">
+          <item>
+           <property name="text">
+            <string>Q1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Q2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Q3</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QComboBox" name="comboBox_yaxis">
+          <item>
+           <property name="text">
+            <string>E</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Q1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Q2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Q3</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignRight">
+    <widget class="QToolButton" name="toolButton_help_oclimax">
+     <property name="text">
+      <string>Help</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_ph_default</sender>
+   <signal>clicked()</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>use_default_mesh()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>566</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ph_save</sender>
+   <signal>clicked()</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>save_mesh()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>676</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_oclimax_load</sender>
+   <signal>clicked()</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>load_parameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>217</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_oclimax_default</sender>
+   <signal>clicked()</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>use_default_parameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>403</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_oclimax_save</sender>
+   <signal>clicked()</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>save_parameters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>676</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_help_oclimax</sender>
+   <signal>clicked()</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>open_help_oclimax()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>687</x>
+     <y>474</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_task</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>task_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>348</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_Eunit</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>OCLIMAX</receiver>
+   <slot>unit_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>348</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>use_default_mesh()</slot>
+  <slot>save_mesh()</slot>
+  <slot>load_parameters()</slot>
+  <slot>use_default_parameters()</slot>
+  <slot>save_parameters()</slot>
+  <slot>open_help_oclimax()</slot>
+  <slot>task_changed()</slot>
+  <slot>unit_changed()</slot>
+ </slots>
+</ui>

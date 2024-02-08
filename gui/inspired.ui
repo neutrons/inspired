@@ -1,0 +1,1427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>INSPIRED</class>
+ <widget class="QMainWindow" name="INSPIRED">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>674</width>
+    <height>858</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Inspired</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="PREDtab">
+       <property name="toolTip">
+        <string>Make predictions with any given structure</string>
+       </property>
+       <attribute name="title">
+        <string>Predictor</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Make predictions with any given structure</string>
+       </attribute>
+       <attribute name="whatsThis">
+        <string>Make predictions with any given structure</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QGroupBox" name="groupBox_step1">
+          <property name="title">
+           <string>Step 1</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_upload_structure_dp">
+             <property name="text">
+              <string>Upload a structure file</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_structure_dp">
+             <property name="text">
+              <string>Structure file:                                                                             </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_step2">
+          <property name="title">
+           <string>Step 2</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QRadioButton" name="radioButton_predict_phonon_dos">
+               <property name="text">
+                <string>Predict Phonon DOS</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_partial_dos">
+               <property name="text">
+                <string>Partial DOS</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_predict_vision">
+             <property name="text">
+              <string>Predict VISION spectra</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_predict_2d_sqe">
+             <property name="text">
+              <string>Predict 2D S(Q,E)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_predict">
+             <property name="text">
+              <string>Predict</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_step3">
+          <property name="title">
+           <string>Step 3</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>180</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Energy unit in plot:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBox_plot_unit_dp">
+               <item>
+                <property name="text">
+                 <string>meV</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>cm\u207B\u00B9</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>THz</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBox_range_dp">
+               <property name="text">
+                <string>Customize range</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBox_interactive_dp">
+               <property name="text">
+                <string>Interactive 2D cross section plot</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="1" column="7">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Ymax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Xmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="8">
+              <widget class="QLineEdit" name="lineEdit_ymax_dp"/>
+             </item>
+             <item row="1" column="5">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Ymin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="6">
+              <widget class="QLineEdit" name="lineEdit_ymin_dp"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_xmin_dp"/>
+             </item>
+             <item row="1" column="4">
+              <widget class="QLineEdit" name="lineEdit_xmax_dp"/>
+             </item>
+             <item row="1" column="10">
+              <widget class="QLineEdit" name="lineEdit_zmin_dp"/>
+             </item>
+             <item row="1" column="11">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Zmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Xmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="9">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Zmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="12">
+              <widget class="QLineEdit" name="lineEdit_zmax_dp"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_plot_dp">
+             <property name="text">
+              <string>Plot</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QToolButton" name="toolButton_help_dp">
+          <property name="text">
+           <string>Help</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="DFTtab">
+       <property name="toolTip">
+        <string>Run calculations using a model in the database</string>
+       </property>
+       <attribute name="title">
+        <string>DFT database</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Run calculations using a model in the database</string>
+       </attribute>
+       <attribute name="whatsThis">
+        <string>Run calculations using a model in the database</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="radioButton_user_dft">
+            <property name="text">
+             <string>Use My DFT Data</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_database">
+            <property name="text">
+             <string>Search DFT Database</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_dft_folder">
+            <property name="text">
+             <string>Browse</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_dft_folder">
+            <property name="text">
+             <string>DFT folder:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Step 1</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <property name="horizontalSpacing">
+              <number>6</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Type:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="lineEdit_search_value"/>
+             </item>
+             <item row="3" column="2">
+              <widget class="QPushButton" name="pushButton_search">
+               <property name="text">
+                <string>Search</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QComboBox" name="comboBox_search_type">
+               <item>
+                <property name="text">
+                 <string>By composition</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>By MP ID</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>By space group</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>By space group number</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Value:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="checkBox_exact">
+               <property name="text">
+                <string>Exact match</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="tableView">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>233</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_11">
+          <property name="title">
+           <string>Step 2 (Optional)</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_17">
+           <item>
+            <widget class="QPushButton" name="pushButton_plot_dos_dft">
+             <property name="text">
+              <string>Plot phonon dispersion and DOS</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Step 3</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QPushButton" name="pushButton_setup_oclimax_dft">
+             <property name="text">
+              <string>Set up INS simulation</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Parameter file:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Step 4</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QPushButton" name="pushButton_run_oclimax_dft">
+             <property name="text">
+              <string>Run INS simulation</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Step 5</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <property name="rightMargin">
+              <number>180</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Energy unit in plot:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBox_plot_unit_dft">
+               <item>
+                <property name="text">
+                 <string>meV</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>cm\u207B\u00B9</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>THz</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBox_range_dft">
+               <property name="text">
+                <string>Customize range</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBox_interactive_dft">
+               <property name="text">
+                <string>Interactive 2D cross section plot</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="5">
+              <widget class="QLineEdit" name="lineEdit_ymin_dft"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_17">
+               <property name="text">
+                <string>Xmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="10">
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>Zmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Xmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="6">
+              <widget class="QLabel" name="label_18">
+               <property name="text">
+                <string>Ymax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>Ymin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="9">
+              <widget class="QLineEdit" name="lineEdit_zmin_dft"/>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLineEdit" name="lineEdit_xmax_dft"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEdit_xmin_dft"/>
+             </item>
+             <item row="0" column="7">
+              <widget class="QLineEdit" name="lineEdit_ymax_dft"/>
+             </item>
+             <item row="0" column="8">
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Zmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="11">
+              <widget class="QLineEdit" name="lineEdit_zmax_dft"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_plot_dft">
+             <property name="text">
+              <string>Plot INS spectrum</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QToolButton" name="toolButton_help_dft">
+          <property name="text">
+           <string>Help</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="MLFFtab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>MLFF</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Step 1</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QPushButton" name="pushButton_upload_structure_mlff">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Upload a structure file</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_structure_mlff">
+             <property name="text">
+              <string>Structure file:                                                                             </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="title">
+           <string>Step 2</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_12">
+           <item>
+            <widget class="QLabel" name="label_30">
+             <property name="text">
+              <string>Choose a pre-trained MLFF model (MACE[8-10], CHGNet[11], M3GNet[12]):</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboBox_mlff_model">
+             <item>
+              <property name="text">
+               <string>MACE Potential</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CHGNet Potential</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>M3GNet Potential</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_7">
+          <property name="title">
+           <string>Step 3</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_18">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_9">
+             <item row="0" column="5">
+              <widget class="QLineEdit" name="lineEdit_nmax_mlff"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_27">
+               <property name="text">
+                <string>Fmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_26">
+               <property name="text">
+                <string>Lmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_28">
+               <property name="text">
+                <string>Nmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="6">
+              <widget class="QLabel" name="label_29">
+               <property name="text">
+                <string>delta</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEdit_lmin_mlff"/>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLineEdit" name="lineEdit_fmax_mlff"/>
+             </item>
+             <item row="0" column="7">
+              <widget class="QLineEdit" name="lineEdit_delta_mlff"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_opt_phonon_mlff">
+             <property name="text">
+              <string>Structure optimization + Phonon calculation</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_8">
+          <property name="title">
+           <string>Step 4</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_16">
+           <item>
+            <widget class="QPushButton" name="pushButton_setup_oclimax_mlff">
+             <property name="text">
+              <string>Set up INS simulation</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_param_file_mlff">
+             <property name="text">
+              <string>Parameter file:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_9">
+          <property name="title">
+           <string>Step 5</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_13">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QPushButton" name="pushButton_run_oclimax_mlff">
+               <property name="text">
+                <string>Run INS simulation</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_10">
+          <property name="title">
+           <string>Step 6</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_15">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <property name="rightMargin">
+              <number>180</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Energy unit in plot:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBox_plot_unit_mlff">
+               <item>
+                <property name="text">
+                 <string>meV</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>cm\u207B\u00B9</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>THz</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBox_range_mlff">
+               <property name="text">
+                <string>Customize range</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBox_interactive_mlff">
+               <property name="text">
+                <string>Interactive 2D cross section plot</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_8">
+             <item row="0" column="9">
+              <widget class="QLineEdit" name="lineEdit_zmin_mlff"/>
+             </item>
+             <item row="0" column="7">
+              <widget class="QLineEdit" name="lineEdit_ymax_mlff"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_20">
+               <property name="text">
+                <string>Xmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="10">
+              <widget class="QLabel" name="label_25">
+               <property name="text">
+                <string>Zmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="8">
+              <widget class="QLabel" name="label_22">
+               <property name="text">
+                <string>Zmin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="6">
+              <widget class="QLabel" name="label_23">
+               <property name="text">
+                <string>Ymax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLineEdit" name="lineEdit_xmax_mlff"/>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_21">
+               <property name="text">
+                <string>Ymin</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEdit_xmin_mlff"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Xmax</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QLineEdit" name="lineEdit_ymin_mlff"/>
+             </item>
+             <item row="0" column="11">
+              <widget class="QLineEdit" name="lineEdit_zmax_mlff"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_plot_mlff">
+             <property name="text">
+              <string>Plot INS spectrum</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QToolButton" name="toolButton_help_mlff">
+          <property name="text">
+           <string>Help</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="abouttab">
+       <attribute name="title">
+        <string>About</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_14">
+        <item>
+         <widget class="QLabel" name="label_title">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Century Gothic'; font-size:14pt; font-weight:700; color:#000000;&quot;&gt;Inelastic Neutron Scattering Prediction for&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Century Gothic'; font-size:14pt; font-weight:700; color:#000000;&quot;&gt;Instantaneous Results and Experimental Design &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Century Gothic'; font-size:14pt; font-weight:700; color:#000000;&quot;&gt;(INSPIRED)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="textBrowser">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Authors: Bowen Han (hanb1@ornl.gov), Andrei Savici (saviciat@ornl.gov), Yongqiang Cheng (chengy@ornl.gov)&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Citation:&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Important References:&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1.            Cheng, Y.;  Wu, G.;  Pajerowski, D. M.;  Stone, M. B.;  Savici, A. T.;  Li, M.; Ramirez-Cuesta, A. J., Direct prediction of inelastic neutron scattering spectra from the crystal structure. &lt;span style=&quot; font-style:italic;&quot;&gt;Machine Learning: Science and Technology &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;4&lt;/span&gt; (1), 015010. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2.            Cheng, Y.;  Stone, M. B.; Ramirez-Cuesta, A. J., A database of synthetic inelastic neutron scattering spectra from molecules and crystals. &lt;span style=&quot; font-style:italic;&quot;&gt;Scientific Data &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;10&lt;/span&gt; (1), 54. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3.            Chen, Z.;  Andrejevic, N.;  Smidt, T.;  Ding, Z.;  Xu, Q.;  Chi, Y.-T.;  Nguyen, Q. T.;  Alatas, A.;  Kong, J.; Li, M., Direct Prediction of Phonon Density of States With Euclidean Neural Networks. &lt;span style=&quot; font-style:italic;&quot;&gt;Advanced Science &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2021,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;8&lt;/span&gt; (12), 2004214. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4.            Togo, A. &lt;a href=&quot;http://phonondb.mtl.kyoto-u.ac.jp/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0078d7;&quot;&gt;http://phonondb.mtl.kyoto-u.ac.jp/&lt;/span&gt;&lt;/a&gt;. (accessed 08/30/2022). &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5.            Togo, A.; Tanaka, I., First principles phonon calculations in materials science. &lt;span style=&quot; font-style:italic;&quot;&gt;Scripta Materialia &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2015,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;108&lt;/span&gt;, 1-5. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6.            Cheng, Y.;  Daemen, L.;  Kolesnikov, A.; Ramirez-Cuesta, A., Simulation of inelastic neutron scattering spectra using OCLIMAX. &lt;span style=&quot; font-style:italic;&quot;&gt;Journal of chemical theory and computation &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2019,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;15&lt;/span&gt; (3), 1974-1982. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;7.            Hjorth Larsen, A.;  Jørgen Mortensen, J.;  Blomqvist, J.;  Castelli, I. E.;  Christensen, R.;  Dułak, M.;  Friis, J.;  Groves, M. N.;  Hammer, B.;  Hargus, C.;  Hermes, E. D.;  Jennings, P. C.;  Bjerre Jensen, P.;  Kermode, J.;  Kitchin, J. R.;  Leonhard Kolsbjerg, E.;  Kubal, J.;  Kaasbjerg, K.;  Lysgaard, S.;  Bergmann Maronsson, J.;  Maxson, T.;  Olsen, T.;  Pastewka, L.;  Peterson, A.;  Rostgaard, C.;  Schiøtz, J.;  Schütt, O.;  Strange, M.;  Thygesen, K. S.;  Vegge, T.;  Vilhelmsen, L.;  Walter, M.;  Zeng, Z.; Jacobsen, K. W., The atomic simulation environment—a Python library for working with atoms. &lt;span style=&quot; font-style:italic;&quot;&gt;Journal of Physics: Condensed Matter &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2017,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;29&lt;/span&gt; (27), 273002. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;8.            Batatia, I.;  Kovacs, D. P.;  Simm, G.;  Ortner, C.; Csányi, G., MACE: Higher order equivariant message passing neural networks for fast and accurate force fields. &lt;span style=&quot; font-style:italic;&quot;&gt;Advances in Neural Information Processing Systems &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;35&lt;/span&gt;, 11423-11436. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;9.            Batatia, I.;  Batzner, S.;  Kovács, D. P.;  Musaelian, A.;  Simm, G. N.;  Drautz, R.;  Ortner, C.;  Kozinsky, B.; Csányi, G., The design space of E (3)-equivariant atom-centered interatomic potentials. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2205.06643 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022&lt;/span&gt;. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;10.         Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2401.00096 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023&lt;/span&gt;. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;11.         Deng, B.;  Zhong, P.;  Jun, K.;  Riebesell, J.;  Han, K.;  Bartel, C. J.; Ceder, G., CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Machine Intelligence &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;5&lt;/span&gt; (9), 1031-1041. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;12.         Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Computational Science &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;2&lt;/span&gt; (11), 718-728. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_cwd">
+      <property name="text">
+       <string>Current Working Directory:</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>674</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionSet_Working_Directory"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="minimumSize">
+    <size>
+     <width>420</width>
+     <height>0</height>
+    </size>
+   </property>
+  </widget>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionWorking_Directory">
+   <property name="text">
+    <string>Working Directory</string>
+   </property>
+  </action>
+  <action name="actionUser_Manual">
+   <property name="text">
+    <string>User Manual</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionSet_Working_Directory">
+   <property name="text">
+    <string>Set Working Directory</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionSet_Working_Directory</sender>
+   <signal>triggered()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>setup_working_directory()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_search</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>search_crystal_structure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>355</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_help_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>open_help_mlff()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>848</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>567</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_setup_oclimax_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>setup_oclimax_dft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_plot_dp</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>plot_spec_dp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>810</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>459</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_predict_vision</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>predict_selection_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>500</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_predict_2d_sqe</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>predict_selection_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>197</x>
+     <y>526</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>423</x>
+     <y>258</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_opt_phonon_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>opt_and_dos_cal_mlff()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_upload_structure_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>upload_structure_mlff()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_help_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>open_help_dft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>848</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_plot_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>plot_spec_mlff()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>286</x>
+     <y>810</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>473</x>
+     <y>486</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_predict_phonon_dos</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>predict_selection_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>234</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>419</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_run_oclimax_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>run_oclimax_dft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>133</x>
+     <y>602</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>427</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_user_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>cal_with_userfile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>140</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_predict</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>run_prediction()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>556</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>456</x>
+     <y>330</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_run_oclimax_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>run_oclimax_mlff()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>444</x>
+     <y>579</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>456</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_upload_structure_dp</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>upload_structure_dp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>357</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>456</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_setup_oclimax_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>setup_oclimax_mlff()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_help_dp</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>open_help_dp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>848</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>590</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_database</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>cal_with_dftdb()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_plot_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>plot_spec_dft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>133</x>
+     <y>810</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_dft_folder</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>choose_dft_folder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>105</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_plot_dos_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>plot_dos_disp_dft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>441</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>487</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>upload_structure_dp()</slot>
+  <slot>run_prediction()</slot>
+  <slot>plot_spec_dp()</slot>
+  <slot>predict_selection_changed()</slot>
+  <slot>setup_oclimax_dft()</slot>
+  <slot>setup_working_directory()</slot>
+  <slot>search_crystal_structure()</slot>
+  <slot>run_oclimax_dft()</slot>
+  <slot>plot_spec_dft()</slot>
+  <slot>open_help_dp()</slot>
+  <slot>upload_structure_mlff()</slot>
+  <slot>opt_and_dos_cal_mlff()</slot>
+  <slot>plot_dos_disp_mlff()</slot>
+  <slot>setup_oclimax_mlff()</slot>
+  <slot>run_oclimax_mlff()</slot>
+  <slot>plot_spec_mlff()</slot>
+  <slot>cal_with_dftdb()</slot>
+  <slot>cal_with_userfile()</slot>
+  <slot>open_help_dft()</slot>
+  <slot>open_help_mlff()</slot>
+  <slot>plot_unit_changed()</slot>
+  <slot>choose_dft_folder()</slot>
+  <slot>plot_dos_disp_dft()</slot>
+ </slots>
+</ui>
