@@ -68,7 +68,7 @@ class MLFFWorker():
             final_structure = relax_results['final_structure']
             atoms_relaxed = AseAtomsAdaptor().get_atoms(final_structure)
         elif potential_index == 2:
-            pot_file = os.path.join(self.mlff_folder, 'matgl')
+            pot_file = os.path.join(self.mlff_folder, 'M3GNet-MP-2021.2.8-PES')
             pot = matgl.load_model(pot_file)
             calculator = M3GNetCalculator(pot)
             relaxer = Relaxer(potential=pot,relax_cell=False)

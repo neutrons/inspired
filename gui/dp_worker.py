@@ -1,12 +1,12 @@
+import os
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
-from load_data import build_data
-from latent_space_model import PeriodicNetwork, Decoder
 import torch_geometric as tg
 from torch.utils.data import Dataset, DataLoader
-import os
+from load_data import build_data
+from latent_space_model import PeriodicNetwork, Decoder
 
 
 class DPWorker():
@@ -14,7 +14,9 @@ class DPWorker():
         self.data = {}
         self.model_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'model')
         self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
-        
+        self.pdos = None
+        self.timestr = None
+ 
     def nnmodel(self,em_dim,out_dim,r_max,nneigh,model_file,pool):
         model = PeriodicNetwork(
             in_dim=118,  # dimension of one-hot encoding of atom type

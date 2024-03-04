@@ -29,6 +29,7 @@ class OCLIMAX(QDialog):
         os.chdir(path)
     
     def use_default_mesh(self):
+        self.ui.lineEdit_bscale.setText('1.0')
         self.ui.spinBox_mesh1.setValue(int(self.oclimax_params.default_mesh[0]))
         self.ui.spinBox_mesh2.setValue(int(self.oclimax_params.default_mesh[1]))
         self.ui.spinBox_mesh3.setValue(int(self.oclimax_params.default_mesh[2]))
@@ -59,6 +60,8 @@ class OCLIMAX(QDialog):
         fname, _ = QFileDialog.getSaveFileName(self, 'Save file',
                                                '', "OCLIMAX parameter files (*.params)")
         if fname:
+            if not fname.endswith('.params'):
+                fname += '.params'
             self.params_file_name = fname
             self.oclimax_params.write_new_parameter_file(fname)
         else:
@@ -176,11 +179,9 @@ class OCLIMAX(QDialog):
         self.ui.lineEdit_Emin.setEnabled(not enable)
         self.ui.lineEdit_Emax.setEnabled(not enable)
         self.ui.lineEdit_dE.setEnabled(not enable)
-        self.ui.lineEdit_Eres.setEnabled(not enable)
         self.ui.lineEdit_Qmin.setEnabled(not enable)
         self.ui.lineEdit_Qmax.setEnabled(not enable)
         self.ui.lineEdit_dQ.setEnabled(not enable)
-        self.ui.lineEdit_Qres.setEnabled(not enable)
         self.ui.lineEdit_maxo.setEnabled(not enable)
 
     def task_changed(self):
@@ -198,7 +199,7 @@ class OCLIMAX(QDialog):
             self.ui.lineEdit_maxo.setText(self.oclimax_params.get_param('MAXO'))
             self.enable_disable_single_crystal_parameters(False)
 
-    def unit_changed(self):
+    def unit_changed(self):  # No action for now
         if self.ui.comboBox_Eunit.currentIndex() == 1:
             return
 
@@ -245,19 +246,46 @@ class OCLIMAX(QDialog):
 
     def run_oclimax_sc(self):
         timestr = time.strftime("%Y%m%d-%H%M%S")
+        task = self.oclimax_params.get_param('TASK')
         Q1 = self.oclimax_params.get_param('Q1').split()
         Q2 = self.oclimax_params.get_param('Q2').split()
         Q3 = self.oclimax_params.get_param('Q3').split()
-        Q = np.array([[float(Q1[0]),float(Q1[1]),float(Q1[2])],[float(Q2[0]),float(Q2[1]),float(Q2[2])],[float(Q3[0]),float(Q3[1]),float(Q3[2])]])
         Qb1 = self.oclimax_params.get_param('Q1bin').split()
         Qb2 = self.oclimax_params.get_param('Q2bin').split()
         Qb3 = self.oclimax_params.get_param('Q3bin').split()
-        Qb = np.array([[float(Qb1[0]),float(Qb1[1]),float(Qb1[2])],[float(Qb2[0]),float(Qb2[1]),float(Qb2[2])],[float(Qb3[0]),float(Qb3[1]),float(Qb3[2])]])
         Eb = self.oclimax_params.get_param('Ebin').split()
-        Eb = np.array([float(Eb[0]),float(Eb[1]),float(Eb[2])])
+        for param in [Q1,Q2,Q3,Qb1,Qb2,Qb3]:
+            if len(param)!=3:
+                print('ERROR: Check Q parameters (each should have three numbers)')
+                return
+        for param in [Qb1,Qb2,Qb3]:
+            if float(param[0])>float(param[2]):
+                print('ERROR: Check Qbin parameters ([Qmin,Qstep,Qmax])')
+                return
+            if float(param[1])<0:
+                print('ERROR: Check Qbin parameters (Qstep cannot be negative)')
+                return
+            if float(param[1])==0:
+                if float(param[0])!=float(param[2]):
+                    print('ERROR: Check Qbin parameters (Qstep can be zero only if Qmin=Qmax)')
+                    return
+                else:
+                    param[1]=1
+        if len(Eb)!=3:
+            if task==3 and len(Eb)==2:
+                Eb = np.array([float(Eb[0]),(float(Eb[1])-float(Eb[0]))/2.0,float(Eb[1])])
+            else:
+                print('ERROR: Check E parameter ([Emin,Estep,Emax])')
+                return
+        else:
+            Eb = np.array([float(Eb[0]),float(Eb[1]),float(Eb[2])])
+        Q = np.array([[float(Q1[0]),float(Q1[1]),float(Q1[2])],[float(Q2[0]),float(Q2[1]),float(Q2[2])],[float(Q3[0]),float(Q3[1]),float(Q3[2])]])
+        Qb = np.array([[float(Qb1[0]),float(Qb1[1]),float(Qb1[2])],[float(Qb2[0]),float(Qb2[1]),float(Qb2[2])],[float(Qb3[0]),float(Qb3[1]),float(Qb3[2])]])
+        bscale = float(self.ui.lineEdit_bscale.displayText())
+        print('INFO: BAND_POINTS scaling factor set to '+str(bscale))
+        dim = subprocess.run(["sed -n '/^DIM/p' mesh.conf"], shell=True, capture_output=True, text=True).stdout
         # S(Q,E)
-        task = self.oclimax_params.get_param('TASK')
-        print('INFO: Running OCLIMAX simulation for single crystals, expect multiple calculation loops. Press Ctrl+C in terminal to abort.')
+        print('INFO: Running OCLIMAX simulation for single crystals, expect multiple calculation cycles. Press Ctrl+C in terminal to abort.')
         if task == 2:
             xaxis = self.oclimax_params.get_param('x-axis')
             s = [0,1,2]
@@ -268,8 +296,6 @@ class OCLIMAX(QDialog):
             qQ1 = Q[s[0]]
             qQ2 = Q[s[1]]
 
-            with open("mesh.conf") as f:
-                dim = f.readline()
             try:
                 result=subprocess.run(["phonopy", "-c", "POSCAR-unitcell", "mesh.conf"], text=True) # run phononpy
             except:
@@ -284,15 +310,20 @@ class OCLIMAX(QDialog):
             q1=np.linspace(Qb[s[0]][0],Qb[s[0]][2],int((Qb[s[0]][2]-Qb[s[0]][0])/Qb[s[0]][1])+1)
             q2=np.linspace(Qb[s[1]][0],Qb[s[1]][2],int((Qb[s[1]][2]-Qb[s[1]][0])/Qb[s[1]][1])+1)
 
+            count = 0
+            npoint = max(int(bscale*1.0/Qxb[1])+1,int(bscale*(Eb[2]-Eb[0])/Eb[1])+1)
             for i in range(len(q1)):
                 for j in range(len(q2)):
+                    count += 1
+                    print('INFO: Running cycle '+str(count)+' of '+str(len(q1)*len(q2)))
                     f = open('band.conf','w')
                     print(dim, file=f)
                     p1 = -0.5*Qx+q1[i]*qQ1+q2[j]*qQ2
                     p2 = q1[i]*qQ1+q2[j]*qQ2
                     p3 = 0.5*Qx+q1[i]*qQ1+q2[j]*qQ2
                     print('BAND = ',p1[0],p1[1],p1[2],p2[0],p2[1],p2[2],p3[0],p3[1],p3[2], file=f)
-                    print('BAND_POINTS = 101', file=f)
+                    print('BAND_POINTS = ',npoint, file=f)
+                    print('# bscale '+str(bscale), file=f)
                     print('FC_SYMMETR= TRUE', file=f)
                     print('EIGENVECTORS = .true.', file=f)
                     if os.path.isfile("FORCE_CONSTANTS"):
@@ -368,9 +399,6 @@ class OCLIMAX(QDialog):
             Qyb = Qb[yaxis]
             qQ1 = Q[s[0]]
 
-            with open("mesh.conf") as f:
-                dim = f.readline()
-
             try:
                 result=subprocess.run(["phonopy", "-c", "POSCAR-unitcell", "mesh.conf"], text=True) # run phononpy
             except:
@@ -386,9 +414,10 @@ class OCLIMAX(QDialog):
             #print(q1)
 
             for i in range(len(q1)):
+                print('INFO: Running cycle '+str(i+1)+' of '+str(len(q1)))
                 f = open('QPOINTS','w')
-                qx=np.linspace(-0.5,0.5,int(1.0/Qxb[1])+1)
-                qy=np.linspace(-0.5,0.5,int(1.0/Qyb[1])+1)
+                qx=np.linspace(-0.5,0.5,int(bscale*1.0/Qxb[1])+1)
+                qy=np.linspace(-0.5,0.5,int(bscale*1.0/Qyb[1])+1)
                 print(len(qx)*len(qy), file=f)
                 shft = q1[i]*qQ1
                 for j in range(len(qx)):

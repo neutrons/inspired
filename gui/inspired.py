@@ -14,8 +14,8 @@ from dft_worker import DFTWorker
 from mlff_worker import MLFFWorker
 from pandas_model import PandasModel
 from ase.io import read
-from ase.spacegroup import get_spacegroup
 from ase.formula import Formula
+from ase.spacegroup import get_spacegroup
 import torch
 
 class INSPIRED(QMainWindow):
@@ -28,7 +28,9 @@ class INSPIRED(QMainWindow):
         self.mlff_worker = MLFFWorker()
 
         self.atoms = None
+
         self.pred_type = "Phonon DOS"
+
         self.show_df = self.dft_worker.get_initial_search_df()
         self.ui.tableView.setModel(PandasModel(self.show_df))
         for i in range(3):
@@ -36,6 +38,7 @@ class INSPIRED(QMainWindow):
         self.ui.tableView.verticalHeader().setVisible(False)
         self.ui.tableView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.ui.radioButton_database.setChecked(True)
+
         self.ui.lineEdit_lmin_mlff.setText('12')
         self.ui.lineEdit_fmax_mlff.setText('0.01')
         self.ui.lineEdit_nmax_mlff.setText('100')
@@ -69,10 +72,21 @@ class INSPIRED(QMainWindow):
     def read_structure_file(self,filename):
         if filename.endswith('.cif'):
             self.atoms = read(filename, format='cif')
+            occ = self.atoms.info['occupancy']
+            fra = []
+            for j in list(occ.values()):
+                fra.append(float(list(j.values())[0]))
+            if min(fra)<0.999:
+                print('WARNING: The structure in the CIF file must be a physical representation of the actual atoms.') 
+                print('WARNING: Statistical representation in the form of fractional/partial occupancies is not supported.')
+                print('WARNING: A supercell may be created to account for disorder and remove partial occupancies.')
+                print('WARNING: All partial occupancies will be treated as full atoms in the following calculations.')
+
         elif 'POSCAR' in filename or 'CONTCAR' in filename:
             self.atoms = read(filename, format='vasp')
         else:
             print('ERROR: File format not supported yet (currently support cif and VASP format)')
+            return
         if self.atoms:
             sg = get_spacegroup(self.atoms)
             form = self.atoms.get_chemical_formula()
@@ -92,7 +106,6 @@ class INSPIRED(QMainWindow):
         if fname:
             try:
                 self.read_structure_file(fname)
-                #torch.set_default_dtype(torch.float64)
                 self.ui.label_structure_dp.setText(f"Structure file: {fname}")
                 self.ui.statusbar.showMessage("")
             except Exception as e:
@@ -109,12 +122,12 @@ class INSPIRED(QMainWindow):
 
     def run_prediction(self):
         if self.atoms:
-            print('INFO: Prediction started...')
+            print('INFO: Prediction started.')
             self.dp_worker.predict(struc=self.atoms, pred_type=self.pred_type, partial_dos=self.ui.checkBox_partial_dos.isChecked())
             print('INFO: Prediction finished.')
             #self.ui.statusbar.showMessage("Prediction done")
         else:
-            print('ERROR: Select structure file first')
+            print('ERROR: Select structure file first.')
 
     def plot_spec_dp(self):
         self.dp_worker.savenplot(cwd=self.cwd_path,partial_dos=self.ui.checkBox_partial_dos.isChecked(),unit=self.ui.comboBox_plot_unit_dp.currentIndex(),
@@ -187,7 +200,6 @@ class INSPIRED(QMainWindow):
         if fname:
             try:
                 self.read_structure_file(fname)
-                #torch.set_default_dtype(torch.float32)
                 self.ui.label_structure_mlff.setText(f"Structure file: {fname}")
                 self.ui.statusbar.showMessage("")
             except Exception as e:
@@ -204,6 +216,9 @@ class INSPIRED(QMainWindow):
                                          delta=self.ui.lineEdit_delta_mlff.displayText())
 
     def setup_oclimax_mlff(self):
+        if not self.atoms:
+            print('ERROR: No structure loaded.')
+            return
         qden = 35.0
         abc = self.atoms.cell.cellpar()[0:3]
         nx = int(qden/abc[0])+1

@@ -1,6 +1,5 @@
-conda remove --name inspired --all
-conda create -n inspired python=3.9
-conda activate inspired
+#!/bin/bash
+
 pip install https://download.pytorch.org/whl/cpu/torch-2.1.0%2Bcpu-cp39-cp39-linux_x86_64.whl
 pip install torch_scatter torch_sparse torch_cluster -f https://data.pyg.org/whl/torch-2.1.0+cpu.html
 pip install torch_geometric
@@ -9,8 +8,8 @@ pip install pyqt5
 pip install qtpy
 pip install phonopy
 pip install seekpath
-pip install e3nn
 git clone https://github.com/ACEsuit/mace.git
 pip install ./mace
 pip install matgl==0.8.5
 pip install chgnet==0.3.1
+bash ./install.sh
