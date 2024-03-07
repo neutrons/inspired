@@ -1,0 +1,4 @@
+predictor_path:/home/yyc/proj/inspired/inspired_test/model
+dft_database_path:/home/yyc/proj/inspired/inspired_test/dftdb
+mace_model_file:/home/yyc/proj/inspired/inspired_test/mlff/2023-08-14-mace-universal.model
+m3gnet_model_path:/home/yyc/proj/inspired/inspired_test/mlff/M3GNet-MP-2021.2.8-PES
