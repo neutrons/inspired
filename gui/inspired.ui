@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>719</width>
-    <height>878</height>
+    <width>709</width>
+    <height>880</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -62,8 +62,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>675</width>
-             <height>718</height>
+             <width>665</width>
+             <height>720</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -318,8 +318,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>675</width>
-             <height>718</height>
+             <width>665</width>
+             <height>720</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -649,8 +649,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>675</width>
-             <height>718</height>
+             <width>665</width>
+             <height>720</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1024,7 +1024,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>719</width>
+     <width>709</width>
      <height>22</height>
     </rect>
    </property>
@@ -1032,7 +1032,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="actionSet_Working_Directory"/>
+    <addaction name="actionSet_CWD"/>
+    <addaction name="actionSet_Preferences"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuMenu"/>
@@ -1065,7 +1066,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>About</string>
    </property>
   </action>
-  <action name="actionSet_Working_Directory">
+  <action name="actionSet_Preferences">
+   <property name="text">
+    <string>Preferences...</string>
+   </property>
+  </action>
+  <action name="actionSet_CWD">
    <property name="text">
     <string>Set Working Directory</string>
    </property>
@@ -1074,10 +1080,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
  <resources/>
  <connections>
   <connection>
-   <sender>actionSet_Working_Directory</sender>
+   <sender>actionSet_Preferences</sender>
    <signal>triggered()</signal>
    <receiver>INSPIRED</receiver>
-   <slot>setup_working_directory()</slot>
+   <slot>set_preferences()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -1112,8 +1118,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>search_crystal_structure()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>200</x>
-     <y>355</y>
+     <x>188</x>
+     <y>365</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1128,8 +1134,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>455</x>
-     <y>848</y>
+     <x>696</x>
+     <y>812</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1144,8 +1150,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>setup_oclimax_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>154</x>
-     <y>514</y>
+     <x>129</x>
+     <y>503</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1160,8 +1166,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_spec_dp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>424</x>
-     <y>810</y>
+     <x>445</x>
+     <y>764</y>
     </hint>
     <hint type="destinationlabel">
      <x>459</x>
@@ -1176,8 +1182,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>predict_selection_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>142</x>
-     <y>500</y>
+     <x>163</x>
+     <y>473</y>
     </hint>
     <hint type="destinationlabel">
      <x>418</x>
@@ -1192,8 +1198,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>predict_selection_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>197</x>
-     <y>526</y>
+     <x>218</x>
+     <y>499</y>
     </hint>
     <hint type="destinationlabel">
      <x>423</x>
@@ -1208,8 +1214,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>opt_and_dos_cal_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>215</x>
-     <y>380</y>
+     <x>150</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1224,8 +1230,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>upload_structure_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>108</y>
+     <x>129</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1240,8 +1246,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>455</x>
-     <y>848</y>
+     <x>696</x>
+     <y>812</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1256,8 +1262,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_spec_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>286</x>
-     <y>810</y>
+     <x>150</x>
+     <y>764</y>
     </hint>
     <hint type="destinationlabel">
      <x>473</x>
@@ -1272,8 +1278,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>predict_selection_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>234</x>
-     <y>419</y>
+     <x>256</x>
+     <y>401</y>
     </hint>
     <hint type="destinationlabel">
      <x>419</x>
@@ -1288,8 +1294,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>run_oclimax_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>602</y>
+     <x>129</x>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1320,8 +1326,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>run_prediction()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>353</x>
-     <y>556</y>
+     <x>374</x>
+     <y>529</y>
     </hint>
     <hint type="destinationlabel">
      <x>456</x>
@@ -1336,8 +1342,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>run_oclimax_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>444</x>
-     <y>579</y>
+     <x>151</x>
+     <y>589</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1368,8 +1374,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>setup_oclimax_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>223</x>
-     <y>446</y>
+     <x>150</x>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1384,8 +1390,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_dp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>455</x>
-     <y>848</y>
+     <x>696</x>
+     <y>812</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1416,8 +1422,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_spec_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>810</y>
+     <x>150</x>
+     <y>764</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1432,8 +1438,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>choose_dft_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
-     <y>105</y>
+     <x>361</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1448,12 +1454,28 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_dos_disp_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>292</x>
-     <y>441</y>
+     <x>129</x>
+     <y>437</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
      <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSet_CWD</sender>
+   <signal>triggered()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>setup_working_directory()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>438</y>
     </hint>
    </hints>
   </connection>
@@ -1464,7 +1486,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <slot>plot_spec_dp()</slot>
   <slot>predict_selection_changed()</slot>
   <slot>setup_oclimax_dft()</slot>
-  <slot>setup_working_directory()</slot>
+  <slot>set_preferences()</slot>
   <slot>search_crystal_structure()</slot>
   <slot>run_oclimax_dft()</slot>
   <slot>plot_spec_dft()</slot>
@@ -1482,5 +1504,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <slot>plot_unit_changed()</slot>
   <slot>choose_dft_folder()</slot>
   <slot>plot_dos_disp_dft()</slot>
+  <slot>setup_working_directory()</slot>
  </slots>
 </ui>

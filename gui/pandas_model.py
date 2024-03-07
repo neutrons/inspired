@@ -2,7 +2,6 @@ import pandas as pd
 
 from qtpy.QtWidgets import QTableView, QApplication
 from qtpy.QtCore import QAbstractTableModel, Qt, QModelIndex
-import sys
 
 
 class PandasModel(QAbstractTableModel):
@@ -60,20 +59,3 @@ class PandasModel(QAbstractTableModel):
 
         return None
 
-
-if __name__ == "__main__":
-
-    app = QApplication(sys.argv)
-
-    df = pd.read_csv("iris.csv")
-
-    view = QTableView()
-    view.resize(800, 500)
-    view.horizontalHeader().setStretchLastSection(True)
-    view.setAlternatingRowColors(True)
-    view.setSelectionBehavior(QTableView.SelectRows)
-
-    model = PandasModel(df)
-    view.setModel(model)
-    view.show()
-    app.exec()

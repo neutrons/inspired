@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SetPaths</class>
+ <widget class="QWidget" name="SetPaths">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>469</width>
+    <height>272</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Set up simulation</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Folder containing Predictor models (spectral and latent space predictors, decoder)</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="lineEdit_dp_path"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_dp_path">
+        <property name="text">
+         <string>Browse</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Folder containing DFT database</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="lineEdit_dft_path"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_dft_path">
+        <property name="text">
+         <string>Browse</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Location of MLFF models:</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>MACE model file:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButton_m3gnet_path">
+        <property name="text">
+         <string>Browse</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_mace_path"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>M3GNet model folder:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_m3gnet_path"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_mace_path">
+        <property name="text">
+         <string>Browse</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_save">
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_cancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_dp_path</sender>
+   <signal>clicked()</signal>
+   <receiver>SetPaths</receiver>
+   <slot>browse_dp_model()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>112</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_dft_path</sender>
+   <signal>clicked()</signal>
+   <receiver>SetPaths</receiver>
+   <slot>browse_dftdb()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_mace_path</sender>
+   <signal>clicked()</signal>
+   <receiver>SetPaths</receiver>
+   <slot>browse_mace()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_m3gnet_path</sender>
+   <signal>clicked()</signal>
+   <receiver>SetPaths</receiver>
+   <slot>browse_m3gnet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cancel</sender>
+   <signal>clicked()</signal>
+   <receiver>SetPaths</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_save</sender>
+   <signal>clicked()</signal>
+   <receiver>SetPaths</receiver>
+   <slot>save_paths()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>use_default_mesh()</slot>
+  <slot>save_mesh()</slot>
+  <slot>load_parameters()</slot>
+  <slot>use_default_parameters()</slot>
+  <slot>save_parameters()</slot>
+  <slot>open_help_oclimax()</slot>
+  <slot>task_changed()</slot>
+  <slot>unit_changed()</slot>
+  <slot>browse_cwd()</slot>
+  <slot>browse_dftdb()</slot>
+  <slot>browse_dp_model()</slot>
+  <slot>browse_mace()</slot>
+  <slot>browse_m3gnet()</slot>
+  <slot>save_paths()</slot>
+ </slots>
+</ui>

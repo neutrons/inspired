@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_INSPIRED(object):
     def setupUi(self, INSPIRED):
         INSPIRED.setObjectName("INSPIRED")
-        INSPIRED.resize(719, 878)
+        INSPIRED.resize(709, 880)
         INSPIRED.setMinimumSize(QtCore.QSize(0, 0))
         self.centralwidget = QtWidgets.QWidget(INSPIRED)
         self.centralwidget.setObjectName("centralwidget")
@@ -34,7 +34,7 @@ class Ui_INSPIRED(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 675, 718))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 665, 720))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_19.setObjectName("verticalLayout_19")
@@ -158,7 +158,7 @@ class Ui_INSPIRED(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 675, 718))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 665, 720))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_20.setObjectName("verticalLayout_20")
@@ -320,7 +320,7 @@ class Ui_INSPIRED(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollArea_3.setObjectName("scrollArea_3")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 675, 718))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 665, 720))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_21.setObjectName("verticalLayout_21")
@@ -501,7 +501,7 @@ class Ui_INSPIRED(object):
         self.verticalLayout_2.addWidget(self.label_cwd)
         INSPIRED.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(INSPIRED)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 719, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 709, 22))
         self.menubar.setObjectName("menubar")
         self.menuMenu = QtWidgets.QMenu(self.menubar)
         self.menuMenu.setObjectName("menuMenu")
@@ -518,15 +518,18 @@ class Ui_INSPIRED(object):
         self.actionUser_Manual.setObjectName("actionUser_Manual")
         self.actionAbout = QtWidgets.QAction(INSPIRED)
         self.actionAbout.setObjectName("actionAbout")
-        self.actionSet_Working_Directory = QtWidgets.QAction(INSPIRED)
-        self.actionSet_Working_Directory.setObjectName("actionSet_Working_Directory")
-        self.menuMenu.addAction(self.actionSet_Working_Directory)
+        self.actionSet_Preferences = QtWidgets.QAction(INSPIRED)
+        self.actionSet_Preferences.setObjectName("actionSet_Preferences")
+        self.actionSet_CWD = QtWidgets.QAction(INSPIRED)
+        self.actionSet_CWD.setObjectName("actionSet_CWD")
+        self.menuMenu.addAction(self.actionSet_CWD)
+        self.menuMenu.addAction(self.actionSet_Preferences)
         self.menuMenu.addAction(self.actionExit)
         self.menubar.addAction(self.menuMenu.menuAction())
 
         self.retranslateUi(INSPIRED)
         self.tabWidget.setCurrentIndex(0)
-        self.actionSet_Working_Directory.triggered.connect(INSPIRED.setup_working_directory) # type: ignore
+        self.actionSet_Preferences.triggered.connect(INSPIRED.set_preferences) # type: ignore
         self.actionExit.triggered.connect(INSPIRED.close) # type: ignore
         self.pushButton_search.clicked.connect(INSPIRED.search_crystal_structure) # type: ignore
         self.toolButton_help_mlff.clicked.connect(INSPIRED.open_help_mlff) # type: ignore
@@ -550,6 +553,7 @@ class Ui_INSPIRED(object):
         self.pushButton_plot_dft.clicked.connect(INSPIRED.plot_spec_dft) # type: ignore
         self.pushButton_dft_folder.clicked.connect(INSPIRED.choose_dft_folder) # type: ignore
         self.pushButton_plot_dos_dft.clicked.connect(INSPIRED.plot_dos_disp_dft) # type: ignore
+        self.actionSet_CWD.triggered.connect(INSPIRED.setup_working_directory) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(INSPIRED)
 
     def retranslateUi(self, INSPIRED):
@@ -687,4 +691,5 @@ class Ui_INSPIRED(object):
         self.actionWorking_Directory.setText(_translate("INSPIRED", "Working Directory"))
         self.actionUser_Manual.setText(_translate("INSPIRED", "User Manual"))
         self.actionAbout.setText(_translate("INSPIRED", "About"))
-        self.actionSet_Working_Directory.setText(_translate("INSPIRED", "Set Working Directory"))
+        self.actionSet_Preferences.setText(_translate("INSPIRED", "Preferences..."))
+        self.actionSet_CWD.setText(_translate("INSPIRED", "Set Working Directory"))

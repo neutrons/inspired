@@ -1,7 +1,6 @@
 import os
 import re
 import shutil
-import subprocess
 import pandas as pd
 import phonopy
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
@@ -10,11 +9,11 @@ from oclimax import OCLIMAX
 class DFTWorker():
     def __init__(self):
         self.initial_search_df = pd.DataFrame()
-        self.crystal_list = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'dftdb','crystals.dat')
         self.oclimax = OCLIMAX()
 
-    def get_initial_search_df(self):
-        df = pd.read_csv(self.crystal_list, sep=' ', skiprows=[1], skipinitialspace=True)
+    def get_initial_search_df(self,dft_path):
+        crystal_list = os.path.join(dft_path,'crystals.dat')
+        df = pd.read_csv(crystal_list, sep=' ', skiprows=[1], skipinitialspace=True)
         df['Space group (number)'] = df['space'].astype(str) + df['group'].astype(str)
         df.rename(columns={'id':'MP ID', 'formula':'Formula'}, inplace=True)
         self.initial_search_df = df.copy()

@@ -2,40 +2,18 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch_geometric as tg
+from torch_geometric.data import Data
+from torch_cluster import radius_graph
 import torch_scatter
 import e3nn
 from e3nn import o3
-from typing import Dict, Union
-
-from ase import Atom, Atoms
-
-
-torch.set_default_dtype(torch.float64)
-
-import pandas as pd
-
-def load_data(filename):
-    df = pd.read_csv(filename)
-
-    try:
-        df['structure'] = df['structure'].apply(eval).progress_map(lambda x: Atoms.fromdict(x))
-
-    except:
-        species = []
-
-    else:
-        df['formula'] = df['structure'].map(lambda x: x.get_chemical_formula())
-        df['species'] = df['structure'].map(lambda x: list(set(x.get_chemical_symbols())))
-        species = sorted(list(set(df['species'].sum())))
-
-    return df, species
-
-from torch_cluster import radius_graph
 from e3nn.math import soft_one_hot_linspace
 from e3nn.nn import Gate
 from e3nn.nn.models.gate_points_2101 import Convolution, smooth_cutoff, tp_path_exists
+from typing import Dict, Union
 
-from torch_geometric.data import Data
+
+torch.set_default_dtype(torch.float64)
 
 class CustomCompose(torch.nn.Module):
     def __init__(self, first, second):

@@ -15,19 +15,16 @@ from phonopy import Phonopy
 from phonopy.interface.calculator import read_crystal_structure
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
 from phonopy.file_IO import write_FORCE_CONSTANTS
-import subprocess
 import torch
-import glob
 from oclimax import OCLIMAX
 
 
 class MLFFWorker():
     def __init__(self):
         self.oclimax = OCLIMAX()
-        self.mlff_folder = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'mlff')
         self.nx = self.ny = self.nz = None
 
-    def run_opt_and_dos(self, struc=None, potential_index=0,lmin=12.0,fmax=0.01,nmax=100,delta=0.03):
+    def run_opt_and_dos(self, mace_file, m3gnet_path, struc=None, potential_index=0,lmin=12.0,fmax=0.01,nmax=100,delta=0.03):
         try:
             lmin = float(lmin)
         except:
@@ -55,8 +52,7 @@ class MLFFWorker():
         torch.set_default_dtype(torch.float32)
         print('INFO: Running structural optimization...')
         if potential_index == 0:
-            pot_file = os.path.join(self.mlff_folder, '2023-08-14-mace-universal.model')
-            calculator = MACECalculator(model_paths=pot_file, device=device)
+            calculator = MACECalculator(model_paths=mace_file, device=device)
             struc.set_calculator(calculator)
             dyn = FIRE(struc)
             dyn.run(fmax=fmax, steps=nmax)
@@ -68,8 +64,7 @@ class MLFFWorker():
             final_structure = relax_results['final_structure']
             atoms_relaxed = AseAtomsAdaptor().get_atoms(final_structure)
         elif potential_index == 2:
-            pot_file = os.path.join(self.mlff_folder, 'M3GNet-MP-2021.2.8-PES')
-            pot = matgl.load_model(pot_file)
+            pot = matgl.load_model(m3gnet_path)
             calculator = M3GNetCalculator(pot)
             relaxer = Relaxer(potential=pot,relax_cell=False)
             relax_results = relaxer.relax(struc, fmax=fmax, steps=nmax, verbose=True)

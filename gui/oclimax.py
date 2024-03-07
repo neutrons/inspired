@@ -67,6 +67,8 @@ class OCLIMAX(QDialog):
         else:
             self.oclimax_params.write_new_parameter_file()
 
+        self.close()
+
     def get_task_index(self):
         task = self.oclimax_params.get_param('TASK')
         instrument = self.oclimax_params.get_param('INSTR')

@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 import warnings
 
 warnings.simplefilter("ignore")
@@ -12,6 +13,7 @@ from ui_help_mlff import Ui_Help_MLFF
 from dp_worker import DPWorker
 from dft_worker import DFTWorker
 from mlff_worker import MLFFWorker
+from set_paths import SetPaths
 from pandas_model import PandasModel
 from ase.io import read
 from ase.formula import Formula
@@ -26,12 +28,19 @@ class INSPIRED(QMainWindow):
         self.dp_worker = DPWorker()
         self.dft_worker = DFTWorker()
         self.mlff_worker = MLFFWorker()
+        self.set_paths = SetPaths()
+        self.root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.cwd_path = os.getcwd()
+        self.ui.label_cwd.setText("Current Working Directory: "+self.cwd_path)
+        self.userdft_path = self.cwd_path
+        self.setup_paths()
+        self.check_paths()
 
         self.atoms = None
 
         self.pred_type = "Phonon DOS"
 
-        self.show_df = self.dft_worker.get_initial_search_df()
+        self.show_df = self.dft_worker.get_initial_search_df(dft_path=self.dft_database_path)
         self.ui.tableView.setModel(PandasModel(self.show_df))
         for i in range(3):
             self.ui.tableView.horizontalHeader().setSectionResizeMode(i, QHeaderView.ResizeToContents)
@@ -44,12 +53,6 @@ class INSPIRED(QMainWindow):
         self.ui.lineEdit_nmax_mlff.setText('100')
         self.ui.lineEdit_delta_mlff.setText('0.03')
 
-        self.root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.data_path = os.path.join(self.root_path, 'dftdb')
-        self.cwd_path = os.getcwd()
-        self.ui.label_cwd.setText("Current Working Directory: "+self.cwd_path)
-        self.userdft_path = self.cwd_path
-
 
     def setup_working_directory(self):
         wd = QFileDialog.getExistingDirectory(self, 'Working directory', '')
@@ -58,6 +61,70 @@ class INSPIRED(QMainWindow):
         self.ui.statusbar.showMessage(f"Working directory is set to {self.cwd_path}.", 1000)
         self.ui.label_cwd.setText("Current Working Directory: "+self.cwd_path)
         os.chdir(self.cwd_path)
+
+
+    def setup_paths(self):
+        home_path = os.path.expanduser('~')
+        user_config = os.path.join(home_path,'.config','inspired','config')
+        sys_config = os.path.join(self.root_path, 'config')
+        self.predictor_path = os.path.join(self.root_path, 'model')
+        self.dft_database_path = os.path.join(self.root_path, 'dftdb')
+        self.mace_model_file = os.path.join(self.root_path, 'mlff', '2023-08-14-mace-universal.model')
+        self.m3gnet_model_path = os.path.join(self.root_path, 'mlff', 'M3GNet-MP-2021.2.8-PES')
+        if not os.path.isfile(user_config) and not os.path.isfile(sys_config):
+            print('INFO: config file not found, using default paths.')
+            return
+        elif not os.path.isfile(user_config) and os.path.isfile(sys_config):
+            os.makedirs(os.path.join(home_path,'.config','inspired'))
+            shutil.copyfile(sys_config,user_config)
+            
+        with open(user_config, 'r') as f:
+            lines = f.readlines()
+        path_dict = {}
+        for line in lines:
+            key, value = line.split(':')
+            key = key.strip()
+            value = value.strip()
+            path_dict[key] = value
+        if 'predictor_path' in path_dict and path_dict['predictor_path']!='default':
+            self.predictor_path = path_dict['predictor_path']
+        if 'dft_database_path' in path_dict and path_dict['dft_database_path']!='default':
+            self.dft_database_path = path_dict['dft_database_path']
+        if 'mace_model_file' in path_dict and path_dict['mace_model_file']!='default':
+            self.mace_model_file = path_dict['mace_model_file']
+        if 'm3gnet_model_path' in path_dict and path_dict['m3gnet_model_path']!='default':
+            self.m3gnet_model_path = path_dict['m3gnet_model_path']
+
+
+
+    def check_paths(self):           
+        if not os.path.isdir(self.predictor_path):
+            print('ERROR: Predictor model path does not exist. Please reset in config file or Preferences in the Menu.')
+            self.set_preferences()
+        for dp_file in ['crys_dos_predictor.torch','crys_vis_predictor.torch','latent_space_predictor.torch','decoder.pt']:
+            if not os.path.isfile(os.path.join(self.predictor_path,dp_file)):
+                print('ERROR: Predictor model path missing '+dp_file+'. Please reset in config file or Preferences in the Menu.')
+                self.set_preferences()
+        if not os.path.isdir(self.dft_database_path):
+            print('ERROR: DFT database path does not exist. Please reset in config file or Preferences in the Menu.')
+            self.set_preferences()
+        if not os.path.isfile(os.path.join(self.dft_database_path,'crystals.dat')):
+            print('ERROR: DFT database file (crystals.dat) could not be found in the specified path. Please reset in config file or Preferences in the Menu.')
+            self.set_preferences()
+        if not os.path.isfile(self.mace_model_file):
+            print('ERROR: MACE model file cannot be found. Please reset in config file or Preferences in the Menu.')
+            self.set_preferences()
+        if not os.path.isdir(self.m3gnet_model_path):
+            print('ERROR: M3GNet model path does not exist. Please reset in config file or Preferences in the Menu.')
+            self.set_preferences()
+
+
+    def set_preferences(self):
+
+        self.set_paths.init_paths(self.predictor_path,self.dft_database_path,self.mace_model_file,self.m3gnet_model_path)
+        self.set_paths.exec()
+        self.setup_paths()
+        self.check_paths()
 
 
     def select_structure_file(self):
@@ -123,14 +190,14 @@ class INSPIRED(QMainWindow):
     def run_prediction(self):
         if self.atoms:
             print('INFO: Prediction started.')
-            self.dp_worker.predict(struc=self.atoms, pred_type=self.pred_type, partial_dos=self.ui.checkBox_partial_dos.isChecked())
+            self.dp_worker.predict(model_path=self.predictor_path, struc=self.atoms, pred_type=self.pred_type, partial_dos=self.ui.checkBox_partial_dos.isChecked())
             print('INFO: Prediction finished.')
             #self.ui.statusbar.showMessage("Prediction done")
         else:
             print('ERROR: Select structure file first.')
 
     def plot_spec_dp(self):
-        self.dp_worker.savenplot(cwd=self.cwd_path,partial_dos=self.ui.checkBox_partial_dos.isChecked(),unit=self.ui.comboBox_plot_unit_dp.currentIndex(),
+        self.dp_worker.savenplot(model_path=self.predictor_path,cwd=self.cwd_path,partial_dos=self.ui.checkBox_partial_dos.isChecked(),unit=self.ui.comboBox_plot_unit_dp.currentIndex(),
                                  setrange=self.ui.checkBox_range_dp.isChecked(),interactive=self.ui.checkBox_interactive_dp.isChecked(),
                                  xmin=self.ui.lineEdit_xmin_dp.displayText(),xmax=self.ui.lineEdit_xmax_dp.displayText(),
                                  ymin=self.ui.lineEdit_ymin_dp.displayText(),ymax=self.ui.lineEdit_ymax_dp.displayText(),
@@ -168,7 +235,7 @@ class INSPIRED(QMainWindow):
         if self.ui.radioButton_database.isChecked():
             mp_dfindex = self.ui.tableView.currentIndex().row()
             mp_id = self.show_df.iat[mp_dfindex, 0]
-            self.dft_worker.prepare_dft_files(self.cwd_path, self.data_path, mp_id)
+            self.dft_worker.prepare_dft_files(self.cwd_path, self.dft_database_path, mp_id)
         elif self.ui.radioButton_user_dft.isChecked():
             self.dft_worker.prepare_dft_files(self.cwd_path, self.userdft_path)
 
@@ -209,7 +276,7 @@ class INSPIRED(QMainWindow):
         if not self.atoms:
             print('ERROR: No structure loaded.')
             return
-        self.mlff_worker.run_opt_and_dos(self.atoms,potential_index=self.ui.comboBox_mlff_model.currentIndex(),
+        self.mlff_worker.run_opt_and_dos(self.mace_model_file,self.m3gnet_model_path,self.atoms,potential_index=self.ui.comboBox_mlff_model.currentIndex(),
                                          lmin=self.ui.lineEdit_lmin_mlff.displayText(),
                                          fmax=self.ui.lineEdit_fmax_mlff.displayText(),
                                          nmax=self.ui.lineEdit_nmax_mlff.displayText(),

@@ -4,18 +4,64 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 import torch_geometric as tg
+from ase import Atom
+from ase.neighborlist import neighbor_list
 from torch.utils.data import Dataset, DataLoader
-from load_data import build_data
 from latent_space_model import PeriodicNetwork, Decoder
 
 
 class DPWorker():
     def __init__(self):
         self.data = {}
-        self.model_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'model')
         self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
         self.pdos = None
         self.timestr = None
+
+
+    def build_data(self, entry, lsv=np.zeros(50), r_max=5.):
+        default_dtype = torch.float64
+        torch.set_default_dtype(default_dtype)
+
+        type_encoding = {}
+        specie_am = []
+        for Z in range(1, 119):
+            specie = Atom(Z)
+            type_encoding[specie.symbol] = Z
+            specie_am.append(specie.mass)
+
+        type_onehot = torch.eye(len(type_encoding))
+        am_onehot = torch.diag(torch.tensor(specie_am))
+
+        symbols = list(entry.symbols).copy()
+        positions = torch.from_numpy(entry.positions.copy())
+        lattice = torch.from_numpy(entry.cell.array.copy()).unsqueeze(0)
+
+        # edge_src and edge_dst are the indices of the central and neighboring atom, respectively
+        # edge_shift indicates whether the neighbors are in different images or copies of the unit cell
+        edge_src, edge_dst, edge_shift = neighbor_list("ijS", a=entry, cutoff=r_max, self_interaction=True)
+
+        # compute the relative distances and unit cell shifts from periodic boundaries
+        edge_batch = positions.new_zeros(positions.shape[0], dtype=torch.long)[torch.from_numpy(edge_src)]
+        edge_vec = (positions[torch.from_numpy(edge_dst)]
+                    - positions[torch.from_numpy(edge_src)]
+                    + torch.einsum('ni,nij->nj', torch.tensor(edge_shift, dtype=default_dtype), lattice[edge_batch]))
+
+        # compute edge lengths (rounded only for plotting purposes)
+        edge_len = np.around(edge_vec.norm(dim=1).numpy(), decimals=2)
+
+        data = tg.data.Data(
+            pos=positions, lattice=lattice, symbol=symbols,
+            x=am_onehot[[type_encoding[specie] for specie in symbols]],  # atomic mass (node feature)
+            z=type_onehot[[type_encoding[specie] for specie in symbols]],  # atom type (node attribute)
+            edge_index=torch.stack([torch.LongTensor(edge_src), torch.LongTensor(edge_dst)], dim=0),
+            edge_shift=torch.tensor(edge_shift, dtype=default_dtype),
+            edge_vec=edge_vec, edge_len=edge_len,
+            lsv=torch.from_numpy(lsv).unsqueeze(0)
+        )
+
+        data = [data]
+        return data
+
  
     def nnmodel(self,em_dim,out_dim,r_max,nneigh,model_file,pool):
         model = PeriodicNetwork(
@@ -43,7 +89,7 @@ class DPWorker():
 
         return model
 
-    def predict(self, struc, pred_type, partial_dos=True):
+    def predict(self, model_path, struc, pred_type, partial_dos=True):
 
         torch.set_default_dtype(torch.float64)
         if pred_type == "Phonon DOS":
@@ -51,9 +97,9 @@ class DPWorker():
             lsv = np.zeros(120)
             nneigh = 58.94458615577375      # for DOS prediction
             xaxis = np.arange(10, 1201, 10)
-            model_file = os.path.join(self.model_path, 'crys_dos_predictor')
+            model_file = os.path.join(model_path, 'crys_dos_predictor')
 
-            self.input_data = build_data(struc, lsv, r_max)
+            self.input_data = self.build_data(struc, lsv, r_max)
 
             out_dim = len(lsv)
             em_dim = 64
@@ -100,9 +146,9 @@ class DPWorker():
             lsv = np.zeros(120)
             nneigh = 59.05215000696383
             xaxis = np.arange(10, 1201, 10)
-            model_file = os.path.join(self.model_path, 'crys_vis_predictor')
+            model_file = os.path.join(model_path, 'crys_vis_predictor')
 
-            self.input_data = build_data(struc, lsv, r_max)
+            self.input_data = self.build_data(struc, lsv, r_max)
 
             out_dim = len(lsv)
             em_dim = 64
@@ -127,12 +173,12 @@ class DPWorker():
 
         elif pred_type == "S(|Q|, E)":
             r_max = 6.0
-            model_file = os.path.join(self.model_path, 'latent_space_predictor')
+            model_file = os.path.join(model_path, 'latent_space_predictor')
             lsv = np.zeros(50)
             xaxis = np.arange(1, 51, 1)
             nneigh = 59.220755709410284
 
-            self.input_data = build_data(struc, lsv, r_max)
+            self.input_data = self.build_data(struc, lsv, r_max)
 
             out_dim = len(lsv)
             em_dim = 64
@@ -160,7 +206,7 @@ class DPWorker():
 
         self.timestr = time.strftime("%Y%m%d-%H%M%S")
     
-    def savenplot(self,cwd,partial_dos=True,unit=0,setrange=False,interactive=False,xmin=None,xmax=None,ymin=None,ymax=None,zmin=None,zmax=None):
+    def savenplot(self,model_path,cwd,partial_dos=True,unit=0,setrange=False,interactive=False,xmin=None,xmax=None,ymin=None,ymax=None,zmin=None,zmax=None):
 
         if not self.data:
             print('ERROR: No data to plot.')
@@ -266,7 +312,7 @@ class DPWorker():
 
 
             # %%
-            DECODER_MODEL = os.path.join(self.model_path, 'decoder.pt')
+            DECODER_MODEL = os.path.join(model_path, 'decoder.pt')
 
             encoded_space_dim = 50
             dropout = 0
