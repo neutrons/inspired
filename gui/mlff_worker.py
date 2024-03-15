@@ -154,6 +154,7 @@ class MLFFWorker():
         print('INFO: Phonon calculation finished.')
         print('INFO: Plotting phonon dispersion and DOS. For large unitcells this may take a few moments.')
         print('INFO: Frequency unit in plot is THz. 1 THz = 4.136 meV = 33.356 cm-1')
+        print('INFO: Phonon DOS data will be saved in total_dos.dat file')
         bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon._primitive, 1, is_const_interval=True)
         points = []
         for i in range(len(bands)):
@@ -167,6 +168,7 @@ class MLFFWorker():
         # To plot DOS next to band structure
         phonon.auto_band_structure()
         phonon.auto_total_dos()
+        phonon.write_total_dos()
         phonon.plot_band_structure_and_dos().show()
 
 

@@ -238,9 +238,8 @@ class OCLIMAX(QDialog):
             except:
                 print('ERROR: OCLIMAX simulation failed or terminated.')
                 return
-            generated_csv = glob.glob('oclimax_'+timestr+'*.csv')
-            generated_csv,  = generated_csv
-            self.csv_file_name = generated_csv
+            generated_csv = glob.glob('oclimax_'+timestr+'*K.csv')
+            self.csv_file_name = generated_csv[0]
             print('INFO: OCLIMAX simulation finished. Output file: '+self.csv_file_name)
 
         else:
@@ -375,8 +374,7 @@ class OCLIMAX(QDialog):
                         print('ERROR: OCLIMAX simulation failed or terminated.')
                         return
                     generated_csv = glob.glob("band_"+timestr+"_2Dmesh_scqw_*K.csv")
-                    generated_csv,  = generated_csv
-                    result=subprocess.run(["mv",generated_csv,outfile])
+                    result=subprocess.run(["mv",generated_csv[0],outfile])
 
             all_cut_csv = glob.glob("cut_qe_"+timestr+"*.csv")
             print('INFO: Integrating cuts')
@@ -485,8 +483,7 @@ class OCLIMAX(QDialog):
                     print('ERROR: OCLIMAX simulation failed or terminated.')
                     return
                 generated_csv = glob.glob("band_"+timestr+"_2Dmesh_scqq_*K.csv")
-                generated_csv,  = generated_csv
-                result=subprocess.run(["mv",generated_csv,outfile])
+                result=subprocess.run(["mv",generated_csv[0],outfile])
 
             all_cut_csv = glob.glob("cut_qq_"+timestr+"*.csv")
             print('INFO: Integrating cuts')
@@ -496,8 +493,7 @@ class OCLIMAX(QDialog):
                 print('ERROR: Merging files failed or terminated.')
                 return
             generated_csv = glob.glob('oclimax_sc_qq_'+timestr+'*.csv')
-        generated_csv,  = generated_csv
-        self.csv_file_name = generated_csv
+        self.csv_file_name = generated_csv[0]
         print('INFO: OCLIMAX simulation finished. Output file: '+self.csv_file_name)
 
     def plot_spec(self,unit=0,setrange=False,interactive=False,xmin=None,xmax=None,ymin=None,ymax=None,zmin=None,zmax=None):
