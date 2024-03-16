@@ -75,11 +75,15 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
    `wget https://zenodo.org/records/10723108/files/inspired.ova`
 
 3. Start VirtualBox, [import the inspired.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
-4. Run the “inspired” VM. Within the VM, start a terminal, run:
+4. Run the “inspired” VM. If prompted, use "inspired" for both user ID and password to login.
+5. Set up the "shared folder" to access (read and write) files on your host computer. Click Devices->Shared Folders->Shared folders settings on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "
+Folder Name" can be anything you want (e.g., inspired_cwd). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" to make future work easier. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, System Tools->QTerminal), run:
+
+   `sudo mount -t vboxsf inspired_cwd /home/inspired/cwd`
+
+6. Go to the shared folder (create a subfolder if needed) and run:
 
    `inspired`
-
-Note: You can use the “shared folder” within the VM to access (read and write) files on your host computer. You can set your INSPIRED working directory in the shared folder. More information can be found [here](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/sharedfolders.html).
 
 
 ## Additional notes:
