@@ -70,7 +70,7 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
 ### Option 2:
    If you do not have access to a Linux computer, or you cannot install INSPIRED properly by following the steps in Option 1, you may consider running INSPIRED as a VM.
 1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
-2. To download the VirtualBox image from Zenodo, run:
+2. Download the VirtualBox image (inspired.ova) from [Zenodo](https://doi.org/10.5281/zenodo.10723108). On MacOS/Linux, you may run:
 
    `wget https://zenodo.org/records/10723108/files/inspired.ova`
 
@@ -84,11 +84,7 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
 
    `inspired`
 
-   (Note: If the VM is properly configured to have internet connection, future update can be done in the same way as in Option 1)
-
-   `cd /home/inspired/inspired`
-   
-   `git pull`
+Note: If the VM is properly configured to have internet connection, future update can be done in the same way as in Option 1: `cd /home/inspired/inspired` and `git pull` for the code, and Step 4 in Option 1 for the database and model.
 
 
 ## Additional notes:
