@@ -24,7 +24,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 
 ## Installation:
-INSPIRED currently only runs on Linux operating systems. The neutron data server ([analysis cluster](https://analysis.sns.gov)) at ORNL will work if you can access it. We are working on deploying INSPIRED on the analysis cluster so that all users can use it easily. Before the deployment is completed, you may install INSPIRED in your home directory on the analysis cluster (or any other Linux machine) by following the steps below ([Option 1](https://github.com/cyqjh/inspired#option-1)). Alternatively, you may download a pre-compiled VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 2](https://github.com/cyqjh/inspired#option-2)).
+INSPIRED currently only runs on Linux operating systems. The neutron data server ([analysis cluster](https://analysis.sns.gov)) at ORNL will work if you can access it. We are working on deploying INSPIRED on the analysis cluster so that all users can use it easily. Before the deployment is completed, you may install INSPIRED in your home directory on the analysis cluster (or any other Linux machine) by following the steps below ([Option 1](https://github.com/cyqjh/inspired#option-1)). Alternatively, you may download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 2](https://github.com/cyqjh/inspired#option-2)).
 
 ### Option 1
 1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. If you are unsure which one to choose, check [here](https://docs.anaconda.com/free/distro-or-miniconda/). Note that for the purpose of running INSPIRED, either one will work. 
@@ -76,14 +76,19 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
 
 3. Start VirtualBox, [import the inspired.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
 4. Run the “inspired” VM. If prompted, use "inspired" for both user ID and password to login.
-5. Set up the "shared folder" to access (read and write) files on your host computer. Click Devices->Shared Folders->Shared folders settings on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "
-Folder Name" can be anything you want (e.g., inspired_cwd). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" to make future work easier. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, System Tools->QTerminal), run:
+5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" can be anything you want (e.g., inspired_cwd). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" if desired. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, "System Tools->QTerminal"), run:
 
    `sudo mount -t vboxsf inspired_cwd /home/inspired/cwd`
 
 6. Go to the shared folder (create a subfolder if needed) and run:
 
    `inspired`
+
+Note: If the VM is properly configured to have internet connection, future update can be done in the same way as in Option 1:
+
+   `cd /home/inspired/inspired`
+   
+   `git pull`
 
 
 ## Additional notes:
