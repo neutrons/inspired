@@ -84,7 +84,7 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
 
    `inspired`
 
-Note: If the VM is properly configured to have internet connection, future update can be done in the same way as in Option 1:
+   (Note: If the VM is properly configured to have internet connection, future update can be done in the same way as in Option 1)
 
    `cd /home/inspired/inspired`
    
