@@ -70,21 +70,21 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
 ### Option 2:
    If you do not have access to a Linux computer, or you cannot install INSPIRED properly by following the steps in Option 1, you may consider running INSPIRED as a VM.
 1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
-2. Download the VirtualBox image (inspired.ova) from [Zenodo](https://doi.org/10.5281/zenodo.10723108). On MacOS/Linux, you may run:
+2. Download the VirtualBox appliance file from [Zenodo](https://doi.org/10.5281/zenodo.10723108). On MacOS/Linux, you may run:
 
-   `wget https://zenodo.org/records/10723108/files/inspired.ova`
+   `wget https://zenodo.org/records/10723108/files/inspired_vm.ova`
 
-3. Start VirtualBox, [import the inspired.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
-4. Run the “inspired” VM. If prompted, use "inspired" for both user ID and password to login.
-5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" can be anything you want (e.g., inspired_cwd). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" if desired. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, "System Tools->QTerminal"), run:
+3. Start VirtualBox, [import the inspired_vm.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
+4. Run the “inspired_vm” VM. If prompted, use "inspired" for both user ID and password to login.
+5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" can be anything you want (e.g., inspired_cwd). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired_vm/cwd). You may check "Auto-mount" and "Make permanent" if desired. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, "System Tools->QTerminal"), run:
 
-   `sudo mount -t vboxsf inspired_cwd /home/inspired/cwd`
+   `sudo mount -t vboxsf inspired_cwd /home/inspired_vm/cwd`
 
 6. Go to the shared folder (create a subfolder if needed) and run:
 
    `inspired`
 
-Note: If the VM is properly configured to have internet connection, future update can be done in the same way as in Option 1: `cd /home/inspired/inspired` and `git pull` for the code, and Step 4 in Option 1 for the database and model.
+Note: If the VM is properly configured to have internet connection, future updates can be done in the same way as in Option 1: `cd /home/inspired_vm/inspired` and `git pull` for the code, and Step 4 in Option 1 for the database and model.
 
 
 ## Additional notes:
