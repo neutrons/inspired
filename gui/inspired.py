@@ -18,6 +18,7 @@ from pandas_model import PandasModel
 from ase.io import read
 from ase.formula import Formula
 from ase.spacegroup import get_spacegroup
+from ase.visualize import view
 import torch
 
 class INSPIRED(QMainWindow):
@@ -166,6 +167,12 @@ class INSPIRED(QMainWindow):
             print('INFO: Chemical formula: ',Formula(form).reduce()[0])
             print('INFO: Space group: ',sg.no,sg.symbol)
     
+    def view_structure(self):
+        if self.atoms:
+            view(self.atoms)
+        else:
+            print('ERROR: Select structure file first.')
+
     # Predictor tab
 
     def upload_structure_dp(self):
@@ -177,6 +184,7 @@ class INSPIRED(QMainWindow):
                 self.ui.statusbar.showMessage("")
             except Exception as e:
                 self.ui.statusbar.showMessage(f"Error: {e.__repr__()} when loading {fname}")
+
 
     def predict_selection_changed(self, *args, **kwargs):
         sender_name = self.sender().objectName()
@@ -230,6 +238,16 @@ class INSPIRED(QMainWindow):
         match_exact = self.ui.checkBox_exact.isChecked()
         self.show_df = self.dft_worker.search_structure(search_type, search_keyword, match_exact)
         self.ui.tableView.setModel(PandasModel(self.show_df))
+
+    def view_structure_dft(self):
+        if self.ui.radioButton_database.isChecked():
+            mp_dfindex = self.ui.tableView.currentIndex().row()
+            mp_id = self.show_df.iat[mp_dfindex, 0]
+            filename = os.path.join(self.dft_database_path, mp_id, 'POSCAR-unitcell')
+        elif self.ui.radioButton_user_dft.isChecked():
+            filename = os.path.join(self.userdft_path, 'POSCAR-unitcell')
+        self.atoms = read(filename, format='vasp')
+        view(self.atoms)
 
     def copy_files(self):
         if self.ui.radioButton_database.isChecked():

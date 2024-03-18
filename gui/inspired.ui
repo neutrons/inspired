@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>709</width>
-    <height>880</height>
+    <width>708</width>
+    <height>879</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -62,8 +62,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>665</width>
-             <height>720</height>
+             <width>664</width>
+             <height>719</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -81,11 +81,22 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_upload_structure_dp">
-                 <property name="text">
-                  <string>Upload a structure file</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_upload_structure_dp">
+                   <property name="text">
+                    <string>Upload a structure file</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_view_struc_dp">
+                   <property name="text">
+                    <string>View structure (optional)</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item>
                 <widget class="QLabel" name="label_structure_dp">
@@ -318,8 +329,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>665</width>
-             <height>720</height>
+             <width>664</width>
+             <height>719</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -342,7 +353,7 @@
               <item row="0" column="0">
                <widget class="QRadioButton" name="radioButton_database">
                 <property name="text">
-                 <string>Search DFT Database</string>
+                 <string>Search DFT Database [4]</string>
                 </property>
                </widget>
               </item>
@@ -443,11 +454,22 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_17">
                <item>
-                <widget class="QPushButton" name="pushButton_plot_dos_dft">
-                 <property name="text">
-                  <string>Plot phonon dispersion and DOS</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_view_struc_dft">
+                   <property name="text">
+                    <string>View structure</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_plot_dos_dft">
+                   <property name="text">
+                    <string>Plot phonon dispersion and DOS</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -649,8 +671,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>665</width>
-             <height>720</height>
+             <width>650</width>
+             <height>592</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -661,17 +683,28 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11">
                <item>
-                <widget class="QPushButton" name="pushButton_upload_structure_mlff">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Upload a structure file</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_upload_structure_mlff">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Upload a structure file</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_view_struc_mlff">
+                   <property name="text">
+                    <string>View structure (optional)</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item>
                 <widget class="QLabel" name="label_structure_mlff">
@@ -695,7 +728,7 @@
                <item>
                 <widget class="QLabel" name="label_30">
                  <property name="text">
-                  <string>Choose a pre-trained MLFF model (MACE[8-10], CHGNet[11], M3GNet[12]):</string>
+                  <string>Choose a pre-trained MLFF model (MACE [8-10], CHGNet [11], M3GNet [12]):</string>
                  </property>
                 </widget>
                </item>
@@ -1024,7 +1057,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>709</width>
+     <width>708</width>
      <height>22</height>
     </rect>
    </property>
@@ -1134,8 +1167,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>696</x>
-     <y>812</y>
+     <x>101</x>
+     <y>76</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1166,8 +1199,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_spec_dp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>445</x>
-     <y>764</y>
+     <x>466</x>
+     <y>763</y>
     </hint>
     <hint type="destinationlabel">
      <x>459</x>
@@ -1182,8 +1215,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>predict_selection_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>163</x>
-     <y>473</y>
+     <x>184</x>
+     <y>472</y>
     </hint>
     <hint type="destinationlabel">
      <x>418</x>
@@ -1198,8 +1231,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>predict_selection_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>218</x>
-     <y>499</y>
+     <x>239</x>
+     <y>498</y>
     </hint>
     <hint type="destinationlabel">
      <x>423</x>
@@ -1214,8 +1247,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>opt_and_dos_cal_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>150</x>
-     <y>390</y>
+     <x>129</x>
+     <y>280</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1246,8 +1279,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>696</x>
-     <y>812</y>
+     <x>685</x>
+     <y>813</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1262,8 +1295,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_spec_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>150</x>
-     <y>764</y>
+     <x>129</x>
+     <y>532</y>
     </hint>
     <hint type="destinationlabel">
      <x>473</x>
@@ -1278,8 +1311,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>predict_selection_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>256</x>
-     <y>401</y>
+     <x>278</x>
+     <y>400</y>
     </hint>
     <hint type="destinationlabel">
      <x>419</x>
@@ -1326,8 +1359,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>run_prediction()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>374</x>
-     <y>529</y>
+     <x>395</x>
+     <y>528</y>
     </hint>
     <hint type="destinationlabel">
      <x>456</x>
@@ -1342,8 +1375,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>run_oclimax_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>151</x>
-     <y>589</y>
+     <x>129</x>
+     <y>464</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1358,8 +1391,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>upload_structure_dp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>357</x>
-     <y>208</y>
+     <x>349</x>
+     <y>209</y>
     </hint>
     <hint type="destinationlabel">
      <x>456</x>
@@ -1374,8 +1407,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>setup_oclimax_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>150</x>
-     <y>456</y>
+     <x>129</x>
+     <y>376</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1390,8 +1423,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_dp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>696</x>
-     <y>812</y>
+     <x>685</x>
+     <y>813</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1454,8 +1487,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_dos_disp_dft()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>437</y>
+     <x>469</x>
+     <y>458</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -1476,6 +1509,54 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <hint type="destinationlabel">
      <x>359</x>
      <y>438</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_view_struc_dft</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>view_structure_dft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>196</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_view_struc_mlff</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>view_structure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_view_struc_dp</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>view_structure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>514</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>439</y>
     </hint>
    </hints>
   </connection>
@@ -1505,5 +1586,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <slot>choose_dft_folder()</slot>
   <slot>plot_dos_disp_dft()</slot>
   <slot>setup_working_directory()</slot>
+  <slot>view_structure()</slot>
+  <slot>view_structure_dft()</slot>
  </slots>
 </ui>
