@@ -27,6 +27,7 @@ class Ui_INSPIRED(object):
         self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
         self.PREDtab = QtWidgets.QWidget()
+        self.PREDtab.setToolTip("")
         self.PREDtab.setObjectName("PREDtab")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.PREDtab)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -104,6 +105,7 @@ class Ui_INSPIRED(object):
         self.checkBox_range_dp.setObjectName("checkBox_range_dp")
         self.gridLayout_3.addWidget(self.checkBox_range_dp, 2, 0, 1, 1)
         self.checkBox_interactive_dp = QtWidgets.QCheckBox(self.groupBox_step3)
+        self.checkBox_interactive_dp.setToolTip("")
         self.checkBox_interactive_dp.setObjectName("checkBox_interactive_dp")
         self.gridLayout_3.addWidget(self.checkBox_interactive_dp, 2, 1, 1, 1)
         self.verticalLayout_5.addLayout(self.gridLayout_3)
@@ -157,6 +159,7 @@ class Ui_INSPIRED(object):
         self.verticalLayout.addWidget(self.toolButton_help_dp, 0, QtCore.Qt.AlignRight)
         self.tabWidget.addTab(self.PREDtab, "")
         self.DFTtab = QtWidgets.QWidget()
+        self.DFTtab.setToolTip("")
         self.DFTtab.setObjectName("DFTtab")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.DFTtab)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -190,15 +193,18 @@ class Ui_INSPIRED(object):
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setHorizontalSpacing(6)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.label_2 = QtWidgets.QLabel(self.groupBox)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
+        self.pushButton_load = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_load.setObjectName("pushButton_load")
+        self.gridLayout_2.addWidget(self.pushButton_load, 5, 2, 1, 1)
+        self.pushButton_search = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_search.setObjectName("pushButton_search")
+        self.gridLayout_2.addWidget(self.pushButton_search, 4, 2, 1, 1)
+        self.checkBox_exact = QtWidgets.QCheckBox(self.groupBox)
+        self.checkBox_exact.setObjectName("checkBox_exact")
+        self.gridLayout_2.addWidget(self.checkBox_exact, 3, 2, 1, 1)
         self.lineEdit_search_value = QtWidgets.QLineEdit(self.groupBox)
         self.lineEdit_search_value.setObjectName("lineEdit_search_value")
         self.gridLayout_2.addWidget(self.lineEdit_search_value, 1, 2, 1, 1)
-        self.pushButton_search = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton_search.setObjectName("pushButton_search")
-        self.gridLayout_2.addWidget(self.pushButton_search, 3, 2, 1, 1)
         self.comboBox_search_type = QtWidgets.QComboBox(self.groupBox)
         self.comboBox_search_type.setObjectName("comboBox_search_type")
         self.comboBox_search_type.addItem("")
@@ -209,9 +215,12 @@ class Ui_INSPIRED(object):
         self.label_3 = QtWidgets.QLabel(self.groupBox)
         self.label_3.setObjectName("label_3")
         self.gridLayout_2.addWidget(self.label_3, 1, 0, 1, 1)
-        self.checkBox_exact = QtWidgets.QCheckBox(self.groupBox)
-        self.checkBox_exact.setObjectName("checkBox_exact")
-        self.gridLayout_2.addWidget(self.checkBox_exact, 2, 2, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.groupBox)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
+        self.textBrowser_2 = QtWidgets.QTextBrowser(self.groupBox)
+        self.textBrowser_2.setObjectName("textBrowser_2")
+        self.gridLayout_2.addWidget(self.textBrowser_2, 2, 2, 1, 1)
         self.horizontalLayout.addLayout(self.gridLayout_2)
         self.tableView = QtWidgets.QTableView(self.groupBox)
         self.tableView.setMinimumSize(QtCore.QSize(0, 233))
@@ -332,7 +341,7 @@ class Ui_INSPIRED(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollArea_3.setObjectName("scrollArea_3")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 650, 592))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 664, 719))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_21.setObjectName("verticalLayout_21")
@@ -573,31 +582,32 @@ class Ui_INSPIRED(object):
         self.pushButton_plot_dos_dft.clicked.connect(INSPIRED.plot_dos_disp_dft) # type: ignore
         self.actionSet_CWD.triggered.connect(INSPIRED.setup_working_directory) # type: ignore
         self.pushButton_view_struc_dft.clicked.connect(INSPIRED.view_structure_dft) # type: ignore
-        self.pushButton_view_struc_mlff.clicked.connect(INSPIRED.view_structure) # type: ignore
-        self.pushButton_view_struc_dp.clicked.connect(INSPIRED.view_structure) # type: ignore
+        self.pushButton_view_struc_mlff.clicked.connect(INSPIRED.view_structure_mlff) # type: ignore
+        self.pushButton_view_struc_dp.clicked.connect(INSPIRED.view_structure_dp) # type: ignore
+        self.pushButton_load.clicked.connect(INSPIRED.load_dft_model) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(INSPIRED)
 
     def retranslateUi(self, INSPIRED):
         _translate = QtCore.QCoreApplication.translate
         INSPIRED.setWindowTitle(_translate("INSPIRED", "Inspired"))
-        self.PREDtab.setToolTip(_translate("INSPIRED", "Make predictions with any given structure"))
         self.groupBox_step1.setTitle(_translate("INSPIRED", "Step 1"))
         self.pushButton_upload_structure_dp.setText(_translate("INSPIRED", "Upload a structure file"))
         self.pushButton_view_struc_dp.setText(_translate("INSPIRED", "View structure (optional)"))
         self.label_structure_dp.setText(_translate("INSPIRED", "Structure file:                                                                             "))
         self.groupBox_step2.setTitle(_translate("INSPIRED", "Step 2"))
-        self.radioButton_predict_phonon_dos.setText(_translate("INSPIRED", "Predict Phonon DOS"))
+        self.radioButton_predict_phonon_dos.setText(_translate("INSPIRED", "Predict phonon DOS"))
         self.checkBox_partial_dos.setText(_translate("INSPIRED", "Partial DOS"))
         self.radioButton_predict_vision.setText(_translate("INSPIRED", "Predict VISION spectra"))
-        self.radioButton_predict_2d_sqe.setText(_translate("INSPIRED", "Predict 2D S(Q,E)"))
+        self.radioButton_predict_2d_sqe.setText(_translate("INSPIRED", "Predict powder 2D S(Q,E)"))
         self.pushButton_predict.setText(_translate("INSPIRED", "Predict"))
         self.groupBox_step3.setTitle(_translate("INSPIRED", "Step 3"))
         self.label_7.setText(_translate("INSPIRED", "Energy unit in plot:"))
         self.comboBox_plot_unit_dp.setItemText(0, _translate("INSPIRED", "meV"))
         self.comboBox_plot_unit_dp.setItemText(1, _translate("INSPIRED", "cm\u207B\u00B9"))
         self.comboBox_plot_unit_dp.setItemText(2, _translate("INSPIRED", "THz"))
+        self.checkBox_range_dp.setToolTip(_translate("INSPIRED", "Check this to use customized axis ranges specified below"))
         self.checkBox_range_dp.setText(_translate("INSPIRED", "Customize range"))
-        self.checkBox_interactive_dp.setText(_translate("INSPIRED", "Interactive 2D cross section plot"))
+        self.checkBox_interactive_dp.setText(_translate("INSPIRED", "Interactive 2D cross-sectional S(Q,E) plot"))
         self.label_12.setText(_translate("INSPIRED", "Ymax"))
         self.label_6.setText(_translate("INSPIRED", "Xmin"))
         self.label_5.setText(_translate("INSPIRED", "Ymin"))
@@ -607,21 +617,29 @@ class Ui_INSPIRED(object):
         self.pushButton_plot_dp.setText(_translate("INSPIRED", "Plot"))
         self.toolButton_help_dp.setText(_translate("INSPIRED", "Help"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.PREDtab), _translate("INSPIRED", "Predictor"))
-        self.tabWidget.setTabToolTip(self.tabWidget.indexOf(self.PREDtab), _translate("INSPIRED", "Make predictions with any given structure"))
-        self.DFTtab.setToolTip(_translate("INSPIRED", "Run calculations using a model in the database"))
         self.pushButton_dft_folder.setText(_translate("INSPIRED", "Browse"))
         self.radioButton_user_dft.setText(_translate("INSPIRED", "Use My DFT Data"))
         self.radioButton_database.setText(_translate("INSPIRED", "Search DFT Database [4]"))
         self.label_dft_folder.setText(_translate("INSPIRED", "DFT folder:"))
         self.groupBox.setTitle(_translate("INSPIRED", "Step 1"))
-        self.label_2.setText(_translate("INSPIRED", "Type:"))
+        self.pushButton_load.setText(_translate("INSPIRED", "Load selected model"))
         self.pushButton_search.setText(_translate("INSPIRED", "Search"))
+        self.checkBox_exact.setText(_translate("INSPIRED", "Exact match"))
         self.comboBox_search_type.setItemText(0, _translate("INSPIRED", "By composition"))
         self.comboBox_search_type.setItemText(1, _translate("INSPIRED", "By MP ID"))
         self.comboBox_search_type.setItemText(2, _translate("INSPIRED", "By space group"))
         self.comboBox_search_type.setItemText(3, _translate("INSPIRED", "By space group number"))
-        self.label_3.setText(_translate("INSPIRED", "Value:"))
-        self.checkBox_exact.setText(_translate("INSPIRED", "Exact match"))
+        self.label_3.setToolTip(_translate("INSPIRED", "Keyword to search in Python RegEx"))
+        self.label_3.setText(_translate("INSPIRED", "RegEx Value:"))
+        self.label_2.setText(_translate("INSPIRED", "Type:"))
+        self.textBrowser_2.setHtml(_translate("INSPIRED", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Example: (Na)(Cl) will return entries containing Na and Cl. With &quot;Exact match&quot; checked, it will return entries containing Na and Cl only. Click &quot;Help&quot; for more info.</p></body></html>"))
         self.groupBox_11.setTitle(_translate("INSPIRED", "Step 2 (Optional)"))
         self.pushButton_view_struc_dft.setText(_translate("INSPIRED", "View structure"))
         self.pushButton_plot_dos_dft.setText(_translate("INSPIRED", "Plot phonon dispersion and DOS"))
@@ -635,8 +653,9 @@ class Ui_INSPIRED(object):
         self.comboBox_plot_unit_dft.setItemText(0, _translate("INSPIRED", "meV"))
         self.comboBox_plot_unit_dft.setItemText(1, _translate("INSPIRED", "cm\u207B\u00B9"))
         self.comboBox_plot_unit_dft.setItemText(2, _translate("INSPIRED", "THz"))
+        self.checkBox_range_dft.setToolTip(_translate("INSPIRED", "Check this to use customized axis ranges specified below"))
         self.checkBox_range_dft.setText(_translate("INSPIRED", "Customize range"))
-        self.checkBox_interactive_dft.setText(_translate("INSPIRED", "Interactive 2D cross section plot"))
+        self.checkBox_interactive_dft.setText(_translate("INSPIRED", "Interactive 2D cross-sectional S(Q,E) plot"))
         self.label_17.setText(_translate("INSPIRED", "Xmax"))
         self.label_19.setText(_translate("INSPIRED", "Zmax"))
         self.label_14.setText(_translate("INSPIRED", "Xmin"))
@@ -646,7 +665,6 @@ class Ui_INSPIRED(object):
         self.pushButton_plot_dft.setText(_translate("INSPIRED", "Plot INS spectrum"))
         self.toolButton_help_dft.setText(_translate("INSPIRED", "Help"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DFTtab), _translate("INSPIRED", "DFT database"))
-        self.tabWidget.setTabToolTip(self.tabWidget.indexOf(self.DFTtab), _translate("INSPIRED", "Run calculations using a model in the database"))
         self.groupBox_5.setTitle(_translate("INSPIRED", "Step 1"))
         self.pushButton_upload_structure_mlff.setText(_translate("INSPIRED", "Upload a structure file"))
         self.pushButton_view_struc_mlff.setText(_translate("INSPIRED", "View structure (optional)"))
@@ -657,9 +675,13 @@ class Ui_INSPIRED(object):
         self.comboBox_mlff_model.setItemText(1, _translate("INSPIRED", "CHGNet Potential"))
         self.comboBox_mlff_model.setItemText(2, _translate("INSPIRED", "M3GNet Potential"))
         self.groupBox_7.setTitle(_translate("INSPIRED", "Step 3"))
+        self.label_Fmax.setToolTip(_translate("INSPIRED", "Maximum force in relaxed structure (eV/A)"))
         self.label_Fmax.setText(_translate("INSPIRED", "Fmax"))
+        self.label_Lmin.setToolTip(_translate("INSPIRED", "Minimum dimension in supercell (A)"))
         self.label_Lmin.setText(_translate("INSPIRED", "Lmin"))
+        self.label_Nmax.setToolTip(_translate("INSPIRED", "Maximum number of structural relaxation steps"))
         self.label_Nmax.setText(_translate("INSPIRED", "Nmax"))
+        self.label_delta.setToolTip(_translate("INSPIRED", "Step size for finite displacement calculation (A)"))
         self.label_delta.setText(_translate("INSPIRED", "delta"))
         self.pushButton_opt_phonon_mlff.setText(_translate("INSPIRED", "Structure optimization + Phonon calculation"))
         self.groupBox_8.setTitle(_translate("INSPIRED", "Step 4"))
@@ -672,8 +694,9 @@ class Ui_INSPIRED(object):
         self.comboBox_plot_unit_mlff.setItemText(0, _translate("INSPIRED", "meV"))
         self.comboBox_plot_unit_mlff.setItemText(1, _translate("INSPIRED", "cm\u207B\u00B9"))
         self.comboBox_plot_unit_mlff.setItemText(2, _translate("INSPIRED", "THz"))
+        self.checkBox_range_mlff.setToolTip(_translate("INSPIRED", "Check this to use customized axis ranges specified below"))
         self.checkBox_range_mlff.setText(_translate("INSPIRED", "Customize range"))
-        self.checkBox_interactive_mlff.setText(_translate("INSPIRED", "Interactive 2D cross section plot"))
+        self.checkBox_interactive_mlff.setText(_translate("INSPIRED", "Interactive 2D cross-sectional S(Q,E) plot"))
         self.label_20.setText(_translate("INSPIRED", "Xmin"))
         self.label_25.setText(_translate("INSPIRED", "Zmax"))
         self.label_22.setText(_translate("INSPIRED", "Zmin"))
@@ -692,7 +715,7 @@ class Ui_INSPIRED(object):
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Developers: Bowen Han, Andrei Savici, Mingda Li, Yongqiang Cheng</p>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Citation: INSPIRED manuscript is in preparation.</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Citation: Please find INSPIRED publication on https://github.com/cyqjh/inspired</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Contact: Please email chengy@ornl.gov for any questions or requests.</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Important References:</p>\n"
@@ -707,7 +730,14 @@ class Ui_INSPIRED(object):
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">9.            Batatia, I.;  Batzner, S.;  Kovács, D. P.;  Musaelian, A.;  Simm, G. N.;  Drautz, R.;  Ortner, C.;  Kozinsky, B.; Csányi, G., The design space of E (3)-equivariant atom-centered interatomic potentials. <span style=\" font-style:italic;\">arXiv preprint arXiv:2205.06643 </span><span style=\" font-weight:700;\">2022</span>. </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">10.         Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. <span style=\" font-style:italic;\">arXiv preprint arXiv:2401.00096 </span><span style=\" font-weight:700;\">2023</span>. </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">11.         Deng, B.;  Zhong, P.;  Jun, K.;  Riebesell, J.;  Han, K.;  Bartel, C. J.; Ceder, G., CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. <span style=\" font-style:italic;\">Nature Machine Intelligence </span><span style=\" font-weight:700;\">2023,</span> <span style=\" font-style:italic;\">5</span> (9), 1031-1041. </p>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">12.         Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. <span style=\" font-style:italic;\">Nature Computational Science </span><span style=\" font-weight:700;\">2022,</span> <span style=\" font-style:italic;\">2</span> (11), 718-728. </p></body></html>"))
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">12.         Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. <span style=\" font-style:italic;\">Nature Computational Science </span><span style=\" font-weight:700;\">2022,</span> <span style=\" font-style:italic;\">2</span> (11), 718-728. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">13.         Hinuma, Y.; Pizzi, G.; Kumagai, Y.; Oba, F.; Tanaka, I., Band structure diagram paths based on crystallography. <span style=\" font-style:italic;\">Comp. Mat. Sci.</span> <span style=\" font-weight:700;\">2017</span>, 128, 140.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">14.         Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. <span style=\" font-weight:700;\">2018,</span> arXiv:1808.01590</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">15.         Geiger, M.; Smidt, T., e3nn: Euclidean neural networks. <span style=\" font-weight:700;\">2022,</span> doi:10.48550/ARXIV.2207.09453.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">16.         Geiger, M.; et al., Euclidean neural networks: e3nn. <span style=\" font-weight:700;\">2022,</span> doi:10.5281/zenodo.6459381.</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.abouttab), _translate("INSPIRED", "About"))
         self.label_cwd.setText(_translate("INSPIRED", "Current Working Directory:"))
         self.menuMenu.setTitle(_translate("INSPIRED", "Menu"))

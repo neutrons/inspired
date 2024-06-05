@@ -54,6 +54,7 @@ class OCLIMAX(QDialog):
         self.oclimax_params.reset_params_default()
         self.display_parameters()
         self.oclimax_params.write_new_parameter_file()
+        self.params_file_name = "oclimax.params"
 
     def save_parameters(self):
         self.get_params_from_display()
@@ -70,6 +71,9 @@ class OCLIMAX(QDialog):
         self.close()
 
     def get_task_index(self):
+        """translate oclimax task/instr to task index in inspired
+        """
+
         task = self.oclimax_params.get_param('TASK')
         instrument = self.oclimax_params.get_param('INSTR')
         if task == 0 and instrument == 0:
@@ -89,6 +93,9 @@ class OCLIMAX(QDialog):
         return ind
 
     def set_task_instr(self,ind):
+        """translate task index in inspired to oclimax task/instr
+        """
+
         if ind == 0:
             self.oclimax_params.update_param('TASK', 0)
             self.oclimax_params.update_param('INSTR', 0)
@@ -201,7 +208,7 @@ class OCLIMAX(QDialog):
             self.ui.lineEdit_maxo.setText(self.oclimax_params.get_param('MAXO'))
             self.enable_disable_single_crystal_parameters(False)
 
-    def unit_changed(self):  # No action for now
+    def unit_changed(self):  # No action for now, reserved for future development
         if self.ui.comboBox_Eunit.currentIndex() == 1:
             return
 
@@ -257,7 +264,7 @@ class OCLIMAX(QDialog):
         Eb = self.oclimax_params.get_param('Ebin').split()
         for param in [Q1,Q2,Q3,Qb1,Qb2,Qb3]:
             if len(param)!=3:
-                print('ERROR: Check Q parameters (each should have three numbers)')
+                print('ERROR: Check Q and Q_bin parameters (each should have three numbers, click "Help" for more information)')
                 return
         for param in [Qb1,Qb2,Qb3]:
             if float(param[0])>float(param[2]):
@@ -274,11 +281,21 @@ class OCLIMAX(QDialog):
                     param[1]=1
         if len(Eb)!=3:
             if task==3 and len(Eb)==2:
-                Eb = np.array([float(Eb[0]),(float(Eb[1])-float(Eb[0]))/2.0,float(Eb[1])])
+                if float(Eb[1])>float(Eb[0]):
+                    Eb = np.array([float(Eb[0]),(float(Eb[1])-float(Eb[0]))/2.0,float(Eb[1])])
+                else:
+                    print('ERROR: Check E_bin parameters (Emax must be greater than Emin)')
+                    return
             else:
-                print('ERROR: Check E parameter ([Emin,Estep,Emax])')
+                print('ERROR: Check E_bin parameters ([Emin,Estep,Emax] for the task)')
                 return
         else:
+            if float(Eb[2])<=float(Eb[0]):
+                print('ERROR: Check E_bin parameters (Emax must be greater than Emin)')
+                return
+            if float(Eb[1])<=0:
+                print('ERROR: Check E_bin parameters (Estep must be greater than zero)')
+                return
             Eb = np.array([float(Eb[0]),float(Eb[1]),float(Eb[2])])
         Q = np.array([[float(Q1[0]),float(Q1[1]),float(Q1[2])],[float(Q2[0]),float(Q2[1]),float(Q2[2])],[float(Q3[0]),float(Q3[1]),float(Q3[2])]])
         Qb = np.array([[float(Qb1[0]),float(Qb1[1]),float(Qb1[2])],[float(Qb2[0]),float(Qb2[1]),float(Qb2[2])],[float(Qb3[0]),float(Qb3[1]),float(Qb3[2])]])

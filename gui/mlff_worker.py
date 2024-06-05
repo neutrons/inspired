@@ -25,6 +25,9 @@ class MLFFWorker():
         self.nx = self.ny = self.nz = None
 
     def run_opt_and_dos(self, mace_file, m3gnet_path, struc=None, potential_index=0,lmin=12.0,fmax=0.01,nmax=100,delta=0.03):
+        """structure optimization and phonon calculation with MLFF
+        """
+
         try:
             lmin = float(lmin)
         except:
@@ -42,7 +45,7 @@ class MLFFWorker():
         except:
             delta = 0.03
         abc = struc.cell.cellpar()[0:3]
-        nx = math.ceil(lmin/abc[0])
+        nx = math.ceil(lmin/abc[0])        # calculate default mesh in BZ based on cell size
         ny = math.ceil(lmin/abc[1])
         nz = math.ceil(lmin/abc[2])
         self.nx = nx
@@ -51,19 +54,19 @@ class MLFFWorker():
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         torch.set_default_dtype(torch.float32)
         print('INFO: Running structural optimization...')
-        if potential_index == 0:
+        if potential_index == 0:  # MACE
             calculator = MACECalculator(model_paths=mace_file, device=device)
             struc.set_calculator(calculator)
             dyn = FIRE(struc)
             dyn.run(fmax=fmax, steps=nmax)
             atoms_relaxed = dyn.atoms.copy()
-        elif potential_index == 1:
+        elif potential_index == 1:  # CHGNet
             calculator = CHGNetCalculator()
             relaxer = StructOptimizer()
             relax_results = relaxer.relax(struc, fmax=fmax, steps=nmax, relax_cell=False)
             final_structure = relax_results['final_structure']
             atoms_relaxed = AseAtomsAdaptor().get_atoms(final_structure)
-        elif potential_index == 2:
+        elif potential_index == 2:  # M3GNet
             pot = matgl.load_model(m3gnet_path)
             calculator = M3GNetCalculator(pot)
             relaxer = Relaxer(potential=pot,relax_cell=False)
@@ -86,7 +89,7 @@ class MLFFWorker():
                          primitive_matrix=np.array([[1,0,0], [0,1,0], [0,0,1]]))
 
         # Phonon calculation with ASE
-        ''' 
+        """ 
         supercell = (self.nx, self.ny, self.nz)
         ph = Phonons(atoms_relaxed, calculator, supercell=supercell, delta=delta)
         print('INFO: Running phonon calculation. Expect '+str(nsc)+'x6 cache.json files in ./phonon when completed.')
@@ -115,7 +118,7 @@ class MLFFWorker():
                             force_constants[i,j*nx*ny*nz+k] = fcs[k,3*i:3*i+3,3*j:3*j+3]
         
         phonon.force_constants = force_constants
-        '''
+        """
 
         # Phonon calculation with phonopy
 
@@ -173,6 +176,9 @@ class MLFFWorker():
 
 
     def generate_initial_mesh_file(self, mesh_list=[1,1,1]):
+        """generate mesh.conf file for MLFF calculation
+        """
+
         if self.nx and self.ny and self.nz:
             try:
                 os.remove('BORN')

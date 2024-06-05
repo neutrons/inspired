@@ -73,6 +73,12 @@ class Ui_SetPaths(object):
         self.pushButton_cancel = QtWidgets.QPushButton(SetPaths)
         self.pushButton_cancel.setObjectName("pushButton_cancel")
         self.horizontalLayout_4.addWidget(self.pushButton_cancel)
+        self.pushButton_quit = QtWidgets.QPushButton(SetPaths)
+        self.pushButton_quit.setToolTipDuration(-1)
+        self.pushButton_quit.setStatusTip("")
+        self.pushButton_quit.setWhatsThis("")
+        self.pushButton_quit.setObjectName("pushButton_quit")
+        self.horizontalLayout_4.addWidget(self.pushButton_quit)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
 
         self.retranslateUi(SetPaths)
@@ -80,8 +86,9 @@ class Ui_SetPaths(object):
         self.pushButton_dft_path.clicked.connect(SetPaths.browse_dftdb) # type: ignore
         self.pushButton_mace_path.clicked.connect(SetPaths.browse_mace) # type: ignore
         self.pushButton_m3gnet_path.clicked.connect(SetPaths.browse_m3gnet) # type: ignore
-        self.pushButton_cancel.clicked.connect(SetPaths.close) # type: ignore
+        self.pushButton_quit.clicked.connect(SetPaths.quit_inspired) # type: ignore
         self.pushButton_save.clicked.connect(SetPaths.save_paths) # type: ignore
+        self.pushButton_cancel.clicked.connect(SetPaths.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(SetPaths)
 
     def retranslateUi(self, SetPaths):
@@ -98,3 +105,5 @@ class Ui_SetPaths(object):
         self.pushButton_mace_path.setText(_translate("SetPaths", "Browse"))
         self.pushButton_save.setText(_translate("SetPaths", "Save"))
         self.pushButton_cancel.setText(_translate("SetPaths", "Cancel"))
+        self.pushButton_quit.setToolTip(_translate("SetPaths", "Click this botton will terminate INSPIRED."))
+        self.pushButton_quit.setText(_translate("SetPaths", "Quit INSPIRED"))

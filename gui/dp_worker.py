@@ -11,6 +11,14 @@ from latent_space_model import PeriodicNetwork, Decoder
 
 
 class DPWorker():
+    """direct prediction of INS spectra from the crystal structure
+    ML models have been pre-trained
+    Part of the code in this section was modified from the following sources
+    https://github.com/zhantaochen/phonondos_e3nn
+    https://github.com/ninarina12/phononDoS_tutorial
+    The autoencoder used to compress S(Q,E) was based on the work by Geoffery Wu (https://geoffreywu.me/)
+    """
+
     def __init__(self):
         self.data = {}
         self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -19,6 +27,9 @@ class DPWorker():
 
 
     def build_data(self, entry, lsv=np.zeros(50), r_max=5.):
+        """build a graph neural network from the crystal structure
+        """
+
         default_dtype = torch.float64
         torch.set_default_dtype(default_dtype)
 
@@ -64,6 +75,9 @@ class DPWorker():
 
  
     def nnmodel(self,em_dim,out_dim,r_max,nneigh,model_file,pool):
+        """define and load the pre-trained e3nn model
+        """
+
         model = PeriodicNetwork(
             in_dim=118,  # dimension of one-hot encoding of atom type
             em_dim=em_dim,  # dimension of atom-type embedding
@@ -89,7 +103,10 @@ class DPWorker():
 
         return model
 
+
     def predict(self, model_path, struc, pred_type, partial_dos=True):
+        """make predictions
+        """
 
         torch.set_default_dtype(torch.float64)
         if pred_type == "Phonon DOS":
@@ -144,7 +161,7 @@ class DPWorker():
         elif pred_type == "VISION spectrum":
             r_max = 6.0
             lsv = np.zeros(120)
-            nneigh = 59.05215000696383
+            nneigh = 59.05215000696383    # for VISION spectrum prediction
             xaxis = np.arange(10, 1201, 10)
             model_file = os.path.join(model_path, 'crys_vis_predictor')
 
@@ -176,7 +193,7 @@ class DPWorker():
             model_file = os.path.join(model_path, 'latent_space_predictor')
             lsv = np.zeros(50)
             xaxis = np.arange(1, 51, 1)
-            nneigh = 59.220755709410284
+            nneigh = 59.220755709410284   # for latent space vector prediction
 
             self.input_data = self.build_data(struc, lsv, r_max)
 
@@ -204,9 +221,12 @@ class DPWorker():
         else:
             self.data = {}
 
-        self.timestr = time.strftime("%Y%m%d-%H%M%S")
+        self.timestr = time.strftime("%Y%m%d-%H%M%S")   # each prediction is timestamped
     
+
     def savenplot(self,model_path,cwd,partial_dos=True,unit=0,setrange=False,interactive=False,xmin=None,xmax=None,ymin=None,ymax=None,zmin=None,zmax=None):
+        """save prediction results to files and make plots
+        """
 
         if not self.data:
             print('ERROR: No data to plot.')
@@ -266,7 +286,7 @@ class DPWorker():
             f = open(os.path.join(cwd,outfile),'w')
             print('# Energy ('+xlabel+'), Normalized spectrum',file=f)
             for i in range(len(xaxis)):
-                print(xaxis[i], self.data['y'][i], file=f)
+                print(xaxis[i], ',', self.data['y'][i], file=f)
             f.close()
             print('INFO: '+self.data['type']+' data saved to '+outfile)
 
@@ -286,9 +306,9 @@ class DPWorker():
                 fig.show()
                 outfile = 'PPDOS_pred_'+self.timestr+'.csv'
                 f = open(os.path.join(cwd,outfile),'w')
-                print('# Energy ('+xlabel+'), Normalized spectrum',file=f)
+                print('# Energy ('+xlabel+'), Normalized spectrum ('+','.join([s for s in self.species])+')',file=f)
                 for i in range(len(self.data['x'])):
-                    print(xaxis[i], ' '.join([str(self.pdos[s][i]) for s in self.species]), file=f)
+                    print(str(xaxis[i])+',', ','.join([str(self.pdos[s][i]) for s in self.species]), file=f)
                 f.close()
                 print('INFO: Partial phonon DOS data saved to '+outfile)
         
@@ -310,8 +330,7 @@ class DPWorker():
                 y_max = y_max0 = 150
                 plt_unit = 'meV'
 
-
-            # %%
+            # Latent space vector is decoded in the following steps to reconstruct the 2D S(Q,E)
             DECODER_MODEL = os.path.join(model_path, 'decoder.pt')
 
             encoded_space_dim = 50
@@ -372,6 +391,9 @@ class DPWorker():
             asp = (x_max-x_min)/(y_max-y_min)*1.0
 
             if interactive:
+                # Make interactive 2D plot, modified from the example by Diziet Asahi from the following link
+                # https://stackoverflow.com/questions/59144464/plotting-two-cross-section-intensity-at-the-same-time-in-one-figure
+
                 fig, axs = plt.subplots(2, 2, figsize=(6, 6), sharex="col", sharey="row",
                                          gridspec_kw=dict(height_ratios=[1, 3],
                                                           width_ratios=[3, 1]))

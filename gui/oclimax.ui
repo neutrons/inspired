@@ -24,6 +24,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label">
+          <property name="toolTip">
+           <string>Uniform mesh in the first Brillouin zone for phonon DOS</string>
+          </property>
           <property name="text">
            <string>Q mesh</string>
           </property>
@@ -52,6 +55,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_ph_default">
+          <property name="toolTip">
+           <string>Use default mesh based on cell size</string>
+          </property>
           <property name="text">
            <string>Default</string>
           </property>
@@ -59,6 +65,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_ph_save">
+          <property name="toolTip">
+           <string>Save mesh to the mesh.conf file</string>
+          </property>
           <property name="text">
            <string>Save mesh</string>
           </property>
@@ -70,6 +79,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLabel" name="label_29">
+          <property name="toolTip">
+           <string>Increase Q point density when dispersion appears disconnected</string>
+          </property>
           <property name="text">
            <string>BAND_POINTS scaling factor </string>
           </property>
@@ -167,6 +179,9 @@
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_4">
+          <property name="toolTip">
+           <string>Temperature in kelvin</string>
+          </property>
           <property name="text">
            <string>Temperature</string>
           </property>
@@ -189,6 +204,9 @@
         </item>
         <item row="7" column="0">
          <widget class="QLabel" name="label_9">
+          <property name="toolTip">
+           <string>Maximum energy in simulated spectra</string>
+          </property>
           <property name="text">
            <string>Emax</string>
           </property>
@@ -196,6 +214,9 @@
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_17">
+          <property name="toolTip">
+           <string>Unit of energy transfer</string>
+          </property>
           <property name="text">
            <string>E Unit</string>
           </property>
@@ -206,6 +227,9 @@
         </item>
         <item row="7" column="3">
          <widget class="QLabel" name="label_11">
+          <property name="toolTip">
+           <string>Maximum Q in simulated spectra</string>
+          </property>
           <property name="text">
            <string>Qmax</string>
           </property>
@@ -213,6 +237,9 @@
         </item>
         <item row="6" column="3">
          <widget class="QLabel" name="label_10">
+          <property name="toolTip">
+           <string>Minimum Q in simulated spectra</string>
+          </property>
           <property name="text">
            <string>Qmin</string>
           </property>
@@ -220,6 +247,9 @@
         </item>
         <item row="0" column="3">
          <widget class="QLabel" name="label_18">
+          <property name="toolTip">
+           <string>Options for additional output files</string>
+          </property>
           <property name="text">
            <string>Output</string>
           </property>
@@ -227,6 +257,9 @@
         </item>
         <item row="10" column="0">
          <widget class="QLabel" name="label_6">
+          <property name="toolTip">
+           <string>Energy resolution coefficients r0 r1 r2 ... with FWHM=2.355*(r0+r1*E+r2*E^2+...)</string>
+          </property>
           <property name="text">
            <string>ERES</string>
           </property>
@@ -241,7 +274,7 @@
           </item>
           <item>
            <property name="text">
-            <string>2D S(Q,E) inc</string>
+            <string>2D S(Q,E) powder inc</string>
            </property>
           </item>
           <item>
@@ -251,7 +284,7 @@
           </item>
           <item>
            <property name="text">
-            <string>2D S(Q,E) full</string>
+            <string>2D S(Q,E) powder full</string>
            </property>
           </item>
           <item>
@@ -292,6 +325,9 @@
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_2">
+          <property name="toolTip">
+           <string>Choose a type of calculation</string>
+          </property>
           <property name="text">
            <string>Task</string>
           </property>
@@ -299,6 +335,9 @@
         </item>
         <item row="9" column="3">
          <widget class="QLabel" name="label_13">
+          <property name="toolTip">
+           <string>Q bin size in simulated spectra</string>
+          </property>
           <property name="text">
            <string>dQ</string>
           </property>
@@ -306,6 +345,9 @@
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_19">
+          <property name="toolTip">
+           <string>Set 1 to simulate [Q,E] envelope due to kinematics and detector coverage</string>
+          </property>
           <property name="text">
            <string>Mask</string>
           </property>
@@ -319,6 +361,9 @@
         </item>
         <item row="1" column="3">
          <widget class="QLabel" name="label_5">
+          <property name="toolTip">
+           <string>Maximum order of excitations to calculate</string>
+          </property>
           <property name="text">
            <string>MAXO</string>
           </property>
@@ -329,6 +374,9 @@
         </item>
         <item row="3" column="3">
          <widget class="QLabel" name="label_21">
+          <property name="toolTip">
+           <string>Scattering angles to define detector coverage</string>
+          </property>
           <property name="text">
            <string>Theta</string>
           </property>
@@ -342,6 +390,9 @@
         </item>
         <item row="6" column="0">
          <widget class="QLabel" name="label_8">
+          <property name="toolTip">
+           <string>Minimum energy in simulated spectra</string>
+          </property>
           <property name="text">
            <string>Emin</string>
           </property>
@@ -349,6 +400,9 @@
         </item>
         <item row="9" column="0">
          <widget class="QLabel" name="label_12">
+          <property name="toolTip">
+           <string>Energy bin size in simulated spectra</string>
+          </property>
           <property name="text">
            <string>dE</string>
           </property>
@@ -356,6 +410,9 @@
         </item>
         <item row="10" column="3">
          <widget class="QLabel" name="label_7">
+          <property name="toolTip">
+           <string>Q resolution coefficients r0 r1 r2 ... with FWHM=2.355*(r0+r1*Q+r2*Q^2+...)</string>
+          </property>
           <property name="text">
            <string>QRES</string>
           </property>
@@ -363,6 +420,9 @@
         </item>
         <item row="5" column="3">
          <widget class="QLabel" name="label_3">
+          <property name="toolTip">
+           <string>Energy cutoff (phonon modes below this cutoff will be ignored)</string>
+          </property>
           <property name="text">
            <string>Ecut</string>
           </property>
@@ -370,6 +430,9 @@
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_22">
+          <property name="toolTip">
+           <string>Incident energy (DGS only)</string>
+          </property>
           <property name="text">
            <string>Ei</string>
           </property>
@@ -383,6 +446,9 @@
         </item>
         <item row="4" column="3">
          <widget class="QLabel" name="label_20">
+          <property name="toolTip">
+           <string>Normalize spectral intensity with total scattering cross-section</string>
+          </property>
           <property name="text">
            <string>Norm</string>
           </property>
@@ -397,6 +463,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QPushButton" name="pushButton_oclimax_load">
+          <property name="toolTip">
+           <string>Read parameters from a params file</string>
+          </property>
           <property name="text">
            <string>Load parameters</string>
           </property>
@@ -404,6 +473,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_oclimax_default">
+          <property name="toolTip">
+           <string>Default calculation for 1D VISION/TOSCA spectra</string>
+          </property>
           <property name="text">
            <string>Use default</string>
           </property>
@@ -411,8 +483,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_oclimax_save">
+          <property name="toolTip">
+           <string>Save parameters to a params file before running the calculation</string>
+          </property>
           <property name="text">
-           <string>Save parameters</string>
+           <string>Save/Use current parameters</string>
           </property>
          </widget>
         </item>
@@ -425,6 +500,9 @@
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_24">
+          <property name="toolTip">
+           <string>Binning for Q2 dimension (in rlu)</string>
+          </property>
           <property name="text">
            <string>Q2_bin</string>
           </property>
@@ -432,6 +510,9 @@
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_25">
+          <property name="toolTip">
+           <string>Binning for Q3 dimension (in rlu)</string>
+          </property>
           <property name="text">
            <string>Q3_bin</string>
           </property>
@@ -439,6 +520,9 @@
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_14">
+          <property name="toolTip">
+           <string>Vector for Q1 dimension (in rlu)</string>
+          </property>
           <property name="text">
            <string>Q1</string>
           </property>
@@ -449,6 +533,9 @@
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_16">
+          <property name="toolTip">
+           <string>Vector for Q3 dimension (in rlu)</string>
+          </property>
           <property name="text">
            <string>Q3</string>
           </property>
@@ -456,6 +543,9 @@
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_23">
+          <property name="toolTip">
+           <string>Binning for Q1 dimension (in rlu)</string>
+          </property>
           <property name="text">
            <string>Q1_bin</string>
           </property>
@@ -463,6 +553,9 @@
         </item>
         <item row="7" column="0">
          <widget class="QLabel" name="label_27">
+          <property name="toolTip">
+           <string>X-axis in the 2D plot</string>
+          </property>
           <property name="text">
            <string>x-axis</string>
           </property>
@@ -473,6 +566,9 @@
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_15">
+          <property name="toolTip">
+           <string>Vector for Q2 dimension (in rlu)</string>
+          </property>
           <property name="text">
            <string>Q2</string>
           </property>
@@ -483,6 +579,9 @@
         </item>
         <item row="6" column="0">
          <widget class="QLabel" name="label_26">
+          <property name="toolTip">
+           <string>Binning for energy</string>
+          </property>
           <property name="text">
            <string>E_bin</string>
           </property>
@@ -490,6 +589,9 @@
         </item>
         <item row="8" column="0">
          <widget class="QLabel" name="label_28">
+          <property name="toolTip">
+           <string>Y-axis in the 2D plot</string>
+          </property>
           <property name="text">
            <string>y-axis</string>
           </property>

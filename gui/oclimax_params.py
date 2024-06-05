@@ -1,9 +1,10 @@
 import os
 import subprocess
 
+# Initialize and access oclimax parameters
+
 class OclimaxParams():
     def __init__(self):
-
 
         self.dict_default_params = {'TASK': 0,
                                     'INSTR': 0,

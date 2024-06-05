@@ -36,13 +36,14 @@ class INSPIRED(QMainWindow):
         self.userdft_path = self.cwd_path
         self.setup_paths()
         self.check_paths()
-
-        self.atoms = None
-
-        self.pred_type = "Phonon DOS"
-
         self.show_df = self.dft_worker.get_initial_search_df(dft_path=self.dft_database_path)
         self.ui.tableView.setModel(PandasModel(self.show_df))
+        self.pred_type = "Phonon DOS"
+        self.atoms_dp = None
+        self.atoms_dft = None
+        self.atoms_mlff = None
+        self.mlff_opt = False
+
         for i in range(3):
             self.ui.tableView.horizontalHeader().setSectionResizeMode(i, QHeaderView.ResizeToContents)
         self.ui.tableView.verticalHeader().setVisible(False)
@@ -56,6 +57,11 @@ class INSPIRED(QMainWindow):
 
 
     def setup_working_directory(self):
+        """set working directory
+        This is the directory where all input and output files are located
+        Default is the location where inspired is started
+        """
+
         wd = QFileDialog.getExistingDirectory(self, 'Working directory', '')
         if wd:
             self.cwd_path = wd
@@ -65,6 +71,11 @@ class INSPIRED(QMainWindow):
 
 
     def setup_paths(self):
+        """set paths to database and model files
+        Default is root dir of inspired but can be customized
+        Will be saved in ~/.config/inspired
+        """
+
         home_path = os.path.expanduser('~')
         user_config = os.path.join(home_path,'.config','inspired','config')
         sys_config = os.path.join(self.root_path, 'config')
@@ -76,7 +87,8 @@ class INSPIRED(QMainWindow):
             print('INFO: config file not found, using default paths.')
             return
         elif not os.path.isfile(user_config) and os.path.isfile(sys_config):
-            os.makedirs(os.path.join(home_path,'.config','inspired'))
+            if not os.path.exists(os.path.join(home_path,'.config','inspired')):
+                os.makedirs(os.path.join(home_path,'.config','inspired'))
             shutil.copyfile(sys_config,user_config)
             
         with open(user_config, 'r') as f:
@@ -99,6 +111,12 @@ class INSPIRED(QMainWindow):
 
 
     def check_paths(self):           
+        """check if paths are valid
+        Inspired will not run without all paths set properly
+        Will check repeatedly until all required files are found
+        Users can choose to quit
+        """
+
         if not os.path.isdir(self.predictor_path):
             print('ERROR: Predictor model path does not exist. Please reset in config file or Preferences in the Menu.')
             self.set_preferences()
@@ -121,6 +139,9 @@ class INSPIRED(QMainWindow):
 
 
     def set_preferences(self):
+        """open preferences window
+        Set and check paths
+        """
 
         self.set_paths.init_paths(self.predictor_path,self.dft_database_path,self.mace_model_file,self.m3gnet_model_path)
         self.set_paths.exec()
@@ -129,6 +150,10 @@ class INSPIRED(QMainWindow):
 
 
     def select_structure_file(self):
+        """choose a structure file in browser
+        Currently support cif and VASP POSCAR/CONTCAR
+        """
+
         fname, _ = QFileDialog.getOpenFileName(self, 'Open file', 
                 '',"Structure files (*)")
               #  '',"CIF files (*.cif)")
@@ -137,10 +162,16 @@ class INSPIRED(QMainWindow):
         else:
             return None
 
-    def read_structure_file(self,filename):
+
+    def read_structure_file(self, filename):
+        """read and check structure with a given filename
+        Not supporting fractional occupancies
+        Display crystal information after successful loading
+        """
+
         if filename.endswith('.cif'):
-            self.atoms = read(filename, format='cif')
-            occ = self.atoms.info['occupancy']
+            atoms = read(filename, format='cif')
+            occ = atoms.info['occupancy']
             fra = []
             for j in list(occ.values()):
                 fra.append(float(list(j.values())[0]))
@@ -151,40 +182,42 @@ class INSPIRED(QMainWindow):
                 print('WARNING: All partial occupancies will be treated as full atoms in the following calculations.')
 
         elif 'POSCAR' in filename or 'CONTCAR' in filename:
-            self.atoms = read(filename, format='vasp')
+            atoms = read(filename, format='vasp')
         else:
             print('ERROR: File format not supported yet (currently support cif and VASP format)')
             return
-        if self.atoms:
-            sg = get_spacegroup(self.atoms)
-            form = self.atoms.get_chemical_formula()
-            cell = self.atoms.cell
+        if atoms:
+            sg = get_spacegroup(atoms)
+            form = atoms.get_chemical_formula()
+            cell = atoms.cell
             print('INFO: Crystal structure loaded successfully')
             print('INFO: Cell lengths: ',cell.lengths())
             print('INFO: Cell angles: ',cell.angles())
             print('INFO: Cell volume: ',cell.volume)
-            print('INFO: Number of atoms in cell: ',len(self.atoms.numbers))
+            print('INFO: Number of atoms in cell: ',len(atoms.numbers))
             print('INFO: Chemical formula: ',Formula(form).reduce()[0])
             print('INFO: Space group: ',sg.no,sg.symbol)
-    
-    def view_structure(self):
-        if self.atoms:
-            view(self.atoms)
-        else:
-            print('ERROR: Select structure file first.')
 
+        return atoms
+    
     # Predictor tab
+    # The following functions define actions in the Predictor tab
 
     def upload_structure_dp(self):
         fname = self.select_structure_file()
         if fname:
             try:
-                self.read_structure_file(fname)
+                self.atoms_dp = self.read_structure_file(fname)
                 self.ui.label_structure_dp.setText(f"Structure file: {fname}")
                 self.ui.statusbar.showMessage("")
             except Exception as e:
                 self.ui.statusbar.showMessage(f"Error: {e.__repr__()} when loading {fname}")
 
+    def view_structure_dp(self):
+        if self.atoms_dp:
+            view(self.atoms_dp)
+        else:
+            print('ERROR: Select structure file first.')
 
     def predict_selection_changed(self, *args, **kwargs):
         sender_name = self.sender().objectName()
@@ -196,9 +229,9 @@ class INSPIRED(QMainWindow):
             self.pred_type = "S(|Q|, E)"
 
     def run_prediction(self):
-        if self.atoms:
+        if self.atoms_dp:
             print('INFO: Prediction started.')
-            self.dp_worker.predict(model_path=self.predictor_path, struc=self.atoms, pred_type=self.pred_type, partial_dos=self.ui.checkBox_partial_dos.isChecked())
+            self.dp_worker.predict(model_path=self.predictor_path, struc=self.atoms_dp, pred_type=self.pred_type, partial_dos=self.ui.checkBox_partial_dos.isChecked())
             print('INFO: Prediction finished.')
             #self.ui.statusbar.showMessage("Prediction done")
         else:
@@ -213,6 +246,7 @@ class INSPIRED(QMainWindow):
 
 
     # DFT tab
+    # The following functions define actions in the DFT tab
 
     def cal_with_dftdb(self):
         self.ui.comboBox_search_type.setEnabled(True)
@@ -239,36 +273,57 @@ class INSPIRED(QMainWindow):
         self.show_df = self.dft_worker.search_structure(search_type, search_keyword, match_exact)
         self.ui.tableView.setModel(PandasModel(self.show_df))
 
-    def view_structure_dft(self):
+    def load_dft_model(self):
         if self.ui.radioButton_database.isChecked():
             mp_dfindex = self.ui.tableView.currentIndex().row()
             mp_id = self.show_df.iat[mp_dfindex, 0]
             filename = os.path.join(self.dft_database_path, mp_id, 'POSCAR-unitcell')
-        elif self.ui.radioButton_user_dft.isChecked():
-            filename = os.path.join(self.userdft_path, 'POSCAR-unitcell')
-        self.atoms = read(filename, format='vasp')
-        view(self.atoms)
-
-    def copy_files(self):
-        if self.ui.radioButton_database.isChecked():
-            mp_dfindex = self.ui.tableView.currentIndex().row()
-            mp_id = self.show_df.iat[mp_dfindex, 0]
             self.dft_worker.prepare_dft_files(self.cwd_path, self.dft_database_path, mp_id)
         elif self.ui.radioButton_user_dft.isChecked():
+            filename = os.path.join(self.userdft_path, 'POSCAR-unitcell')
             self.dft_worker.prepare_dft_files(self.cwd_path, self.userdft_path)
+        try:
+            self.atoms_dft = read(filename, format='vasp')
+        except:
+            print('ERROR: Failed to load structure model')
+        else:
+            sg = get_spacegroup(self.atoms_dft)
+            form = self.atoms_dft.get_chemical_formula()
+            cell = self.atoms_dft.cell
+            print('INFO: Crystal structure loaded successfully')
+            print('INFO: Cell lengths: ',cell.lengths())
+            print('INFO: Cell angles: ',cell.angles())
+            print('INFO: Cell volume: ',cell.volume)
+            print('INFO: Number of atoms in cell: ',len(self.atoms_dft.numbers))
+            print('INFO: Chemical formula: ',Formula(form).reduce()[0])
+            print('INFO: Space group: ',sg.no,sg.symbol)
+
+
+    def view_structure_dft(self):
+        if self.atoms_dft:
+            view(self.atoms_dft)
+        else:
+            print('ERROR: Select and load model first.')
 
     def plot_dos_disp_dft(self):
-        self.copy_files()
-        self.dft_worker.plot_dos_dispersion()
+        if self.atoms_dft:
+            self.dft_worker.plot_dos_dispersion()
+        else:
+            print('ERROR: Select and load model first.')
 
     def setup_oclimax_dft(self):
-        self.copy_files()
-        self.dft_worker.oclimax.set_oclimax_cwd(self.cwd_path)
-        self.dft_worker.oclimax.exec()
-        self.ui.label.setText(f"Parameter file: {self.dft_worker.oclimax.params_file_name}")
+        if self.atoms_dft:
+            self.dft_worker.oclimax.set_oclimax_cwd(self.cwd_path)
+            self.dft_worker.oclimax.exec()
+            self.ui.label.setText(f"Parameter file: {self.dft_worker.oclimax.params_file_name}")
+        else:
+            print('ERROR: Select and load model first.')
         
     def run_oclimax_dft(self):
-        self.dft_worker.oclimax.run_oclimax()
+        if self.atoms_dft:
+            self.dft_worker.oclimax.run_oclimax()
+        else:
+            print('ERROR: Select and load model file first.')
 
     def plot_spec_dft(self):
         self.dft_worker.oclimax.plot_spec(unit=self.ui.comboBox_plot_unit_dft.currentIndex(),
@@ -279,33 +334,45 @@ class INSPIRED(QMainWindow):
 
 
     # MLFF tab
+    # The following functions define actions in the MLFF tab
 
     def upload_structure_mlff(self):
         fname = self.select_structure_file()
         if fname:
             try:
-                self.read_structure_file(fname)
+                self.atoms_mlff = self.read_structure_file(fname)
+                self.mlff_opt = False
                 self.ui.label_structure_mlff.setText(f"Structure file: {fname}")
                 self.ui.statusbar.showMessage("")
             except Exception as e:
                 self.ui.statusbar.showMessage(f"Error: {e.__repr__()} when loading {fname}")
 
+    def view_structure_mlff(self):
+        if self.atoms_mlff:
+            view(self.atoms_mlff)
+        else:
+            print('ERROR: Select structure file first.')
+
     def opt_and_dos_cal_mlff(self):
-        if not self.atoms:
+        if not self.atoms_mlff:
             print('ERROR: No structure loaded.')
             return
-        self.mlff_worker.run_opt_and_dos(self.mace_model_file,self.m3gnet_model_path,self.atoms,potential_index=self.ui.comboBox_mlff_model.currentIndex(),
+        self.mlff_worker.run_opt_and_dos(self.mace_model_file,self.m3gnet_model_path,self.atoms_mlff,potential_index=self.ui.comboBox_mlff_model.currentIndex(),
                                          lmin=self.ui.lineEdit_lmin_mlff.displayText(),
                                          fmax=self.ui.lineEdit_fmax_mlff.displayText(),
                                          nmax=self.ui.lineEdit_nmax_mlff.displayText(),
                                          delta=self.ui.lineEdit_delta_mlff.displayText())
+        self.mlff_opt = True
 
     def setup_oclimax_mlff(self):
-        if not self.atoms:
+        if not self.atoms_mlff:
             print('ERROR: No structure loaded.')
             return
+        if not self.mlff_opt:
+            print('ERROR: Must run structure optimization and phonon calculation first.')
+            return
         qden = 35.0
-        abc = self.atoms.cell.cellpar()[0:3]
+        abc = self.atoms_mlff.cell.cellpar()[0:3]
         nx = int(qden/abc[0])+1
         ny = int(qden/abc[1])+1
         nz = int(qden/abc[2])+1
@@ -316,6 +383,12 @@ class INSPIRED(QMainWindow):
         self.ui.label_param_file_mlff.setText(f"Parameter file: {self.mlff_worker.oclimax.params_file_name}")
 
     def run_oclimax_mlff(self):
+        if not self.atoms_mlff:
+            print('ERROR: No structure loaded.')
+            return
+        if not self.mlff_opt:
+            print('ERROR: Must run structure optimization and phonon calculation first.')
+            return
         self.mlff_worker.oclimax.run_oclimax()
 
     def plot_spec_mlff(self):
@@ -326,7 +399,8 @@ class INSPIRED(QMainWindow):
                                  zmin=self.ui.lineEdit_zmin_mlff.displayText(),zmax=self.ui.lineEdit_zmax_mlff.displayText())
 
 
-    # help dialogs
+    # Help dialogs in the tabs
+
     def open_help_dp(self):
         help_dp = QDialog()
         self.setup_help = Ui_Help_DP()
@@ -350,12 +424,14 @@ if __name__ == "__main__":
     print('********************************************************************************************************')
     print('* Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design (INSPIRED) *')
     print('********************************************************************************************************')
+    print('INFO: version 0.2.0')
     print('INFO: Initializing ...')
     app = QApplication(sys.argv)
     main_window = INSPIRED()
     print('INFO: Starting GUI ...')
     main_window.show()
     print('INFO: Ready. Set your working directory in Menu, or use current directory by default.')
-    print('INFO: To start with a new material, it is strongly recommended that a new/empty directory is created/assigned as working directory.')
+    print('INFO: It is strongly recommended that a new/empty directory is created/assigned as working directory for each project.')
     print('INFO: Existing files from a previous/different model in the working directory may interfere with the calculation and lead to incorrect results.')
+    print('INFO: If you choose not to change working directory for multiple calculations, please follow through all steps for each calculation (do not skip steps).')
     sys.exit(app.exec_())

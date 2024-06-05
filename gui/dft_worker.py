@@ -7,11 +7,18 @@ from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
 from oclimax import OCLIMAX
 
 class DFTWorker():
+    """calculate INS spectra from available entries in the DFT database (or user-supplied DFT results)
+    """
+
     def __init__(self):
         self.initial_search_df = pd.DataFrame()
         self.oclimax = OCLIMAX()
 
+
     def get_initial_search_df(self,dft_path):
+        """list crystals in the database
+        """
+
         crystal_list = os.path.join(dft_path,'crystals.dat')
         df = pd.read_csv(crystal_list, sep=' ', skiprows=[1], skipinitialspace=True)
         df['Space group (number)'] = df['space'].astype(str) + df['group'].astype(str)
@@ -21,7 +28,10 @@ class DFTWorker():
 
         return df_toshow
 
+
     def search_structure(self, search_type, search_keyword, match_exact):
+        """search for the crystal in various ways
+        """
 
         initial_search_df = self.initial_search_df
         try:
@@ -36,7 +46,7 @@ class DFTWorker():
                 df = initial_search_df[initial_search_df['Formula'].str.contains(search_keyword, case=False)]
         elif search_type == 'By MP ID':
             if match_exact:
-                df = initial_search_df[initial_search_df['MP ID'].str.contains(search_keyword, case=True, regex=False)]
+                df = initial_search_df[initial_search_df['MP ID'].str.contains('-'+search_keyword+'-', case=True, regex=False)]
             else:
                 df = initial_search_df[initial_search_df['MP ID'].str.contains(search_keyword, case=False)]
         elif search_type == 'By space group':
@@ -54,7 +64,11 @@ class DFTWorker():
         print('INFO: Search value '+search_keyword+' returns '+str(len(current_search_df))+' match(es).')
         return current_search_df
 
+
     def prepare_dft_files(self, cwd_path, data_path, mp_id=None):
+        """copy DFT files to the current working directory
+        """
+
         if mp_id:
             dft_path = os.path.join(data_path, mp_id)
         else:
@@ -72,6 +86,7 @@ class DFTWorker():
                         pass
         self.oclimax.oclimax_params.get_default_mesh()
         self.oclimax.use_default_mesh()
+
 
     def plot_dos_dispersion(self):
 

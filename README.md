@@ -24,9 +24,30 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 
 ## Installation:
-INSPIRED currently only runs on Linux operating systems. The neutron data server ([analysis cluster](https://analysis.sns.gov)) at ORNL will work if you can access it. We are working on deploying INSPIRED on the analysis cluster so that all users can use it easily. Before the deployment is completed, you may install INSPIRED in your home directory on the analysis cluster (or any other Linux machine) by following the steps below ([Option 1](https://github.com/cyqjh/inspired#option-1)). Alternatively, you may download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 2](https://github.com/cyqjh/inspired#option-2)).
+
+For most users, the easiest way to use INSPIRED is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have a Linux machine and would like to have a native installation, you may also do so [Option 2](https://github.com/cyqjh/inspired#option-2).
 
 ### Option 1
+1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
+2. Download the VirtualBox appliance file from [Zenodo](https://doi.org/10.5281/zenodo.10723108). On MacOS/Linux, you may run:
+
+   `wget https://zenodo.org/records/11478889/files/inspired_vm.ova`
+
+3. Start VirtualBox, [import the inspired_vm.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
+4. Run the “inspired_vm” VM. If prompted, use "inspired" for both user ID and password for authentication.
+5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" is a label to this folder and can be anything you want (we use inspired_cwd as an example). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" so you can skip this step in the future as long as you keep using this folder to share files between your host computer and the VM (but you still need to run the next step every time you start the VM to mount the folder). 
+6. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, "System Tools->QTerminal"), run (use "inspired" as password if prompted for authentication):
+
+   `sudo mount -t vboxsf -o rw,uid=1000,gid=1000 inspired_cwd /home/inspired/cwd`
+
+7. Go to the shared folder (create a subfolder if needed) and run:
+
+   `inspired`
+
+Note: If the VM is properly configured to have an internet connection, future updates can be done in the same way as in Option 1: `cd /home/inspired/inspired` and `git pull` for the code and Step 4 in Option 1 for the database and model. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
+
+
+### Option 2
 1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. If you are unsure which one to choose, check [here](https://docs.anaconda.com/free/distro-or-miniconda/). Note that for the purpose of running INSPIRED, either one will work. 
 
 2. With conda initiated, run the following commands:
@@ -47,7 +68,7 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
 
 4. To download the latest DFT database and ML models from Zenodo and extract the files, run:
    
-    `wget https://zenodo.org/records/10723108/files/dftdb.tar.gz`
+    `wget https://zenodo.org/records/11478889/files/dftdb.tar.gz`
 
     `wget https://zenodo.org/records/10723108/files/model.tar.gz`
 
@@ -67,29 +88,9 @@ INSPIRED currently only runs on Linux operating systems. The neutron data server
    
      `inspired`
 
-### Option 2:
-   If you do not have access to a Linux computer or you cannot install INSPIRED properly by following the steps in Option 1, you may consider running INSPIRED as a VM.
-1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
-2. Download the VirtualBox appliance file from [Zenodo](https://doi.org/10.5281/zenodo.10723108). On MacOS/Linux, you may run:
-
-   `wget https://zenodo.org/records/10723108/files/inspired_vm.ova`
-
-3. Start VirtualBox, [import the inspired_vm.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
-4. Run the “inspired_vm” VM. If prompted, use "inspired" for both user ID and password to login.
-5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" can be anything you want (e.g., inspired_cwd). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" if desired. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, "System Tools->QTerminal"), run:
-
-   `sudo mount -t vboxsf inspired_cwd /home/inspired/cwd`
-
-6. Go to the shared folder (create a subfolder if needed) and run:
-
-   `inspired`
-
-Note: If the VM is properly configured to have an internet connection, future updates can be done in the same way as in Option 1: `cd /home/inspired/inspired` and `git pull` for the code and Step 4 in Option 1 for the database and model. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
-
-
 ## Additional notes:
 
-When using INSPIRED, it is important to ensure the "Current Working Directory" (CWD) is correctly set, as this is where the program reads/writes all its input/output files. The default CWD is where you started INSPIRED, and once this program is running, you can change it in the Menu. It is strongly recommended that a new folder be created for each material to avoid mixed input/output files and potential errors.
+When using INSPIRED, it is important to ensure the "Current Working Directory" (CWD) is correctly set, as this is where the program reads/writes all its input/output files. The default CWD is where you started INSPIRED, and once this program is running, you can change it in the Menu. It is strongly recommended that a new folder be created for each project to avoid mixed input/output files and potential errors. If you prefer not to change the working directory, then please make sure to run through all steps in each calculation (do not skip steps) to avoid accidently picking up input files from a previous calculation.
 
 There is a "Help" button at the bottom right corner of each window. Click on the button for instructions.
 
@@ -98,7 +99,7 @@ If you have any questions, please contact YQ Cheng at chengy@ornl.gov for help.
 
 ## Citation:
 
-INSPIRED paper is in preparation.
+INSPIRED paper is under review.
 
 
 ## References:
@@ -115,3 +116,7 @@ INSPIRED paper is in preparation.
 10.	Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. arXiv preprint arXiv:2401.00096 2023.
 11.	Deng, B.;  Zhong, P.;  Jun, K.;  Riebesell, J.;  Han, K.;  Bartel, C. J.; Ceder, G., CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. Nature Machine Intelligence 2023, 5 (9), 1031-1041.
 12.	Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. Nature Computational Science 2022, 2 (11), 718-728.
+13.	Hinuma, Y.; Pizzi, G.; Kumagai, Y.; Oba, F.; Tanaka, I., Band structure diagram paths based on crystallography. Comp. Mat. Sci. 2017, 128, 140.
+14.	Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. 2018, arXiv:1808.01590
+15.	Geiger, M.; Smidt, T., e3nn: Euclidean neural networks. 2022, doi:10.48550/ARXIV.2207.09453.
+16.	Geiger, M.; et al., Euclidean neural networks: e3nn. 2022, doi:10.5281/zenodo.6459381.

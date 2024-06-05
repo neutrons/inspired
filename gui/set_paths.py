@@ -1,6 +1,7 @@
 from qtpy.QtWidgets import (QFileDialog, QDialog)
 from ui_set_paths import Ui_SetPaths
 import os
+import sys
 
 class SetPaths(QDialog):
     def __init__(self):
@@ -56,3 +57,5 @@ class SetPaths(QDialog):
              f.write('m3gnet_model_path:'+self.m3gnet_model_path+'\n')
         self.close()
 
+    def quit_inspired(self):
+        sys.exit()

@@ -4,6 +4,9 @@ from qtpy.QtWidgets import QTableView, QApplication
 from qtpy.QtCore import QAbstractTableModel, Qt, QModelIndex
 
 
+# Modified from and example given in the link below
+# https://doc.qt.io/qtforpython-6/examples/example_external_pandas.html
+
 class PandasModel(QAbstractTableModel):
     """A model to interface a Qt view with pandas dataframe """
 

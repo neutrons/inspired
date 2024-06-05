@@ -40,16 +40,10 @@
       </property>
       <widget class="QWidget" name="PREDtab">
        <property name="toolTip">
-        <string>Make predictions with any given structure</string>
+        <string/>
        </property>
        <attribute name="title">
         <string>Predictor</string>
-       </attribute>
-       <attribute name="toolTip">
-        <string>Make predictions with any given structure</string>
-       </attribute>
-       <attribute name="whatsThis">
-        <string>Make predictions with any given structure</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -119,7 +113,7 @@
                  <item>
                   <widget class="QRadioButton" name="radioButton_predict_phonon_dos">
                    <property name="text">
-                    <string>Predict Phonon DOS</string>
+                    <string>Predict phonon DOS</string>
                    </property>
                    <property name="checked">
                     <bool>true</bool>
@@ -148,7 +142,7 @@
                <item>
                 <widget class="QRadioButton" name="radioButton_predict_2d_sqe">
                  <property name="text">
-                  <string>Predict 2D S(Q,E)</string>
+                  <string>Predict powder 2D S(Q,E)</string>
                  </property>
                 </widget>
                </item>
@@ -204,6 +198,9 @@
                  </item>
                  <item row="2" column="0">
                   <widget class="QCheckBox" name="checkBox_range_dp">
+                   <property name="toolTip">
+                    <string>Check this to use customized axis ranges specified below</string>
+                   </property>
                    <property name="text">
                     <string>Customize range</string>
                    </property>
@@ -211,8 +208,11 @@
                  </item>
                  <item row="2" column="1">
                   <widget class="QCheckBox" name="checkBox_interactive_dp">
+                   <property name="toolTip">
+                    <string/>
+                   </property>
                    <property name="text">
-                    <string>Interactive 2D cross section plot</string>
+                    <string>Interactive 2D cross-sectional S(Q,E) plot</string>
                    </property>
                   </widget>
                  </item>
@@ -307,16 +307,10 @@
       </widget>
       <widget class="QWidget" name="DFTtab">
        <property name="toolTip">
-        <string>Run calculations using a model in the database</string>
+        <string/>
        </property>
        <attribute name="title">
         <string>DFT database</string>
-       </attribute>
-       <attribute name="toolTip">
-        <string>Run calculations using a model in the database</string>
-       </attribute>
-       <attribute name="whatsThis">
-        <string>Run calculations using a model in the database</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
@@ -377,22 +371,29 @@
                  <property name="horizontalSpacing">
                   <number>6</number>
                  </property>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_2">
+                 <item row="5" column="2">
+                  <widget class="QPushButton" name="pushButton_load">
                    <property name="text">
-                    <string>Type:</string>
+                    <string>Load selected model</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="2">
-                  <widget class="QLineEdit" name="lineEdit_search_value"/>
-                 </item>
-                 <item row="3" column="2">
+                 <item row="4" column="2">
                   <widget class="QPushButton" name="pushButton_search">
                    <property name="text">
                     <string>Search</string>
                    </property>
                   </widget>
+                 </item>
+                 <item row="3" column="2">
+                  <widget class="QCheckBox" name="checkBox_exact">
+                   <property name="text">
+                    <string>Exact match</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QLineEdit" name="lineEdit_search_value"/>
                  </item>
                  <item row="0" column="2">
                   <widget class="QComboBox" name="comboBox_search_type">
@@ -420,15 +421,32 @@
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_3">
+                   <property name="toolTip">
+                    <string>Keyword to search in Python RegEx</string>
+                   </property>
                    <property name="text">
-                    <string>Value:</string>
+                    <string>RegEx Value:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Type:</string>
                    </property>
                   </widget>
                  </item>
                  <item row="2" column="2">
-                  <widget class="QCheckBox" name="checkBox_exact">
-                   <property name="text">
-                    <string>Exact match</string>
+                  <widget class="QTextBrowser" name="textBrowser_2">
+                   <property name="html">
+                    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example: (Na)(Cl) will return entries containing Na and Cl. With &amp;quot;Exact match&amp;quot; checked, it will return entries containing Na and Cl only. Click &amp;quot;Help&amp;quot; for more info.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -552,6 +570,9 @@
                  </item>
                  <item row="1" column="0">
                   <widget class="QCheckBox" name="checkBox_range_dft">
+                   <property name="toolTip">
+                    <string>Check this to use customized axis ranges specified below</string>
+                   </property>
                    <property name="text">
                     <string>Customize range</string>
                    </property>
@@ -560,7 +581,7 @@
                  <item row="1" column="1">
                   <widget class="QCheckBox" name="checkBox_interactive_dft">
                    <property name="text">
-                    <string>Interactive 2D cross section plot</string>
+                    <string>Interactive 2D cross-sectional S(Q,E) plot</string>
                    </property>
                   </widget>
                  </item>
@@ -671,8 +692,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>650</width>
-             <height>592</height>
+             <width>664</width>
+             <height>719</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -767,6 +788,9 @@
                  </item>
                  <item row="0" column="2">
                   <widget class="QLabel" name="label_Fmax">
+                   <property name="toolTip">
+                    <string>Maximum force in relaxed structure (eV/A)</string>
+                   </property>
                    <property name="text">
                     <string>Fmax</string>
                    </property>
@@ -774,6 +798,9 @@
                  </item>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_Lmin">
+                   <property name="toolTip">
+                    <string>Minimum dimension in supercell (A)</string>
+                   </property>
                    <property name="text">
                     <string>Lmin</string>
                    </property>
@@ -781,6 +808,9 @@
                  </item>
                  <item row="0" column="4">
                   <widget class="QLabel" name="label_Nmax">
+                   <property name="toolTip">
+                    <string>Maximum number of structural relaxation steps</string>
+                   </property>
                    <property name="text">
                     <string>Nmax</string>
                    </property>
@@ -788,6 +818,9 @@
                  </item>
                  <item row="0" column="6">
                   <widget class="QLabel" name="label_delta">
+                   <property name="toolTip">
+                    <string>Step size for finite displacement calculation (A)</string>
+                   </property>
                    <property name="text">
                     <string>delta</string>
                    </property>
@@ -896,6 +929,9 @@
                  </item>
                  <item row="1" column="0">
                   <widget class="QCheckBox" name="checkBox_range_mlff">
+                   <property name="toolTip">
+                    <string>Check this to use customized axis ranges specified below</string>
+                   </property>
                    <property name="text">
                     <string>Customize range</string>
                    </property>
@@ -904,7 +940,7 @@
                  <item row="1" column="1">
                   <widget class="QCheckBox" name="checkBox_interactive_mlff">
                    <property name="text">
-                    <string>Interactive 2D cross section plot</string>
+                    <string>Interactive 2D cross-sectional S(Q,E) plot</string>
                    </property>
                   </widget>
                  </item>
@@ -1020,7 +1056,7 @@ li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Developers: Bowen Han, Andrei Savici, Mingda Li, Yongqiang Cheng&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Citation: INSPIRED manuscript is in preparation.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Citation: Please find INSPIRED publication on https://github.com/cyqjh/inspired&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Contact: Please email chengy@ornl.gov for any questions or requests.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Important References:&lt;/p&gt;
@@ -1035,7 +1071,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;9.            Batatia, I.;  Batzner, S.;  Kovács, D. P.;  Musaelian, A.;  Simm, G. N.;  Drautz, R.;  Ortner, C.;  Kozinsky, B.; Csányi, G., The design space of E (3)-equivariant atom-centered interatomic potentials. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2205.06643 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022&lt;/span&gt;. &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;10.         Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2401.00096 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023&lt;/span&gt;. &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;11.         Deng, B.;  Zhong, P.;  Jun, K.;  Riebesell, J.;  Han, K.;  Bartel, C. J.; Ceder, G., CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Machine Intelligence &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;5&lt;/span&gt; (9), 1031-1041. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;12.         Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Computational Science &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;2&lt;/span&gt; (11), 718-728. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;12.         Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Computational Science &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;2&lt;/span&gt; (11), 718-728. &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;13.         Hinuma, Y.; Pizzi, G.; Kumagai, Y.; Oba, F.; Tanaka, I., Band structure diagram paths based on crystallography. &lt;span style=&quot; font-style:italic;&quot;&gt;Comp. Mat. Sci.&lt;/span&gt; &lt;span style=&quot; font-weight:700;&quot;&gt;2017&lt;/span&gt;, 128, 140.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;14.         Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. &lt;span style=&quot; font-weight:700;&quot;&gt;2018,&lt;/span&gt; arXiv:1808.01590&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;15.         Geiger, M.; Smidt, T., e3nn: Euclidean neural networks. &lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; doi:10.48550/ARXIV.2207.09453.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;16.         Geiger, M.; et al., Euclidean neural networks: e3nn. &lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; doi:10.5281/zenodo.6459381.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -1151,8 +1194,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>search_crystal_structure()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>188</x>
-     <y>365</y>
+     <x>247</x>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1167,8 +1210,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>open_help_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>101</x>
-     <y>76</y>
+     <x>685</x>
+     <y>794</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1247,8 +1290,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>opt_and_dos_cal_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>280</y>
+     <x>139</x>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1263,8 +1306,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>upload_structure_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>104</y>
+     <x>140</x>
+     <y>128</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1295,8 +1338,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>plot_spec_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>532</y>
+     <x>139</x>
+     <y>765</y>
     </hint>
     <hint type="destinationlabel">
      <x>473</x>
@@ -1375,8 +1418,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>run_oclimax_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>464</y>
+     <x>140</x>
+     <y>590</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1407,8 +1450,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <slot>setup_oclimax_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>376</y>
+     <x>139</x>
+     <y>457</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -1532,11 +1575,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <sender>pushButton_view_struc_mlff</sender>
    <signal>clicked()</signal>
    <receiver>INSPIRED</receiver>
-   <slot>view_structure()</slot>
+   <slot>view_structure_mlff()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>104</y>
+     <x>455</x>
+     <y>128</y>
     </hint>
     <hint type="destinationlabel">
      <x>356</x>
@@ -1548,7 +1591,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <sender>pushButton_view_struc_dp</sender>
    <signal>clicked()</signal>
    <receiver>INSPIRED</receiver>
-   <slot>view_structure()</slot>
+   <slot>view_structure_dp()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>514</x>
@@ -1556,6 +1599,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </hint>
     <hint type="destinationlabel">
      <x>356</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_load</sender>
+   <signal>clicked()</signal>
+   <receiver>INSPIRED</receiver>
+   <slot>load_dft_model()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>358</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>353</x>
      <y>439</y>
     </hint>
    </hints>
@@ -1586,7 +1645,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <slot>choose_dft_folder()</slot>
   <slot>plot_dos_disp_dft()</slot>
   <slot>setup_working_directory()</slot>
-  <slot>view_structure()</slot>
   <slot>view_structure_dft()</slot>
+  <slot>view_structure_dp()</slot>
+  <slot>view_structure_mlff()</slot>
+  <slot>load_dft_model()</slot>
  </slots>
 </ui>
