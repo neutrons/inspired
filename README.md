@@ -29,22 +29,35 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
 
 ### Option 1
 1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
-2. Download the VirtualBox appliance file from [Zenodo](https://doi.org/10.5281/zenodo.11478889). On MacOS/Linux, you may run:
+2. Download the VirtualBox appliance file (inspired_vm.ova) from [Zenodo](https://doi.org/10.5281/zenodo.11478889). The file is over 6GB, and it may take a while to download (depending on the speed of the internet). On MacOS/Linux, you may download by command line:
 
    `wget https://zenodo.org/records/11478889/files/inspired_vm.ova`
 
 3. Start VirtualBox, [import the inspired_vm.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
 4. Run the “inspired_vm” VM. If prompted, use "inspired" for both user ID and password for authentication.
-5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" is a label to this folder and can be anything you want (we use inspired_cwd as an example). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" so you can skip this step in the future as long as you keep using this folder to share files between your host computer and the VM (but you still need to run the next step every time you start the VM to mount the folder). 
+5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" is a label for this folder and can be anything you want (we use inspired_cwd as an example). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" so you can skip this step in the future as long as you keep using this folder to share files between your host computer and the VM (but you still need to run the next step every time you start the VM to mount the folder).
+   
+   ![image](https://github.com/cyqjh/inspired/assets/105002220/69cbfd29-71a8-43ba-adbf-6ea78f8b8a22)
+   ![image](https://github.com/cyqjh/inspired/assets/105002220/bed6ba73-b2e1-457c-9d99-63f195afcfd9)
+
+  
 6. After finishing the setup, open a terminal in the VM (click the icon at the bottom left corner, "System Tools->QTerminal"), run (use "inspired" as password if prompted for authentication):
 
    `sudo mount -t vboxsf -o rw,uid=1000,gid=1000 inspired_cwd /home/inspired/cwd`
+
+   ![image](https://github.com/cyqjh/inspired/assets/105002220/c7b2f0d7-6c0c-4b18-b734-01cf3e018ac7)
+   ![image](https://github.com/cyqjh/inspired/assets/105002220/48df97f2-79da-4c68-b1a1-a601224bef51)
+
+
 
 7. Go to the shared folder (create a subfolder if needed) and run:
 
    `inspired`
 
-Note: If the VM is properly configured to have an internet connection, future updates can be done by: `cd /home/inspired/inspired` and `git pull` for the code. Newest database and model can be downloaded following Step 4 in Option 2. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
+Note: If the VM is properly configured to have an internet connection, future updates can be done by: `cd /home/inspired/inspired` and `git pull` for the code. The latest database and model can be downloaded following Step 4 in Option 2. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
+
+   ![image](https://github.com/cyqjh/inspired/assets/105002220/89609ffa-38a4-41b4-82eb-dde7f7ddcfe0)
+
 
 
 ### Option 2
