@@ -12,7 +12,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 2. INS simulation based on existing DFT-calculated forces
 
-* Pros: both powder and single crystal samples, very accurate
+* Pros: both powder and single crystal samples, more accurate
 
 * Cons: only for crystals with DFT results found in the database (or provided by the users)
 
@@ -25,11 +25,11 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 ## Installation:
 
-For most users, the easiest way to use INSPIRED is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have a Linux machine and would like to have a native installation, you may also do so [Option 2](https://github.com/cyqjh/inspired#option-2).
+For most users, the easiest way to use INSPIRED is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have a Linux machine and would like to have a native installation, you may also do so ([Option 2](https://github.com/cyqjh/inspired#option-2)).
 
 ### Option 1
 1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
-2. Download the VirtualBox appliance file from [Zenodo](https://doi.org/10.5281/zenodo.10723108). On MacOS/Linux, you may run:
+2. Download the VirtualBox appliance file from [Zenodo](https://doi.org/10.5281/zenodo.11478889). On MacOS/Linux, you may run:
 
    `wget https://zenodo.org/records/11478889/files/inspired_vm.ova`
 
@@ -44,7 +44,7 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
 
    `inspired`
 
-Note: If the VM is properly configured to have an internet connection, future updates can be done in the same way as in Option 1: `cd /home/inspired/inspired` and `git pull` for the code and Step 4 in Option 1 for the database and model. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
+Note: If the VM is properly configured to have an internet connection, future updates can be done by: `cd /home/inspired/inspired` and `git pull` for the code. Newest database and model can be downloaded following Step 4 in Option 2. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
 
 
 ### Option 2
