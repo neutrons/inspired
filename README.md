@@ -10,7 +10,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Cons: powder samples only, predefined Q and E ranges, less accurate
   
-  ![image](https://github.com/cyqjh/inspired/assets/105002220/a1b50d85-c196-435f-ae6b-edb52f217064)
+  ![image](https://github.com/cyqjh/inspired/assets/105002220/2fd4288e-2739-4852-9d4e-4513c9cfc029)
 
 
 2. INS simulation based on existing DFT-calculated forces
@@ -19,7 +19,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Cons: only for crystals with DFT results found in the database (or provided by the users)
   
-  ![image](https://github.com/cyqjh/inspired/assets/105002220/170419f9-6e43-47db-ba12-80410e15b6ac)
+  ![image](https://github.com/cyqjh/inspired/assets/105002220/c28a9c3a-1fae-4c38-9ca3-dfb03d19492b)
 
 
 3. INS simulation using pre-trained universal machine learning force fields
@@ -28,7 +28,8 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Cons: can be slow for large or low-symmetry systems, accuracy varies (generally between 1 and 2)
   
-  ![image](https://github.com/cyqjh/inspired/assets/105002220/b997a71e-d13f-4d88-88ec-409cb3a14a38)
+  ![image](https://github.com/cyqjh/inspired/assets/105002220/04571dc1-5dfb-469b-92e9-8e5f523b33d2)
+
 
 
 
