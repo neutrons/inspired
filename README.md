@@ -45,7 +45,7 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
 
 3. Start VirtualBox, [import the inspired_vm.ova file as an appliance](https://docs.oracle.com/cd/E26217_01/E26796/html/qs-import-vm.html).
 4. Run the “inspired_vm” VM. If prompted, use "inspired" for both user ID and password for authentication.
-5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" is a label for this folder and can be anything you want (we use inspired_cwd as an example). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" so you can skip this step in the future as long as you keep using this folder to share files between your host computer and the VM (but you still need to run the next step every time you start the VM to mount the folder).
+5. Set up the "shared folder" to access (read and write) files on your host computer. Click "Devices->Shared Folders->Shared folders settings" on the VM menu. Click the "add new shared folder" icon to the right. In "Folder Path", find the folder on your host computer you would like the guest VM to have access to. "Folder Name" is a label for this folder and can be anything you want (we use inspired_cwd as an example). "Mount point" is the path in the VM where the shared folder will be mounted (e.g., /home/inspired/cwd). You may check "Auto-mount" and "Make permanent" so you can skip this step in the future as long as you keep using this folder to share files between your host computer and the VM.
    
    ![image](https://github.com/cyqjh/inspired/assets/105002220/69cbfd29-71a8-43ba-adbf-6ea78f8b8a22)
    ![image](https://github.com/cyqjh/inspired/assets/105002220/bed6ba73-b2e1-457c-9d99-63f195afcfd9)
@@ -58,7 +58,21 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
    ![image](https://github.com/cyqjh/inspired/assets/105002220/c7b2f0d7-6c0c-4b18-b734-01cf3e018ac7)
    ![image](https://github.com/cyqjh/inspired/assets/105002220/48df97f2-79da-4c68-b1a1-a601224bef51)
 
+   To automatically mount this folder, you may add the above command line to the end of the ~/.bashrc file. You can use vim, or if you are not familiar with vim, run
 
+   `featherpad ~/.bashrc`
+
+   This will open a GUI text editor. Add the command line to the end of the file and save it.
+
+   Finally, to skip typing the password for the `sudo mount` command, run
+
+   `sudo visudo`
+
+   Add the following line to the end of the file
+
+   `inspired ALL=(ALL) NOPASSWD: /usr/bin/mount`
+
+   Press Ctrl+S to save and Ctrl+X to exit. Now this folder will be automatically mounted in the future when you run the VM on this computer.
 
 7. Go to the shared folder (create a subfolder if needed) and run:
 
@@ -122,7 +136,8 @@ If you have any questions, please contact YQ Cheng at chengy@ornl.gov for help.
 
 ## Citation:
 
-INSPIRED paper is under review.
+Bowen Han, Andrei T. Savici, Mingda Li, Yongqiang Cheng, INSPIRED: Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design, Computer Physics Communications, in press (2024)
+.
 
 
 ## References:
