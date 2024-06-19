@@ -58,21 +58,15 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
    ![image](https://github.com/cyqjh/inspired/assets/105002220/c7b2f0d7-6c0c-4b18-b734-01cf3e018ac7)
    ![image](https://github.com/cyqjh/inspired/assets/105002220/48df97f2-79da-4c68-b1a1-a601224bef51)
 
-   To automatically mount this folder, you may add the above command line to the end of the ~/.bashrc file. You can use vim, or if you are not familiar with vim, run
+   To automatically run this command in the future when you start the VM, you may add it to the crontab file by running:
 
-   `featherpad ~/.bashrc`
+   `crontab -e`
 
-   This will open a GUI text editor. Add the command line to the end of the file and save it.
+   If asked to choose an editor and you are not sure, select nano. Add the following line to the end of the crontab file:
 
-   Finally, to skip typing the password for the `sudo mount` command, run
+   `@reboot echo "inspired" | sudo -S mount -t vboxsf -o rw,uid=1000,gid=1000 inspired_cwd /home/inspired/cwd`
 
-   `sudo visudo`
-
-   Add the following line to the end of the file
-
-   `inspired ALL=(ALL) NOPASSWD: /usr/bin/mount`
-
-   Press Ctrl+S to save and Ctrl+X to exit. Now this folder will be automatically mounted in the future when you run the VM on this computer.
+   Press Ctrl+S to save and Ctrl+X to exit (if using nano). This folder will now be automatically mounted when you run the VM on this computer.
 
 7. Go to the shared folder (create a subfolder if needed) and run:
 
