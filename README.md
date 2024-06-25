@@ -26,7 +26,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Pros: any structure, both powder and single crystal samples
 
-* Cons: can be slow for large or low-symmetry systems, accuracy varies (generally between 1 and 2)
+* Cons: can be slow for large or low-symmetry systems, accuracy varies significantly from case to case (see Additional notes)
   
   ![image](https://github.com/cyqjh/inspired/assets/105002220/04571dc1-5dfb-469b-92e9-8e5f523b33d2)
 
@@ -35,10 +35,10 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 ## Installation:
 
-For most users, the easiest way to use INSPIRED is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have a Linux machine and would like to have a native installation, you may also do so ([Option 2](https://github.com/cyqjh/inspired#option-2)).
+For most users, the easiest way to use INSPIRED is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have acess to a Linux machine (such as the [Analysis cluster](https://analysis.sns.gov/)) and would like to have a native installation, you may also do so ([Option 2](https://github.com/cyqjh/inspired#option-2)).
 
 ### Option 1
-1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads).
+1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads). Unfortunately, VirtualBox does not support Apple M3 chips. There was a [developer preview](https://download.virtualbox.org/virtualbox/7.0.8/VirtualBox-7.0.8_BETA4-156879-macOSArm64.dmg) from an older version of VirtualBox that may support M1/M2 chips, but we did not test it. We are working on a solution to address this issue.
 2. Download the VirtualBox appliance file (inspired_vm.ova) from [Zenodo](https://doi.org/10.5281/zenodo.11478889). The file is over 6GB, and it may take a while to download (depending on the speed of the internet). On MacOS/Linux, you may download by command line:
 
    `wget https://zenodo.org/records/11478889/files/inspired_vm.ova`
@@ -113,7 +113,7 @@ Note: If the VM is properly configured to have an internet connection, future up
 
     `bash conda_env_cpu.sh` (or `bash conda_env_gpu.sh` for GPU machines).
 
-    (Note: It may take a while for the installation to be completed. If you encounter errors, you may try running the commands in the sh file one by one to diagnose.)
+    (Note: It may take a while for the installation to be completed. If you encounter errors, you may try running the commands in the sh file one by one to diagnose. If you encounter an error associated with missing pydantic, please run `pip install pydantic` to install.)
 
 6. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
    
@@ -124,6 +124,15 @@ Note: If the VM is properly configured to have an internet connection, future up
 When using INSPIRED, it is important to ensure the "Current Working Directory" (CWD) is correctly set, as this is where the program reads/writes all its input/output files. The default CWD is where you started INSPIRED, and once this program is running, you can change it in the Menu. It is strongly recommended that a new folder be created for each project to avoid mixed input/output files and potential errors. If you prefer not to change the working directory, then please make sure to run through all steps in each calculation (do not skip steps) to avoid accidently picking up input files from a previous calculation.
 
 There is a "Help" button at the bottom right corner of each window. Click on the button for instructions.
+
+Finally, but **very importantly**, INSPIRED is a GUI that provides streamlined access to various resources for users to obtain simulated INS spectra easily and quickly from a structure model. Many of the tools included in INSPIRED are under active development by their developers, such as the MLFFs. With growing computing power, larger training datasets, and more sophisticated models, the scope of the data and the accuracy of the models will keep improving. While we will try to keep the models included in INSPIRED up to date, we do not and cannot guarantee the accuracy of the results. Please check the references (1,8-12) for more details about these tools and their limitations. User discretion is extremely important while using INSPIRED, and please check the results carefully before using them for your analyses. Note that in some cases, even though the calculated phonon dispersion from the MLFFs appears fine, there could be a systematic softening (or, less likely, hardening) of the modes. Here are some additional resources on the benchmark of the MLFFs:
+
+https://matbench-discovery.materialsproject.org/
+
+https://arxiv.org/abs/2405.07105
+
+
+## Contact:
 
 If you have any questions, please contact YQ Cheng at chengy@ornl.gov for help.
 
