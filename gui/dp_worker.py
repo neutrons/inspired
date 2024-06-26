@@ -449,7 +449,7 @@ class DPWorker():
             print('# Q, deltaE, Total', file=f)
             for iq in range(nq):
                 for ie in range(ne):
-                    print((iq+1)/nq*x_max0,',',(ie+1)/ne*y_max0,',',sqe[ne-ie-1][iq].item(), file=f)
+                    print((iq+1)/nq*x_max0,',',(ie+1)/ne*y_max0,',',sqe[ie][iq].item(), file=f)
                 print(' ', file=f)
             f.close()
             print('INFO: S(|Q|,E) spectra data saved to '+outfile)
