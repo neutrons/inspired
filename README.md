@@ -68,11 +68,19 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
 
    Press Ctrl+S to save and Ctrl+X to exit (if using nano). This folder will now be automatically mounted when you run the VM on this computer.
 
-7. Go to the shared folder (create a subfolder if needed) and run:
+7. Update the code/model to the newest version by running:
+
+   `cd /home/inspired/inspired`
+   
+   `git pull`
+
+     This step is important as the VM may not contain the newest version of INSPIRED. It is also recommended that you run this regularly to ensure you get the latest bug fixes. The database as the predictor model are not updated in this way. They will be updated on Zenodo when new versions are available and they can be obtained in the VM by following Step 4 in Option 2.
+
+9. Go to the shared folder (create a subfolder if needed) and run:
 
    `inspired`
 
-Note: If the VM is properly configured to have an internet connection, future updates can be done by: `cd /home/inspired/inspired` and `git pull` for the code. The latest database and model can be downloaded following Step 4 in Option 2. The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
+Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->Monitor settings" within the VM. The VM window size can be changed on the VirtualBox menu (under View).
 
    ![image](https://github.com/cyqjh/inspired/assets/105002220/89609ffa-38a4-41b4-82eb-dde7f7ddcfe0)
 
