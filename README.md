@@ -74,7 +74,7 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
    
    `git pull`
 
-     This step is important as the VM may not contain the newest version of INSPIRED. It is also recommended that you run this regularly to ensure you get the latest bug fixes. The database as the predictor model are not updated in this way. They will be updated on Zenodo when new versions are available and they can be obtained in the VM by following Step 4 in Option 2.
+     This step is important as the VM may not contain the newest version of INSPIRED. It is also recommended that you run this regularly to ensure you get the latest bug fixes. The database and the predictor model are not updated in this way. They will be updated on Zenodo when new versions are available and they can be obtained in the VM by following Step 4 in Option 2.
 
 9. Go to the shared folder (create a subfolder if needed) and run:
 
