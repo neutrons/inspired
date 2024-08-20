@@ -8,8 +8,7 @@ pip install pyqt5
 pip install qtpy
 pip install phonopy
 pip install seekpath
-git clone https://github.com/ACEsuit/mace.git
-pip install ./mace
-pip install matgl==0.8.5
-pip install chgnet==0.3.1
+pip install mace-torch
+pip install matgl
+pip install chgnet
 bash ./install.sh
