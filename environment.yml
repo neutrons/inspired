@@ -1,0 +1,32 @@
+name: inspired-dev
+channels:
+  - conda-forge
+  - pytorch
+  - esri
+dependencies:
+  - anaconda-client
+  - boa
+  - check-wheel-contents
+  - conda-build
+  - conda-verify
+  - pre-commit
+  - python == 3.9
+  - python-build
+  - pytest
+  - pytest-qt
+  - pytest-cov
+  - versioningit
+  - pandas
+  - pyqt >= 5
+  - qtpy
+  - phonopy
+  - seekpath
+  - matgl
+  - chgnet
+  - pip
+  - pip:
+     - mace-torch
+     - torch-geometric
+     - torch_scatter 
+     - torch_sparse 
+     - torch_cluster
