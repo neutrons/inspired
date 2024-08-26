@@ -127,6 +127,10 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
    
      `inspired`
 
+### Package Versions
+The code related to already published work can be accessed (v0.2.0):
+git clone -b v0.2.0 https://github.com/neutrons/inspired.git
+
 ## Additional notes:
 
 When using INSPIRED, it is important to ensure the "Current Working Directory" (CWD) is correctly set, as this is where the program reads/writes all its input/output files. The default CWD is where you started INSPIRED, and once this program is running, you can change it in the Menu. It is strongly recommended that a new folder be created for each project to avoid mixed input/output files and potential errors. If you prefer not to change the working directory, then please make sure to run through all steps in each calculation (do not skip steps) to avoid accidently picking up input files from a previous calculation.
