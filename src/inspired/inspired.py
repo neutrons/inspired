@@ -4,17 +4,16 @@ import shutil
 import warnings
 
 warnings.simplefilter("ignore")
-
 from qtpy.QtWidgets import (QApplication, QMainWindow, QFileDialog, QHeaderView, QDialog, QAbstractItemView)
-from ui_inspired import Ui_INSPIRED
-from ui_help_dp import Ui_Help_DP
-from ui_help_dft import Ui_Help_DFT
-from ui_help_mlff import Ui_Help_MLFF
-from dp_worker import DPWorker
-from dft_worker import DFTWorker
-from mlff_worker import MLFFWorker
-from set_paths import SetPaths
-from pandas_model import PandasModel
+from inspired.ui_inspired import Ui_INSPIRED
+from inspired.ui_help_dp import Ui_Help_DP
+from inspired.ui_help_dft import Ui_Help_DFT
+from inspired.ui_help_mlff import Ui_Help_MLFF
+from inspired.dp_worker import DPWorker
+from inspired.dft_worker import DFTWorker
+from inspired.mlff_worker import MLFFWorker
+from inspired.set_paths import SetPaths
+from inspired.pandas_model import PandasModel
 from ase.io import read
 from ase.formula import Formula
 from ase.spacegroup import get_spacegroup
@@ -421,6 +420,26 @@ class INSPIRED(QMainWindow):
 
 
 if __name__ == "__main__":
+    print('********************************************************************************************************')
+    print('* Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design (INSPIRED) *')
+    print('********************************************************************************************************')
+    print('INFO: version 0.2.0')
+    print('INFO: Initializing ...')
+    app = QApplication(sys.argv)
+    main_window = INSPIRED()
+    print('INFO: Starting GUI ...')
+    main_window.show()
+    print('INFO: Ready. Set your working directory in Menu, or use current directory by default.')
+    print('INFO: It is strongly recommended that a new/empty directory is created/assigned as working directory for each project.')
+    print('INFO: Existing files from a previous/different model in the working directory may interfere with the calculation and lead to incorrect results.')
+    print('INFO: If you choose not to change working directory for multiple calculations, please follow through all steps for each calculation (do not skip steps).')
+    sys.exit(app.exec_())
+
+
+def gui():
+    """
+    Main entry point for Qt application
+    """
     print('********************************************************************************************************')
     print('* Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design (INSPIRED) *')
     print('********************************************************************************************************')

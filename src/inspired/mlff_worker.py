@@ -16,7 +16,7 @@ from phonopy.interface.calculator import read_crystal_structure
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
 from phonopy.file_IO import write_FORCE_CONSTANTS
 import torch
-from oclimax import OCLIMAX
+from inspired.oclimax import OCLIMAX
 
 
 class MLFFWorker():

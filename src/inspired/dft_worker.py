@@ -4,7 +4,7 @@ import shutil
 import pandas as pd
 import phonopy
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
-from oclimax import OCLIMAX
+from inspired.oclimax import OCLIMAX
 
 class DFTWorker():
     """calculate INS spectra from available entries in the DFT database (or user-supplied DFT results)

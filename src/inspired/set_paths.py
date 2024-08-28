@@ -1,5 +1,5 @@
 from qtpy.QtWidgets import (QFileDialog, QDialog)
-from ui_set_paths import Ui_SetPaths
+from inspired.ui_set_paths import Ui_SetPaths
 import os
 import sys
 
