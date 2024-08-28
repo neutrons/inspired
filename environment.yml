@@ -11,6 +11,8 @@ dependencies:
   - pre-commit
   - python == 3.9
   - python-build
+  - pymatgen==2024.5.1
+  - spglib==2.4.0
   - versioningit
   - pandas
   - pyqt >= 5, <6
