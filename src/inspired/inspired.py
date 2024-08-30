@@ -6,15 +6,15 @@ import warnings
 warnings.simplefilter("ignore")
 from qtpy.QtWidgets import (QApplication, QMainWindow, QFileDialog, QHeaderView, QDialog, QAbstractItemView)
 import torch
-from inspired.ui_inspired import Ui_INSPIRED
-from inspired.ui_help_dp import Ui_Help_DP
-from inspired.ui_help_dft import Ui_Help_DFT
-from inspired.ui_help_mlff import Ui_Help_MLFF
-from inspired.dp_worker import DPWorker
-from inspired.dft_worker import DFTWorker
-from inspired.mlff_worker import MLFFWorker
-from inspired.set_paths import SetPaths
-from inspired.pandas_model import PandasModel
+from inspired.gui.ui_inspired import Ui_INSPIRED
+from inspired.gui.ui_help_dp import Ui_Help_DP
+from inspired.gui.ui_help_dft import Ui_Help_DFT
+from inspired.gui.ui_help_mlff import Ui_Help_MLFF
+from inspired.gui.dp_worker import DPWorker
+from inspired.gui.dft_worker import DFTWorker
+from inspired.gui.mlff_worker import MLFFWorker
+from inspired.gui.set_paths import SetPaths
+from inspired.gui.pandas_model import PandasModel
 from ase.io import read
 from ase.formula import Formula
 from ase.spacegroup import get_spacegroup
