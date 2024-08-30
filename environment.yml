@@ -9,6 +9,7 @@ dependencies:
   - check-wheel-contents
   - conda-build
   - conda-verify
+  - h5py >= 3.9
   - toml
   - setuptools
   - pre-commit

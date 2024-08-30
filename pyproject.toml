@@ -4,7 +4,8 @@ description = "Inelastic Neutron Scattering Prediction for Instantaneous Results
 dynamic = ["version"]
 requires-python = ">=3.9"
 dependencies = [
-    "torch",
+    "pytorch",
+    "h5py >= 3.9",
     "phonopy",
     "pandas",
     "seekpath",

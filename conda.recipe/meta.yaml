@@ -36,6 +36,7 @@ requirements:
 
   run:
     - python
+    - h5py>=3.9
     - qtpy
     - pyqt==5  
     - pytorch
