@@ -12,7 +12,7 @@
 
 package:
   name: inspired
-  version: {{ version }}
+  version: {{ version_number }}
 
 source:
   path: ..
