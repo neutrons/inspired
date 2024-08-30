@@ -1,0 +1,62 @@
+# load information from pyproject.toml
+{% set pyproject = load_file_data('pyproject.toml') %}
+{% set project = pyproject.get('project', {}) %}
+{% set license = project.get('license').get('text') %}
+{% set description = project.get('description') %}
+{% set project_url = pyproject.get('project', {}).get('urls') %}
+{% set url = project_url.get('homepage') %}
+# this will get the version set by environment variable
+{% set version = environ.get('VERSION') %}
+{% set version_number = version.split('+')[0] %}
+{% set git_describe_number = environ.get('GIT_DESCRIBE_NUMBER', '0') | string %}
+
+package:
+  name: inspired
+  version: {{ version_number }}
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  number: {{ git_describe_number }}
+  string: py{{py}}
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+
+requirements:
+  host:
+    - versioningit
+    - setuptools>=42
+    - wheel
+
+  build:
+    - setuptools>=42
+    - versioningit
+
+  run:
+    - python
+    - qtpy
+    - pyqt==5  
+    - pytorch
+    - phonopy
+    - pandas
+    - seekpath
+    - matgl
+    - chgnet
+    - pymatgen==2024.5.1
+    - spglib==2.4.0
+    - mkl==2024.0
+    - pytorch-sparse
+    - pytorch-cluster
+    - pytorch-scatter
+
+  test:
+    imports:
+      - inspired
+
+about:
+  home: {{ url }}
+  license: {{ license }}
+  license_family: MIT
+  license_file: ../LICENSE
+  summary: {{ description }}

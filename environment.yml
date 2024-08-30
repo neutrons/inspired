@@ -2,12 +2,14 @@ name: inspired-dev
 channels:
   - conda-forge
   - pytorch
+  - pyg
 dependencies:
   - anaconda-client
   - boa
   - check-wheel-contents
   - conda-build
   - conda-verify
+  - setuptools
   - pre-commit
   - python == 3.9
   - python-build
@@ -15,18 +17,16 @@ dependencies:
   - spglib==2.4.0
   - versioningit
   - pandas
-  - pyqt >= 5, <6
+  - pyqt==5.*
   - qtpy
   - phonopy
   - seekpath
   - matgl
   - chgnet
-  - mkl==2024.0 # resolve the pytorch error
+  - mkl==2024.0 # solves the pytorch error
   - pytorch
-  - pip
-  - pip:
-    - mace-torch
-    - torch-geometric
-    - torch-sparse 
-    - torch-cluster
-    - torch-scatter 
+  - pymace
+  - pyg
+  - pytorch-sparse
+  - pytorch-cluster
+  - pytorch-scatter

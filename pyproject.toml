@@ -6,9 +6,17 @@ requires-python = ">=3.9"
 dependencies = [
     "torch",
     "phonopy",
+    "pandas",
     "seekpath",
     "matgl",
-    "chgnet"
+    "chgnet",
+    "qtpy",
+    "pyqt5==5.*",
+    "pymatgen==2024.5.1",
+    "spglib==2.4.0",
+    "pytorch-sparse",
+    "pytorch-cluster",
+    "pytorch-scatter"
 ]
 license = { text = "GPL3.0" }
 
@@ -17,10 +25,10 @@ homepage = "https://github.com/neutrons/inspired/"
 
 [build-system]
 requires = [
-  "setuptools",
-   "wheel",
-   "toml",
-   "versioningit"
+    "setuptools",
+    "wheel",
+    "toml",
+    "versioningit"
 ]
 build-backend = "setuptools.build_meta"
 

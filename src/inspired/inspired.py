@@ -5,6 +5,7 @@ import warnings
 
 warnings.simplefilter("ignore")
 from qtpy.QtWidgets import (QApplication, QMainWindow, QFileDialog, QHeaderView, QDialog, QAbstractItemView)
+import torch
 from inspired.ui_inspired import Ui_INSPIRED
 from inspired.ui_help_dp import Ui_Help_DP
 from inspired.ui_help_dft import Ui_Help_DFT
@@ -18,7 +19,6 @@ from ase.io import read
 from ase.formula import Formula
 from ase.spacegroup import get_spacegroup
 from ase.visualize import view
-import torch
 
 class INSPIRED(QMainWindow):
     def __init__(self, parent=None):
