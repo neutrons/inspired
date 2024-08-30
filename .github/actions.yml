@@ -36,6 +36,7 @@ jobs:
               cd conda.recipe
               echo "versioningit $(versioningit ../)"
               # build the package
+              CHANNELS="--channel conda-forge --channel pytorch --channel pyg"
               VERSION=$(versioningit ../) conda mambabuild --output-folder . .
               conda verify noarch/inspired*.tar.bz2
           - name: upload conda package to anaconda
