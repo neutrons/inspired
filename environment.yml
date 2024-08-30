@@ -13,7 +13,7 @@ dependencies:
   - toml
   - setuptools
   - pre-commit
-  - python == 3.9
+  - python >= 3.9
   - python-build
   - pymatgen==2024.5.1
   - spglib==2.4.0
