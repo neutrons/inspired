@@ -9,6 +9,7 @@ dependencies:
   - check-wheel-contents
   - conda-build
   - conda-verify
+  - toml
   - setuptools
   - pre-commit
   - python == 3.9
