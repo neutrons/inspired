@@ -29,6 +29,7 @@ jobs:
           shell: bash -l {0}
           run: |
             python -m build --wheel --no-isolation
+            check-wheel-contents dist/inspired-*.whl
         - name: build conda package
           shell: bash -l {0}
           run: |
