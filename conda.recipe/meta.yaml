@@ -28,7 +28,8 @@ requirements:
     - versioningit
     - setuptools>=42
     - wheel
-
+    - python
+    
   build:
     - setuptools>=42
     - versioningit
