@@ -5,7 +5,6 @@ dynamic = ["version"]
 requires-python = ">=3.9"
 dependencies = [
     "pytorch",
-    "h5py >= 3.9",
     "phonopy",
     "pandas",
     "seekpath",
