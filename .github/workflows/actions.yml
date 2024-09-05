@@ -18,8 +18,8 @@ jobs:
         - uses: mamba-org/setup-micromamba@v1
           with:
             environment-file: environment.yml
-            cache-environment-key: ${{ runner.os }}-env-${{ hashFiles('**/environment.yml') }}
-            cache-downloads-key: ${{ runner.os }}-downloads-${{ hashFiles('**/environment.yml') }}
+            #cache-environment-key: ${{ runner.os }}-env-${{ hashFiles('**/environment.yml') }}
+            #cache-downloads-key: ${{ runner.os }}-downloads-${{ hashFiles('**/environment.yml') }}
             condarc: |
               channels:
                 - conda-forge
