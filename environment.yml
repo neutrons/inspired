@@ -1,4 +1,4 @@
-name: inspired-dev-2
+name: inspired-dev
 channels:
   - conda-forge
   - pytorch
