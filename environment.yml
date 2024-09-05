@@ -19,7 +19,7 @@ dependencies:
   - spglib==2.4.0
   - versioningit
   - pandas
-  - pyqt==5.*
+  - pyqt5
   - qtpy
   - phonopy
   - seekpath
