@@ -51,7 +51,7 @@ file = "src/inspired/_version.py"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.yml","*.yaml","*.ini","*.json","*.pt","*.model","oclimax*","*.ui","M3GNet-MP-2021.2.8-PES/*"]
+"*" = ["*.yml","*.yaml","*.ini","*.json","*.pt","*.model","oclimax*","*.ui","M3GNet-MP-2021.2.8-PES/*", "config"]
 
 [project.gui-scripts]
 inspired = "inspired.inspired:gui"

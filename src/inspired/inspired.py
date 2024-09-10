@@ -29,7 +29,7 @@ class INSPIRED(QMainWindow):
         self.dft_worker = DFTWorker()
         self.mlff_worker = MLFFWorker()
         self.set_paths = SetPaths()
-        self.root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.root_path = os.path.dirname(__file__)
         self.cwd_path = os.getcwd()
         self.ui.label_cwd.setText("Current Working Directory: "+self.cwd_path)
         self.userdft_path = self.cwd_path
