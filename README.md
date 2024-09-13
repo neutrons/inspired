@@ -68,15 +68,7 @@ For most users, the easiest way to use INSPIRED is to download a pre-installed V
 
    Press Ctrl+S to save and Ctrl+X to exit (if using nano). This folder will now be automatically mounted when you run the VM on this computer.
 
-7. Update the code/model to the newest version by running:
-
-   `cd /home/inspired/inspired`
-   
-   `git pull`
-
-     This step is important as the VM may not contain the newest version of INSPIRED. It is also recommended that you run this regularly to ensure you get the latest bug fixes. The database and the predictor model are not updated in this way. They will be updated on Zenodo when new versions are available and they can be obtained in the VM by following Step 4 in Option 2.
-
-9. Go to the shared folder (create a subfolder if needed) and run:
+7. Go to the shared folder (create a subfolder if needed) and run:
 
    `inspired`
 
