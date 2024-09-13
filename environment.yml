@@ -25,7 +25,7 @@ dependencies:
   - matgl
   - chgnet
   - mkl==2024.0 # solves the pytorch error
-  - pytorch
+  - pytorch::pytorch
   - pymace
   - pyg
   - pytorch-sparse
