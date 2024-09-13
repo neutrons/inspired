@@ -8,7 +8,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Pros: any structure, minimum parameter setting, very fast (seconds)
 
-* Cons: powder samples only, predefined Q and E ranges, less accurate
+* Cons: powder samples only, predefined Q and E ranges, less accurate, accuracy varies significantly from case to case
   
   ![image](https://github.com/cyqjh/inspired/assets/105002220/2fd4288e-2739-4852-9d4e-4513c9cfc029)
 
@@ -26,7 +26,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Pros: any structure, both powder and single crystal samples
 
-* Cons: can be slow for large or low-symmetry systems, accuracy varies significantly from case to case (see Additional notes)
+* Cons: can be slow for large or low-symmetry systems, accuracy varies significantly from case to case
   
   ![image](https://github.com/cyqjh/inspired/assets/105002220/04571dc1-5dfb-469b-92e9-8e5f523b33d2)
 
@@ -35,7 +35,15 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 ## Installation:
 
-For most users, the easiest way to use INSPIRED is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have acess to a Linux machine (such as the [Analysis cluster](https://analysis.sns.gov/)) and would like to have a native installation, you may also do so ([Option 2](https://github.com/cyqjh/inspired#option-2)).
+INSPIRED is available on the [Analysis cluster](https://analysis.sns.gov/) as a conda environment. To run INSPIRED, all you need to do is to activate "inspired-dev" in the global conda environment:
+
+`source /opt/anaconda/etc/profile.d/conda.sh`
+
+`conda activate inspired-dev`
+
+`inspired`
+
+To use INSPIRED on another computer, there are two installation options. One option is to download a pre-installed VirtualBox image and run INSPIRED as a virtual machine (VM) on any platform, including Windows, MacOS, and Linux ([Option 1](https://github.com/cyqjh/inspired#option-1)). If you have acess to a Linux machine and would like to have a native installation, you may also do so ([Option 2](https://github.com/cyqjh/inspired#option-2)).
 
 ### Option 1
 1. Install [VirtualBox for your operating system](https://www.virtualbox.org/wiki/Downloads). Unfortunately, VirtualBox does not support Apple M3 chips. There was a [developer preview](https://download.virtualbox.org/virtualbox/7.0.8/VirtualBox-7.0.8_BETA4-156879-macOSArm64.dmg) from an older version of VirtualBox that may support M1/M2 chips, but we did not test it. We are working on a solution to address this issue.
@@ -79,11 +87,11 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
 
 ### Option 2
-1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. If you are unsure which one to choose, check [here](https://docs.anaconda.com/free/distro-or-miniconda/). Note that for the purpose of running INSPIRED, either one will work. 
+1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed.  
 
 2. Go to a location where you would like to install the program (e.g., $HOME/software), run:
    
-    `git clone https://github.com/cyqjh/inspired.git`
+    `git clone https://github.com/neutrons/inspired.git`
    
     After the download, you should see a folder named “inspired”. Go to the folder by running:
    
@@ -93,19 +101,19 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
 3. With conda initiated, run the following commands in the project's root directory (inspired):
 
-   .. code-block:: shell
+    `.. code-block:: shell`
 
-      //create the conda environment and activate
+    //Next, create the conda environment and activate
 
-      conda env create
+    `conda env create`
 
-      conda activate inspired-dev
+    `conda activate inspired-dev`
 
-      // install inspired in editable mode
+    //Then, install inspired in editable mode
 
-      pip install -e . --no-deps
+    `pip install -e . --no-deps`
 
-4. To download the latest DFT database and ML models from Zenodo and extract the files, run:
+4. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
    
     `wget https://zenodo.org/records/11478889/files/dftdb.tar.gz`
 
@@ -118,8 +126,10 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
 5. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
    
-     `inspired`
+    `inspired`
 
+   when you run the program for the first time, it may ask you to specify the paths to the DFT database and ML models. Set them to where you downloaded/extracted the files, and the main user interface should pop up.
+   
 ### Package Versions
 The code related to already published work can be accessed (v0.2.0):
 git clone -b v0.2.0 https://github.com/neutrons/inspired.git
@@ -144,8 +154,7 @@ If you have any questions, please contact YQ Cheng at chengy@ornl.gov for help.
 
 ## Citation:
 
-Bowen Han, Andrei T. Savici, Mingda Li, Yongqiang Cheng, INSPIRED: Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design, Computer Physics Communications, in press (2024)
-.
+Bowen Han, Andrei T. Savici, Mingda Li, Yongqiang Cheng, [INSPIRED: Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design](https://doi.org/10.1016/j.cpc.2024.109288), Computer Physics Communications, 304, 109288 (2024).
 
 
 ## References:
