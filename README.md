@@ -89,13 +89,22 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 ### Option 2
 1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. If you are unsure which one to choose, check [here](https://docs.anaconda.com/free/distro-or-miniconda/). Note that for the purpose of running INSPIRED, either one will work. 
 
-2. With conda initiated, run the following commands:
+2. With conda initiated, run the following commands in the project's root directory:
 
-    `conda create -n inspired python=3.9`
 
-    `conda activate inspired`
+   .. code-block:: shell
 
-4. Go to a location where you would like to install the program (e.g., $HOME/software), run:
+      //create the conda environment and activate
+
+      conda env create
+
+      conda activate inspired-dev
+
+      // install inspired in editable mode
+
+      pip install -e . --no-deps
+
+3. Go to a location where you would like to install the program (e.g., $HOME/software), run:
    
     `git clone https://github.com/cyqjh/inspired.git`
    
@@ -115,15 +124,8 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
     `tar zxvf model.tar.gz`
 
-5. Determine if your computer is CPU-only or equipped with GPU/CUDA. If you are not sure, choose the CPU-only option. Run:
 
-    `cd ./install`
-
-    `bash conda_env_cpu.sh` (or `bash conda_env_gpu.sh` for GPU machines).
-
-    (Note: It may take a while for the installation to be completed. If you encounter errors, you may try running the commands in the sh file one by one to diagnose. If you encounter an error associated with missing pydantic, please run `pip install pydantic` to install.)
-
-6. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
+5. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
    
      `inspired`
 
