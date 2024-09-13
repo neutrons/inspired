@@ -89,8 +89,17 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 ### Option 2
 1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. If you are unsure which one to choose, check [here](https://docs.anaconda.com/free/distro-or-miniconda/). Note that for the purpose of running INSPIRED, either one will work. 
 
-2. With conda initiated, run the following commands in the project's root directory:
+2. Go to a location where you would like to install the program (e.g., $HOME/software), run:
+   
+    `git clone https://github.com/cyqjh/inspired.git`
+   
+    After the download, you should see a folder named “inspired”. Go to the folder by running:
+   
+    `cd inspired`
+   
+    (Note: to get updated code in the future, you can simply run “git pull” in this folder)
 
+3. With conda initiated, run the following commands in the project's root directory (inspired):
 
    .. code-block:: shell
 
@@ -103,16 +112,6 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
       // install inspired in editable mode
 
       pip install -e . --no-deps
-
-3. Go to a location where you would like to install the program (e.g., $HOME/software), run:
-   
-    `git clone https://github.com/cyqjh/inspired.git`
-   
-    After the download, you should see a folder named “inspired”. Go to the folder by running:
-   
-    `cd inspired`
-   
-    (Note: to get updated code in the future, you can simply run “git pull” in this folder)
 
 4. To download the latest DFT database and ML models from Zenodo and extract the files, run:
    
