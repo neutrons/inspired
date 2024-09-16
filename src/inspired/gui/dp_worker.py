@@ -7,7 +7,7 @@ import torch_geometric as tg
 from ase import Atom
 from ase.neighborlist import neighbor_list
 from torch.utils.data import Dataset, DataLoader
-from latent_space_model import PeriodicNetwork, Decoder
+from inspired.gui.latent_space_model import PeriodicNetwork, Decoder
 
 
 class DPWorker():

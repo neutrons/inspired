@@ -1,7 +1,7 @@
 from qtpy.QtWidgets import (QFileDialog, QDialog)
-from ui_oclimax import Ui_OCLIMAX
-from ui_help_oclimax import Ui_Help_OCLIMAX
-from oclimax_params import OclimaxParams
+from inspired.gui.ui_oclimax import Ui_OCLIMAX
+from inspired.gui.ui_help_oclimax import Ui_Help_OCLIMAX
+from inspired.gui.oclimax_params import OclimaxParams
 import subprocess
 import os
 import numpy as np
