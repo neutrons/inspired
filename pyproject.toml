@@ -4,7 +4,6 @@ description = "Inelastic Neutron Scattering Prediction for Instantaneous Results
 dynamic = ["version"]
 requires-python = ">=3.9"
 dependencies = [
-    "pytorch",
     "phonopy",
     "pandas",
     "seekpath",
@@ -13,10 +12,7 @@ dependencies = [
     "qtpy",
     "pyqt5==5.*",
     "pymatgen==2024.5.1",
-    "spglib==2.4.0",
-    "pytorch-sparse",
-    "pytorch-cluster",
-    "pytorch-scatter"
+    "spglib==2.4.0"
 ]
 license = { text = "GPL3.0" }
 
