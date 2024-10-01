@@ -19,6 +19,7 @@ from ase.io import read
 from ase.formula import Formula
 from ase.spacegroup import get_spacegroup
 from ase.visualize import view
+from inspired.version import __version__ 
 
 class INSPIRED(QMainWindow):
     def __init__(self, parent=None):
@@ -423,6 +424,7 @@ if __name__ == "__main__":
     print('********************************************************************************************************')
     print('* Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design (INSPIRED) *')
     print('********************************************************************************************************')
+    print(f'INFO: version {__version__}')
     print('INFO: Initializing ...')
     app = QApplication(sys.argv)
     main_window = INSPIRED()
@@ -439,10 +441,18 @@ def gui():
     """
     Main entry point for Qt application
     """
+    
+    input_flags = sys.argv[1::]
+    if "--v" in input_flags or "--version" in input_flags:
+        print(__version__)
+        sys.exit()
+    
     print('********************************************************************************************************')
     print('* Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design (INSPIRED) *')
     print('********************************************************************************************************')
+    print(f'INFO: version {__version__}')
     print('INFO: Initializing ...')
+
     app = QApplication(sys.argv)
     main_window = INSPIRED()
     print('INFO: Starting GUI ...')
