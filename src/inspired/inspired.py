@@ -441,18 +441,17 @@ def gui():
     """
     Main entry point for Qt application
     """
-    
+    #print version and exit
     input_flags = sys.argv[1::]
     if "--v" in input_flags or "--version" in input_flags:
         print(__version__)
         sys.exit()
-    
+    #start the app
     print('********************************************************************************************************')
     print('* Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design (INSPIRED) *')
     print('********************************************************************************************************')
     print(f'INFO: version {__version__}')
     print('INFO: Initializing ...')
-
     app = QApplication(sys.argv)
     main_window = INSPIRED()
     print('INFO: Starting GUI ...')
