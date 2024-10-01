@@ -36,8 +36,10 @@ requirements:
 
   run:
     - python
+    - pymace
     - qtpy
-    - pyqt==5  
+    - pyqt==5.*
+    - pyg
     - pytorch
     - phonopy
     - pandas
