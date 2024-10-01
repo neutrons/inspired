@@ -1,6 +1,6 @@
 """Module to load the version created by versioningit
 
-Will fall back to a default it shiver is not installed"""
+Will fall back to a default if inspired is not installed"""
 
 try:
     from ._version import __version__
