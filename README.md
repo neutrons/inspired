@@ -111,7 +111,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
     //Then, install inspired in editable mode
 
-    `pip install -e . --no-deps`
+    `pip install -e . `
 
 4. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
    
