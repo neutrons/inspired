@@ -25,6 +25,10 @@ jobs:
                 - conda-forge
                 - pytorch
                 - pyg
+        - name: install in editable mode
+          shell: bash -l {0}
+          run: |
+            pip install -e .                
         - name: building python wheel
           shell: bash -l {0}
           run: |
