@@ -20,7 +20,7 @@ dependencies:
   - pandas
   - pyqt==5.*
   - qtpy
-  - phonopy
+  - phonopy==2.32.0
   - seekpath
   - matgl
   - chgnet

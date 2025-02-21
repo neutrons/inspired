@@ -41,7 +41,7 @@ requirements:
     - pyqt==5.*
     - pyg
     - pytorch
-    - phonopy
+    - phonopy==2.32.0
     - pandas
     - seekpath
     - matgl
