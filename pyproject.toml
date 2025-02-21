@@ -24,7 +24,7 @@ method = "git"
 default-tag = "0.2.0"
 
 [tool.versioningit.next-version]
-method = "minor"
+method = "minor-release"
 
 [tool.versioningit.format]
 distance = "{next_version}.dev{distance}"
