@@ -38,273 +38,6 @@
       <property name="tabBarAutoHide">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="PREDtab">
-       <property name="toolTip">
-        <string/>
-       </property>
-       <attribute name="title">
-        <string>Predictor</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QScrollArea" name="scrollArea">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>664</width>
-             <height>719</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_19">
-            <item>
-             <widget class="QGroupBox" name="groupBox_step1">
-              <property name="title">
-               <string>Step 1</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_4">
-               <item>
-                <widget class="QLabel" name="label_4">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QPushButton" name="pushButton_upload_structure_dp">
-                   <property name="text">
-                    <string>Upload a structure file</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButton_view_struc_dp">
-                   <property name="text">
-                    <string>View structure (optional)</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_structure_dp">
-                 <property name="text">
-                  <string>Structure file:                                                                             </string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_step2">
-              <property name="title">
-               <string>Step 2</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_3">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                 <item>
-                  <widget class="QRadioButton" name="radioButton_predict_phonon_dos">
-                   <property name="text">
-                    <string>Predict phonon DOS</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QCheckBox" name="checkBox_partial_dos">
-                   <property name="text">
-                    <string>Partial DOS</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioButton_predict_vision">
-                 <property name="text">
-                  <string>Predict VISION spectra</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioButton_predict_2d_sqe">
-                 <property name="text">
-                  <string>Predict powder 2D S(Q,E)</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_predict">
-                 <property name="text">
-                  <string>Predict</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_step3">
-              <property name="title">
-               <string>Step 3</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item>
-                <layout class="QGridLayout" name="gridLayout_3">
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>180</number>
-                 </property>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_7">
-                   <property name="text">
-                    <string>Energy unit in plot:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QComboBox" name="comboBox_plot_unit_dp">
-                   <item>
-                    <property name="text">
-                     <string>meV</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>cm\u207B\u00B9</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>THz</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QCheckBox" name="checkBox_range_dp">
-                   <property name="toolTip">
-                    <string>Check this to use customized axis ranges specified below</string>
-                   </property>
-                   <property name="text">
-                    <string>Customize range</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QCheckBox" name="checkBox_interactive_dp">
-                   <property name="toolTip">
-                    <string/>
-                   </property>
-                   <property name="text">
-                    <string>Interactive 2D cross-sectional S(Q,E) plot</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QGridLayout" name="gridLayout">
-                 <item row="1" column="7">
-                  <widget class="QLabel" name="label_12">
-                   <property name="text">
-                    <string>Ymax</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="text">
-                    <string>Xmin</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="8">
-                  <widget class="QLineEdit" name="lineEdit_ymax_dp"/>
-                 </item>
-                 <item row="1" column="5">
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>Ymin</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="6">
-                  <widget class="QLineEdit" name="lineEdit_ymin_dp"/>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_xmin_dp"/>
-                 </item>
-                 <item row="1" column="4">
-                  <widget class="QLineEdit" name="lineEdit_xmax_dp"/>
-                 </item>
-                 <item row="1" column="10">
-                  <widget class="QLineEdit" name="lineEdit_zmin_dp"/>
-                 </item>
-                 <item row="1" column="11">
-                  <widget class="QLabel" name="label_13">
-                   <property name="text">
-                    <string>Zmax</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="3">
-                  <widget class="QLabel" name="label_11">
-                   <property name="text">
-                    <string>Xmax</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="9">
-                  <widget class="QLabel" name="label_10">
-                   <property name="text">
-                    <string>Zmin</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="12">
-                  <widget class="QLineEdit" name="lineEdit_zmax_dp"/>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_plot_dp">
-                 <property name="text">
-                  <string>Plot</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-        <item alignment="Qt::AlignRight">
-         <widget class="QToolButton" name="toolButton_help_dp">
-          <property name="text">
-           <string>Help</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="DFTtab">
        <property name="toolTip">
         <string/>
@@ -347,7 +80,7 @@
               <item row="0" column="0">
                <widget class="QRadioButton" name="radioButton_database">
                 <property name="text">
-                 <string>Search DFT Database [4]</string>
+                 <string>Search DFT Database</string>
                 </property>
                </widget>
               </item>
@@ -446,7 +179,8 @@ hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example: (Na)(Cl) will return entries containing Na and Cl. With &amp;quot;Exact match&amp;quot; checked, it will return entries containing Na and Cl only. Click &amp;quot;Help&amp;quot; for more info.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Example: Na2O&lt;/span&gt; will return all entries containing the string, such as GaNa2O4Li3. Check &amp;quot;Exact match&amp;quot; will only return Na2O.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Na2.*O|O.*Na2&lt;/span&gt; will find anything containing Na2 and O in any order. Click &amp;quot;Help&amp;quot; for more information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -749,7 +483,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <item>
                 <widget class="QLabel" name="label_30">
                  <property name="text">
-                  <string>Choose a pre-trained MLFF model (MACE [8-10], CHGNet [11], M3GNet [12]):</string>
+                  <string>Choose a pre-trained MLFF model (see About for references):</string>
                  </property>
                 </widget>
                </item>
@@ -757,20 +491,39 @@ li.checked::marker { content: &quot;\2612&quot;; }
                 <widget class="QComboBox" name="comboBox_mlff_model">
                  <item>
                   <property name="text">
-                   <string>MACE Potential</string>
+                   <string>MatterSim</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>CHGNet Potential</string>
+                   <string>MACE-MP</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>M3GNet Potential</string>
+                   <string>MACE-OFF (for organic materials containing only H, C, N, O, F, P, S, Cl, Br, and I)</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>SevenNet</string>
                   </property>
                  </item>
                 </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QCheckBox" name="checkBox_mlff_model">
+                   <property name="text">
+                    <string>Use specific model:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_mlff_model_name"/>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -1033,6 +786,273 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="PREDtab">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <attribute name="title">
+        <string>Predictor</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>664</width>
+             <height>719</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_19">
+            <item>
+             <widget class="QGroupBox" name="groupBox_step1">
+              <property name="title">
+               <string>Step 1</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_upload_structure_dp">
+                   <property name="text">
+                    <string>Upload a structure file</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_view_struc_dp">
+                   <property name="text">
+                    <string>View structure (optional)</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_structure_dp">
+                 <property name="text">
+                  <string>Structure file:                                                                             </string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_step2">
+              <property name="title">
+               <string>Step 2</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QRadioButton" name="radioButton_predict_phonon_dos">
+                   <property name="text">
+                    <string>Predict phonon DOS</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkBox_partial_dos">
+                   <property name="text">
+                    <string>Partial DOS</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="radioButton_predict_vision">
+                 <property name="text">
+                  <string>Predict VISION spectra</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="radioButton_predict_2d_sqe">
+                 <property name="text">
+                  <string>Predict powder 2D S(Q,E)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_predict">
+                 <property name="text">
+                  <string>Predict</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_step3">
+              <property name="title">
+               <string>Step 3</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <layout class="QGridLayout" name="gridLayout_3">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>180</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>Energy unit in plot:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="comboBox_plot_unit_dp">
+                   <item>
+                    <property name="text">
+                     <string>meV</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>cm\u207B\u00B9</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>THz</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="checkBox_range_dp">
+                   <property name="toolTip">
+                    <string>Check this to use customized axis ranges specified below</string>
+                   </property>
+                   <property name="text">
+                    <string>Customize range</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="checkBox_interactive_dp">
+                   <property name="toolTip">
+                    <string/>
+                   </property>
+                   <property name="text">
+                    <string>Interactive 2D cross-sectional S(Q,E) plot</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout">
+                 <item row="1" column="7">
+                  <widget class="QLabel" name="label_12">
+                   <property name="text">
+                    <string>Ymax</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>Xmin</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="8">
+                  <widget class="QLineEdit" name="lineEdit_ymax_dp"/>
+                 </item>
+                 <item row="1" column="5">
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>Ymin</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="6">
+                  <widget class="QLineEdit" name="lineEdit_ymin_dp"/>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="lineEdit_xmin_dp"/>
+                 </item>
+                 <item row="1" column="4">
+                  <widget class="QLineEdit" name="lineEdit_xmax_dp"/>
+                 </item>
+                 <item row="1" column="10">
+                  <widget class="QLineEdit" name="lineEdit_zmin_dp"/>
+                 </item>
+                 <item row="1" column="11">
+                  <widget class="QLabel" name="label_13">
+                   <property name="text">
+                    <string>Zmax</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QLabel" name="label_11">
+                   <property name="text">
+                    <string>Xmax</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="9">
+                  <widget class="QLabel" name="label_10">
+                   <property name="text">
+                    <string>Zmin</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="12">
+                  <widget class="QLineEdit" name="lineEdit_zmax_dp"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_plot_dp">
+                 <property name="text">
+                  <string>Plot</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QToolButton" name="toolButton_help_dp">
+          <property name="text">
+           <string>Help</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="abouttab">
        <attribute name="title">
         <string>About</string>
@@ -1056,22 +1076,23 @@ li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Developers: Bowen Han, Andrei Savici, Mingda Li, Yongqiang Cheng&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Citation: Please find INSPIRED publication on https://github.com/cyqjh/inspired&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Citation: Please find INSPIRED publication on https://github.com/neutrons/inspired&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Contact: Please email chengy@ornl.gov for any questions or requests.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Special thanks to: Maria Patrou for making the deployment package and conda environment available on analysis.sns.gov and Murillo Longo Martins for designing the desktop logo.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Important References:&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1.            Cheng, Y.;  Wu, G.;  Pajerowski, D. M.;  Stone, M. B.;  Savici, A. T.;  Li, M.; Ramirez-Cuesta, A. J., Direct prediction of inelastic neutron scattering spectra from the crystal structure. &lt;span style=&quot; font-style:italic;&quot;&gt;Machine Learning: Science and Technology &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;4&lt;/span&gt; (1), 015010. &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2.            Cheng, Y.;  Stone, M. B.; Ramirez-Cuesta, A. J., A database of synthetic inelastic neutron scattering spectra from molecules and crystals. &lt;span style=&quot; font-style:italic;&quot;&gt;Scientific Data &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;10&lt;/span&gt; (1), 54. &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3.            Chen, Z.;  Andrejevic, N.;  Smidt, T.;  Ding, Z.;  Xu, Q.;  Chi, Y.-T.;  Nguyen, Q. T.;  Alatas, A.;  Kong, J.; Li, M., Direct Prediction of Phonon Density of States With Euclidean Neural Networks. &lt;span style=&quot; font-style:italic;&quot;&gt;Advanced Science &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2021,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;8&lt;/span&gt; (12), 2004214. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4.            Togo, A. &lt;a href=&quot;http://phonondb.mtl.kyoto-u.ac.jp/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0078d7;&quot;&gt;http://phonondb.mtl.kyoto-u.ac.jp/&lt;/span&gt;&lt;/a&gt;. (accessed 08/30/2022). &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4.            (Togo18 DFT database) Togo, A. &lt;a href=&quot;http://phonondb.mtl.kyoto-u.ac.jp/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0078d7;&quot;&gt;http://phonondb.mtl.kyoto-u.ac.jp/&lt;/span&gt;&lt;/a&gt;. (accessed 08/30/2022). &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5.            Togo, A.; Tanaka, I., First principles phonon calculations in materials science. &lt;span style=&quot; font-style:italic;&quot;&gt;Scripta Materialia &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2015,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;108&lt;/span&gt;, 1-5. &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6.            Cheng, Y.;  Daemen, L.;  Kolesnikov, A.; Ramirez-Cuesta, A., Simulation of inelastic neutron scattering spectra using OCLIMAX. &lt;span style=&quot; font-style:italic;&quot;&gt;Journal of chemical theory and computation &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2019,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;15&lt;/span&gt; (3), 1974-1982. &lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;7.            Hjorth Larsen, A.;  Jørgen Mortensen, J.;  Blomqvist, J.;  Castelli, I. E.;  Christensen, R.;  Dułak, M.;  Friis, J.;  Groves, M. N.;  Hammer, B.;  Hargus, C.;  Hermes, E. D.;  Jennings, P. C.;  Bjerre Jensen, P.;  Kermode, J.;  Kitchin, J. R.;  Leonhard Kolsbjerg, E.;  Kubal, J.;  Kaasbjerg, K.;  Lysgaard, S.;  Bergmann Maronsson, J.;  Maxson, T.;  Olsen, T.;  Pastewka, L.;  Peterson, A.;  Rostgaard, C.;  Schiøtz, J.;  Schütt, O.;  Strange, M.;  Thygesen, K. S.;  Vegge, T.;  Vilhelmsen, L.;  Walter, M.;  Zeng, Z.; Jacobsen, K. W., The atomic simulation environment—a Python library for working with atoms. &lt;span style=&quot; font-style:italic;&quot;&gt;Journal of Physics: Condensed Matter &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2017,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;29&lt;/span&gt; (27), 273002. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;8.            Batatia, I.;  Kovacs, D. P.;  Simm, G.;  Ortner, C.; Csányi, G., MACE: Higher order equivariant message passing neural networks for fast and accurate force fields. &lt;span style=&quot; font-style:italic;&quot;&gt;Advances in Neural Information Processing Systems &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;35&lt;/span&gt;, 11423-11436. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;9.            Batatia, I.;  Batzner, S.;  Kovács, D. P.;  Musaelian, A.;  Simm, G. N.;  Drautz, R.;  Ortner, C.;  Kozinsky, B.; Csányi, G., The design space of E (3)-equivariant atom-centered interatomic potentials. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2205.06643 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022&lt;/span&gt;. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;10.         Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2401.00096 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023&lt;/span&gt;. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;11.         Deng, B.;  Zhong, P.;  Jun, K.;  Riebesell, J.;  Han, K.;  Bartel, C. J.; Ceder, G., CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Machine Intelligence &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;5&lt;/span&gt; (9), 1031-1041. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;12.         Chen, C.; Ong, S. P., A universal graph deep learning interatomic potential for the periodic table. &lt;span style=&quot; font-style:italic;&quot;&gt;Nature Computational Science &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;2&lt;/span&gt; (11), 718-728. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;8.            (MACE) Batatia, I.;  Kovacs, D. P.;  Simm, G.;  Ortner, C.; Csányi, G., MACE: Higher order equivariant message passing neural networks for fast and accurate force fields. &lt;span style=&quot; font-style:italic;&quot;&gt;Advances in Neural Information Processing Systems &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022,&lt;/span&gt; &lt;span style=&quot; font-style:italic;&quot;&gt;35&lt;/span&gt;, 11423-11436. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;9.            (MACE) Batatia, I.;  Batzner, S.;  Kovács, D. P.;  Musaelian, A.;  Simm, G. N.;  Drautz, R.;  Ortner, C.;  Kozinsky, B.; Csányi, G., The design space of E (3)-equivariant atom-centered interatomic potentials. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2205.06643 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2022&lt;/span&gt;. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;10.         (MACE) Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2401.00096 &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;2023&lt;/span&gt;. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;11.         (MatterSim) Yang, H. et al. MatterSim: A Deep Learning Atomistic Model Across Elements, Temperatures and Pressures. &lt;span style=&quot; font-style:italic;&quot;&gt;arXiv preprint arXiv:2405.04967&lt;/span&gt; &lt;span style=&quot; font-weight:700;&quot;&gt;2024.&lt;/span&gt; https://github.com/microsoft/mattersim. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;12.         (SevenNet) Park, Y., Kim, J., Hwang, S., Han, S., Scalable Parallel Algorithm for Graph Neural Network Interatomic Potentials in Molecular Dynamics Simulations. &lt;span style=&quot; font-style:italic;&quot;&gt;J. Chem. Theory Comput.&lt;/span&gt; &lt;span style=&quot; font-weight:700;&quot;&gt;2024&lt;/span&gt;, 20, 11, 4857–4868. https://github.com/MDIL-SNU/SevenNet. &lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;13.         Hinuma, Y.; Pizzi, G.; Kumagai, Y.; Oba, F.; Tanaka, I., Band structure diagram paths based on crystallography. &lt;span style=&quot; font-style:italic;&quot;&gt;Comp. Mat. Sci.&lt;/span&gt; &lt;span style=&quot; font-weight:700;&quot;&gt;2017&lt;/span&gt;, 128, 140.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;14.         Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. &lt;span style=&quot; font-weight:700;&quot;&gt;2018,&lt;/span&gt; arXiv:1808.01590&lt;/p&gt;

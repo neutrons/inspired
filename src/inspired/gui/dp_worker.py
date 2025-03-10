@@ -9,6 +9,9 @@ from ase.neighborlist import neighbor_list
 from torch.utils.data import Dataset, DataLoader
 from inspired.gui.latent_space_model import PeriodicNetwork, Decoder
 
+import io
+import contextlib
+
 
 class DPWorker():
     """direct prediction of INS spectra from the crystal structure
@@ -78,21 +81,22 @@ class DPWorker():
         """define and load the pre-trained e3nn model
         """
 
-        model = PeriodicNetwork(
-            in_dim=118,  # dimension of one-hot encoding of atom type
-            em_dim=em_dim,  # dimension of atom-type embedding
-            irreps_in=str(em_dim) + "x0e",
-            # em_dim scalars (L=0 and even parity) on each atom to represent atom type
-            irreps_out=str(out_dim) + "x0e",  # out_dim scalars (L=0 and even parity) to output
-            irreps_node_attr=str(em_dim) + "x0e",
-            # em_dim scalars (L=0 and even parity) on each atom to represent atom type
-            layers=2,  # number of nonlinearities (number of convolutions = layers + 1)
-            mul=32,  # multiplicity of irreducible representations
-            lmax=1,  # maximum order of spherical harmonics
-            max_radius=r_max,  # cutoff radius for convolution
-            num_neighbors=nneigh,  # scaling factor based on the typical number of neighbors
-            reduce_output=True  # whether or not to aggregate features of all atoms at the end
-        )
+        with contextlib.redirect_stderr(io.StringIO()) as f:
+            model = PeriodicNetwork(
+                in_dim=118,  # dimension of one-hot encoding of atom type
+                em_dim=em_dim,  # dimension of atom-type embedding
+                irreps_in=str(em_dim) + "x0e",
+                # em_dim scalars (L=0 and even parity) on each atom to represent atom type
+                irreps_out=str(out_dim) + "x0e",  # out_dim scalars (L=0 and even parity) to output
+                irreps_node_attr=str(em_dim) + "x0e",
+                # em_dim scalars (L=0 and even parity) on each atom to represent atom type
+                layers=2,  # number of nonlinearities (number of convolutions = layers + 1)
+                mul=32,  # multiplicity of irreducible representations
+                lmax=1,  # maximum order of spherical harmonics
+                max_radius=r_max,  # cutoff radius for convolution
+                num_neighbors=nneigh,  # scaling factor based on the typical number of neighbors
+                reduce_output=True  # whether or not to aggregate features of all atoms at the end
+                )
 
         # predict on all data
         model.load_state_dict(torch.load(model_file + '.torch', map_location=self.device)['state'])

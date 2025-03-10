@@ -141,6 +141,7 @@ class OCLIMAX(QDialog):
         self.ui.lineEdit_Q1bin.setText(self.oclimax_params.get_param('Q1bin'))
         self.ui.lineEdit_Q2bin.setText(self.oclimax_params.get_param('Q2bin'))
         self.ui.lineEdit_Q3bin.setText(self.oclimax_params.get_param('Q3bin'))
+        self.ui.lineEdit_HKL.setText(self.oclimax_params.get_param('HKL'))
         self.ui.lineEdit_Ebin.setText(self.oclimax_params.get_param('Ebin'))
         self.ui.comboBox_xaxis.setCurrentIndex(self.oclimax_params.get_param('x-axis'))
         self.ui.comboBox_yaxis.setCurrentIndex(self.oclimax_params.get_param('y-axis'))
@@ -170,6 +171,7 @@ class OCLIMAX(QDialog):
         self.oclimax_params.update_param('Q1bin', self.ui.lineEdit_Q1bin.displayText())
         self.oclimax_params.update_param('Q2bin', self.ui.lineEdit_Q2bin.displayText())
         self.oclimax_params.update_param('Q3bin', self.ui.lineEdit_Q3bin.displayText())
+        self.oclimax_params.update_param('HKL', self.ui.lineEdit_HKL.displayText())
         self.oclimax_params.update_param('Ebin', self.ui.lineEdit_Ebin.displayText())
         self.oclimax_params.update_param('x-axis', self.ui.comboBox_xaxis.currentIndex())
         self.oclimax_params.update_param('y-axis', self.ui.comboBox_yaxis.currentIndex())
@@ -181,6 +183,7 @@ class OCLIMAX(QDialog):
         self.ui.lineEdit_Q1bin.setEnabled(enable)
         self.ui.lineEdit_Q2bin.setEnabled(enable)
         self.ui.lineEdit_Q3bin.setEnabled(enable)
+        self.ui.lineEdit_HKL.setEnabled(enable)
         self.ui.lineEdit_Ebin.setEnabled(enable)
         self.ui.comboBox_xaxis.setEnabled(enable)
         self.ui.comboBox_yaxis.setEnabled(enable)
@@ -261,6 +264,7 @@ class OCLIMAX(QDialog):
         Qb1 = self.oclimax_params.get_param('Q1bin').split()
         Qb2 = self.oclimax_params.get_param('Q2bin').split()
         Qb3 = self.oclimax_params.get_param('Q3bin').split()
+        HKL = list(map(float,self.oclimax_params.get_param('HKL').split()))
         Eb = self.oclimax_params.get_param('Ebin').split()
         for param in [Q1,Q2,Q3,Qb1,Qb2,Qb3]:
             if len(param)!=3:
@@ -325,8 +329,8 @@ class OCLIMAX(QDialog):
             except:
                 print('ERROR: File format conversion failed or terminated.')
                 return
-            q1=np.linspace(Qb[s[0]][0],Qb[s[0]][2],int((Qb[s[0]][2]-Qb[s[0]][0])/Qb[s[0]][1])+1)
-            q2=np.linspace(Qb[s[1]][0],Qb[s[1]][2],int((Qb[s[1]][2]-Qb[s[1]][0])/Qb[s[1]][1])+1)
+            q1=np.linspace(Qb[s[0]][0],Qb[s[0]][2],int(round((Qb[s[0]][2]-Qb[s[0]][0])/Qb[s[0]][1]))+1)
+            q2=np.linspace(Qb[s[1]][0],Qb[s[1]][2],int(round((Qb[s[1]][2]-Qb[s[1]][0])/Qb[s[1]][1]))+1)
 
             count = 0
             npoint = max(int(bscale*1.0/Qxb[1])+1,int(bscale*(Eb[2]-Eb[0])/Eb[1])+1)
@@ -339,6 +343,7 @@ class OCLIMAX(QDialog):
                     p1 = -0.5*Qx+q1[i]*qQ1+q2[j]*qQ2
                     p2 = q1[i]*qQ1+q2[j]*qQ2
                     p3 = 0.5*Qx+q1[i]*qQ1+q2[j]*qQ2
+                    p4 = p2+HKL[0]*Q[0]+HKL[1]*Q[1]+HKL[2]*Q[2]
                     print('BAND = ',p1[0],p1[1],p1[2],p2[0],p2[1],p2[2],p3[0],p3[1],p3[2], file=f)
                     print('BAND_POINTS = ',npoint, file=f)
                     print('# bscale '+str(bscale), file=f)
@@ -381,7 +386,7 @@ class OCLIMAX(QDialog):
                     print('QRES    =     ', self.oclimax_params.get_param('QRES'), file=f)
                     print('THETA   =     ', self.oclimax_params.get_param('THETA'), file=f)
                     print('Ei      =     ', self.oclimax_params.get_param('Ei'), file=f)
-                    print('HKL     =     ', p2[0],p2[1],p2[2], file=f)
+                    print('HKL     =     ', p4[0],p4[1],p4[2], file=f)
                     print('Q_vec   =     ', Qx[0],Qx[1],Qx[2], file=f)
                     f.close()
                     outfile='cut_qe_'+timestr+'_'+str(i)+'_'+str(j)+'.csv'
@@ -427,7 +432,7 @@ class OCLIMAX(QDialog):
             except:
                 print('ERROR: File format conversion failed or terminated.')
                 return
-            q1=np.linspace(Qb[s[0]][0],Qb[s[0]][2],round((Qb[s[0]][2]-Qb[s[0]][0])/Qb[s[0]][1])+1)
+            q1=np.linspace(Qb[s[0]][0],Qb[s[0]][2],int(round((Qb[s[0]][2]-Qb[s[0]][0])/Qb[s[0]][1])+1))
             #print(q1)
 
             for i in range(len(q1)):
@@ -437,6 +442,7 @@ class OCLIMAX(QDialog):
                 qy=np.linspace(-0.5,0.5,int(bscale*1.0/Qyb[1])+1)
                 print(len(qx)*len(qy), file=f)
                 shft = q1[i]*qQ1
+                p4 = shft+HKL[0]*Q[0]+HKL[1]*Q[1]+HKL[2]*Q[2]
                 for j in range(len(qx)):
                     for k in range(len(qy)):
                         qp = qx[j]*Qx+qy[k]*Qy+shft
@@ -485,7 +491,7 @@ class OCLIMAX(QDialog):
                 print('QRES    =     ', self.oclimax_params.get_param('QRES'), file=f)
                 print('THETA   =     ', self.oclimax_params.get_param('THETA'), file=f)
                 print('Ei      =     ', self.oclimax_params.get_param('Ei'), file=f)
-                print('HKL     =     ', shft[0],shft[1],shft[2], file=f)
+                print('HKL     =     ', p4[0],p4[1],p4[2], file=f)
                 print('Q_vec   =     ', Qx[0],Qx[1],Qx[2], file=f)
                 print('Q_vec_y =     ', Qy[0],Qy[1],Qy[2], file=f)
                 print('MINQ_y  =     ', Qyb[0], file=f)
@@ -606,7 +612,16 @@ class OCLIMAX(QDialog):
             ax.set_ylim(y_min,y_max)
             for i in range(ns):
                 tsim[i+1]=[tsim[i+1][j] for j in range(len(tsim[i+1]))]
-                ax.plot(tsim[0],tsim[i+1],label='Spec'+str(i+1))
+            if int(INSTR)==0:
+                ax.plot(tsim[0],tsim[1],label='High Q total')
+                ax.plot(tsim[0],tsim[2],label='Low Q total')
+                ax.plot(tsim[0],tsim[3],label='High Q 0-1')
+                ax.plot(tsim[0],tsim[4],label='High Q 0-2')
+                ax.plot(tsim[0],tsim[5],label='High Q 0-3')
+                ax.plot(tsim[0],tsim[6],label='High Q 0-4+')
+            else:
+                for i in range(ns):
+                    ax.plot(tsim[0],tsim[i+1],label='Spec'+str(i+1))
             ax.set_xlabel('Energy transfer ('+plt_unit+')')
             ax.set_ylabel('Intensity (a.u.)')
             ax.legend(frameon=False)
