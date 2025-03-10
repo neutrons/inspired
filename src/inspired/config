@@ -1,5 +1,2 @@
 predictor_path:/SNS/software/inspired/model
 dft_database_path:/SNS/software/inspired/dftdb
-mattersim_model:default
-mace_model:default
-molcrysmace_model:default
