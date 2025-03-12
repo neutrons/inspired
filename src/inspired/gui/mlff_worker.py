@@ -11,6 +11,7 @@ from phonopy import Phonopy
 from phonopy.interface.calculator import read_crystal_structure
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
 from phonopy.file_IO import write_FORCE_CONSTANTS
+from phonopy.file_IO import parse_BORN
 import torch
 from inspired.gui.oclimax import OCLIMAX
 
@@ -155,6 +156,9 @@ class MLFFWorker():
         if os.path.isfile('BORN'):
             print('INFO: BORN file found in the current folder.')
             print('INFO: Unless it is there on purpose to include NAC, please remove it.')
+            nac_params = parse_BORN(phonon.primitive, filename="BORN")
+            nac_params['factor'] = 14.4
+            phonon.set_nac_params(nac_params)
         try:
             os.remove('FORCE_SETS')
         except OSError:
@@ -164,7 +168,7 @@ class MLFFWorker():
         print('INFO: Plotting phonon dispersion and DOS. For large unitcells this may take a few moments.')
         print('INFO: Frequency unit in plot is THz. 1 THz = 4.136 meV = 33.356 cm-1')
         print('INFO: Phonon DOS data will be saved in total_dos.dat file')
-        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon._primitive, 1, is_const_interval=True)
+        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
         points = []
         for i in range(len(bands)):
             if i==0 or (bands[i-1][1]!=bands[i][0]).any():
