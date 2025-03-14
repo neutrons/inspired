@@ -31,9 +31,12 @@ class MLFFWorker():
         """
 
         try:
-            lmin = float(lmin)
+            lmin = float(lmin.strip())
         except:
-            lmin = 12.0
+            try:
+                lmin = list(map(int,lmin.strip().split()))
+            except:
+                lmin = 12.0
         try:
             fmax = float(fmax)
         except:
@@ -47,9 +50,17 @@ class MLFFWorker():
         except:
             delta = 0.03
         abc = struc.cell.cellpar()[0:3]
-        nx = math.ceil(lmin/abc[0])        # calculate default mesh in BZ based on cell size
-        ny = math.ceil(lmin/abc[1])
-        nz = math.ceil(lmin/abc[2])
+        if not isinstance(lmin,list):
+            nx = math.ceil(lmin/abc[0])        # calculate default mesh in BZ based on cell size
+            ny = math.ceil(lmin/abc[1])
+            nz = math.ceil(lmin/abc[2])
+        elif len(lmin)==3:
+            nx = lmin[0]
+            ny = lmin[1]
+            nz = lmin[2]
+        else:
+            print('ERROR: Check Lmin/Dim. Must be one float number or three integers.')
+            return
         self.nx = nx
         self.ny = ny
         self.nz = nz

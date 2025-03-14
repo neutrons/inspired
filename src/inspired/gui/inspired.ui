@@ -552,10 +552,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_Lmin">
                    <property name="toolTip">
-                    <string>Minimum dimension in supercell (A)</string>
+                    <string>Minimum size of supercell (A) or supercell dimension in nx ny nz (the supercell will be nx*ny*nz of the unit cell)</string>
                    </property>
                    <property name="text">
-                    <string>Lmin</string>
+                    <string>Lmin/Dim</string>
                    </property>
                   </widget>
                  </item>
