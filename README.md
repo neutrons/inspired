@@ -11,7 +11,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Cons: only for crystals with DFT results found in the database (or provided by the users)
   
-  ![image](https://github.com/cyqjh/inspired/assets/105002220/c28a9c3a-1fae-4c38-9ca3-dfb03d19492b)
+  ![dft_tab](https://github.com/user-attachments/assets/572dd5e5-6441-4ff8-9086-856eef6a729b)
 
 
 2. INS simulation using pre-trained universal machine learning force fields (MLFFs)
@@ -20,7 +20,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Cons: can be slow for large or low-symmetry systems, accuracy varies significantly from case to case
   
-  ![image](https://github.com/cyqjh/inspired/assets/105002220/04571dc1-5dfb-469b-92e9-8e5f523b33d2)
+  ![mlff_tab](https://github.com/user-attachments/assets/47ff98ba-3c7c-4755-97f4-2f0d5720e5ae)
 
 
 3. Direct prediction from a symmetry-aware neural network
@@ -29,7 +29,7 @@ INSPIRED is a PyQt GUI that performs rapid prediction/calculation/visualization 
 
 * Cons: powder samples only, predefined Q and E ranges, less accurate, accuracy varies significantly from case to case
   
-  ![image](https://github.com/cyqjh/inspired/assets/105002220/2fd4288e-2739-4852-9d4e-4513c9cfc029)
+  ![dp_tab](https://github.com/user-attachments/assets/7cc13f86-3cff-4514-8444-5322cebbdf9e)
 
 
 In general, one should follow the above order in choosing the tools. If DFT results are available for the system of interest, they should be used. If not, try the MLFFs to see if you can calculate phonons in reasonable time. If not, the Predictor can be used to obtain a quick guess.
