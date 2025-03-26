@@ -23,8 +23,6 @@ jobs:
             condarc: |
               channels:
                 - conda-forge
-                - pytorch
-                - pyg
         - name: install in editable mode
           shell: bash -l {0}
           run: |
@@ -41,7 +39,7 @@ jobs:
             cd conda.recipe
             echo "versioningit $(versioningit ../)"
             # build the package
-            CHANNELS="--channel conda-forge --channel pytorch --channel pyg"
+            CHANNELS="--channel conda-forge"
             VERSION=$(versioningit ../) conda mambabuild $CHANNELS --output-folder . .
             conda verify noarch/inspired*.tar.bz2
         - name: upload conda package to anaconda
