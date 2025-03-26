@@ -21,11 +21,15 @@ dependencies:
   - pymace
   - pip
   - pip:
-    - pyqt5
+    - --extra-index-url https://download.pytorch.org/whl/cpu
+    - --find-links https://pytorch-geometric.com/whl/torch-2.2.0+cpu.html
     - torch==2.2.0
+    - torchvision==0.17.0 
+    - torchaudio==2.2.0
     - torch-geometric==2.5.3
     - torch-sparse
     - torch-scatter
     - torch-cluster
     - mattersim==1.0.0rc9
     - sevenn==0.10.4
+    - pyqt5
