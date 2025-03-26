@@ -44,6 +44,7 @@ class OclimaxParams():
                                     'Q1': '1  0  0',
                                     'Q2': '0  1  0',
                                     'Q3': '0  0  1',
+                                    'HKL': '0  0  0',
                                     'Q1bin': '2.0  0.01  5.0',
                                     'Q2bin': '-0.05  0.05  0.05',
                                     'Q3bin': '-0.05  0.05  0.05',
@@ -67,27 +68,28 @@ class OclimaxParams():
             else:
                 print('Check supercell dimension in mesh.conf file.')
         else:
-            print('Could not open/read mesh.conf file, make sure it is in current working directory.')
+            print('ERROR: Could not open/read mesh.conf file. This file is required to continue the calculation correctly.')
     
     def get_default_mesh(self):
         if os.path.isfile("mesh.conf"):
-            mesh = subprocess.run(["sed -n '/^MP/p' mesh.conf"], shell=True, capture_output=True, text=True).stdout
+            mesh = subprocess.run(["sed -n '/^MP\|^MESH/p' mesh.conf"], shell=True, capture_output=True, text=True).stdout
             self.default_mesh = mesh.split('=')[1].split()[-3:]
         else:
-            print('Could not open/read mesh.conf file, make sure it is in current working directory.')
+            print('ERROR: Could not open/read mesh.conf file. This file is required to continue the calculation correctly.')
     
     def generate_mesh_file(self, mesh_list=['1', '1', '1']):
         if os.path.isfile("mesh.conf"):
             newmesh = ' '.join(mesh_list)
             subprocess.run(["sed -i 's/.*MP.*/MP = "+newmesh+"/' mesh.conf"], shell=True)
+            subprocess.run(["sed -i 's/.*MESH.*/MESH = "+newmesh+"/' mesh.conf"], shell=True)
         else:
-            print('Could not open/read mesh.conf file, make sure it is in current working directory.')
+            print('ERROR: Could not open/read mesh.conf file. This file is required to continue the calculation correctly.')
         
     def load_parameters(self, params_file_path = "oclimax.params"):
         try:
             pf = open(params_file_path, "r")
         except OSError:
-            print('Could not open/read params file, make sure it is in current working directory.')
+            print('INFO: Could not open/read params file, make sure it is in current working directory.')
             return
         para_lines = pf.readlines()
         pf.close()
@@ -147,6 +149,7 @@ class OclimaxParams():
         list_file_lines.append('#! Q1bin =   ' + self.dict_params['Q1bin'])
         list_file_lines.append('#! Q2bin =   ' + self.dict_params['Q2bin'])
         list_file_lines.append('#! Q3bin =   ' + self.dict_params['Q3bin'])
+        list_file_lines.append('#! HKL =   ' + self.dict_params['HKL'])
         list_file_lines.append('#! Ebin =   ' + self.dict_params['Ebin'])
         list_file_lines.append('#! x-axis =   ' + str(self.dict_params['x-axis']))
         list_file_lines.append('#! y-axis =   ' + str(self.dict_params['y-axis']))

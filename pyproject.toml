@@ -4,6 +4,16 @@ description = "Inelastic Neutron Scattering Prediction for Instantaneous Results
 dynamic = ["version"]
 requires-python = ">=3.9"
 dependencies = [
+    "pyqt5",
+    "torch==2.2.0",
+    "torchvision==0.17.0", 
+    "torchaudio==2.2.0",
+    "torch-geometric==2.5.3",
+    "torch-sparse",
+    "torch-scatter",
+    "torch-cluster",
+    "mattersim==1.0.0rc9",
+    "sevenn==0.10.4"
 ]
 license = { text = "GPL3.0" }
 
@@ -38,7 +48,7 @@ file = "src/inspired/_version.py"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.yml","*.yaml","*.ini","*.json","*.pt","*.model","oclimax*","*.ui","M3GNet-MP-2021.2.8-PES/*", "config"]
+"*" = ["*.yml","*.yaml","*.ini","*.json","*.pt","*.model","oclimax*","*.ui", "config"]
 
 [project.gui-scripts]
 inspired = "inspired.inspired:gui"

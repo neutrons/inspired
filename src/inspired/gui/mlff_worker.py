@@ -2,10 +2,6 @@ from ase import Atoms
 #from ase.phonons import Phonons
 from ase.io import read, write
 from ase.optimize import FIRE
-import matgl
-from matgl.ext.ase import M3GNetCalculator, Relaxer
-from chgnet.model import StructOptimizer, CHGNetCalculator
-from mace.calculators import MACECalculator
 from pymatgen.io.ase import AseAtomsAdaptor
 from pymatgen.core import Structure
 import numpy as np
@@ -15,8 +11,14 @@ from phonopy import Phonopy
 from phonopy.interface.calculator import read_crystal_structure
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
 from phonopy.file_IO import write_FORCE_CONSTANTS
+from phonopy.file_IO import parse_BORN
 import torch
 from inspired.gui.oclimax import OCLIMAX
+
+from mattersim.forcefield.potential import MatterSimCalculator
+from mace.calculators import mace_mp
+from mace.calculators import mace_off
+from sevenn.calculator import SevenNetCalculator
 
 
 class MLFFWorker():
@@ -24,14 +26,17 @@ class MLFFWorker():
         self.oclimax = OCLIMAX()
         self.nx = self.ny = self.nz = None
 
-    def run_opt_and_dos(self, mace_file, m3gnet_path, struc=None, potential_index=0,lmin=12.0,fmax=0.01,nmax=100,delta=0.03):
+    def run_opt_and_dos(self, struc=None, potential_index=0,use_specific_model=False,mlff_model_name=None,lmin=12.0,fmax=0.01,nmax=100,delta=0.03):
         """structure optimization and phonon calculation with MLFF
         """
 
         try:
-            lmin = float(lmin)
+            lmin = float(lmin.strip())
         except:
-            lmin = 12.0
+            try:
+                lmin = list(map(int,lmin.strip().split()))
+            except:
+                lmin = 12.0
         try:
             fmax = float(fmax)
         except:
@@ -45,34 +50,48 @@ class MLFFWorker():
         except:
             delta = 0.03
         abc = struc.cell.cellpar()[0:3]
-        nx = math.ceil(lmin/abc[0])        # calculate default mesh in BZ based on cell size
-        ny = math.ceil(lmin/abc[1])
-        nz = math.ceil(lmin/abc[2])
+        if not isinstance(lmin,list):
+            nx = math.ceil(lmin/abc[0])        # calculate default mesh in BZ based on cell size
+            ny = math.ceil(lmin/abc[1])
+            nz = math.ceil(lmin/abc[2])
+        elif len(lmin)==3:
+            nx = lmin[0]
+            ny = lmin[1]
+            nz = lmin[2]
+        else:
+            print('ERROR: Check Lmin/Dim. Must be one float number or three integers.')
+            return
         self.nx = nx
         self.ny = ny
         self.nz = nz
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
-        torch.set_default_dtype(torch.float32)
         print('INFO: Running structural optimization...')
-        if potential_index == 0:  # MACE
-            calculator = MACECalculator(model_paths=mace_file, device=device)
-            struc.set_calculator(calculator)
-            dyn = FIRE(struc)
-            dyn.run(fmax=fmax, steps=nmax)
-            atoms_relaxed = dyn.atoms.copy()
-        elif potential_index == 1:  # CHGNet
-            calculator = CHGNetCalculator()
-            relaxer = StructOptimizer()
-            relax_results = relaxer.relax(struc, fmax=fmax, steps=nmax, relax_cell=False)
-            final_structure = relax_results['final_structure']
-            atoms_relaxed = AseAtomsAdaptor().get_atoms(final_structure)
-        elif potential_index == 2:  # M3GNet
-            pot = matgl.load_model(m3gnet_path)
-            calculator = M3GNetCalculator(pot)
-            relaxer = Relaxer(potential=pot,relax_cell=False)
-            relax_results = relaxer.relax(struc, fmax=fmax, steps=nmax, verbose=True)
-            final_structure = relax_results['final_structure']
-            atoms_relaxed = AseAtomsAdaptor().get_atoms(final_structure)
+        if potential_index == 0:    # MatterSim
+            torch.set_default_dtype(torch.float32)
+            if use_specific_model and mlff_model_name is not None:
+                calculator = MatterSimCalculator(load_path=mlff_model_name, device=device)
+            else:
+                calculator = MatterSimCalculator(load_path='MatterSim-v1.0.0-5M.pth', device=device)
+        elif potential_index == 1:  # MACE-MP
+            if use_specific_model and mlff_model_name is not None:
+                calculator = mace_mp(model=mlff_model_name, default_dtype="float64", device=device)
+            else:
+                calculator = mace_mp(model='medium', default_dtype="float64", device=device)
+        elif potential_index == 2:  # MACE-OFF
+            if use_specific_model and mlff_model_name is not None:
+                calculator = mace_off(model=mlff_model_name, default_dtype="float64", device=device)
+            else:
+                calculator = mace_off(model='medium', default_dtype="float64", device=device)
+        elif potential_index == 3:  # SevenNet
+            torch.set_default_dtype(torch.float32)
+            if use_specific_model and mlff_model_name is not None:
+                calculator = SevenNetCalculator(model=mlff_model_name, device=device)
+            else:
+                calculator = SevenNetCalculator(model='7net-0', device=device)
+        struc.set_calculator(calculator)
+        dyn = FIRE(struc)
+        dyn.run(fmax=fmax, steps=nmax)
+        atoms_relaxed = dyn.atoms.copy()
         write('POSCAR-unitcell', atoms_relaxed, direct=True, format='vasp')
         print('INFO: Structural optimization finished.')
 
@@ -145,10 +164,12 @@ class MLFFWorker():
         phonon.produce_force_constants()
 
 
-        try:
-            os.remove('BORN')
-        except OSError:
-            pass
+        if os.path.isfile('BORN'):
+            print('INFO: BORN file found in the current folder.')
+            print('INFO: Unless it is there on purpose to include NAC, please remove it.')
+            nac_params = parse_BORN(phonon.primitive, filename="BORN")
+            nac_params['factor'] = 14.4
+            phonon.set_nac_params(nac_params)
         try:
             os.remove('FORCE_SETS')
         except OSError:
@@ -158,7 +179,7 @@ class MLFFWorker():
         print('INFO: Plotting phonon dispersion and DOS. For large unitcells this may take a few moments.')
         print('INFO: Frequency unit in plot is THz. 1 THz = 4.136 meV = 33.356 cm-1')
         print('INFO: Phonon DOS data will be saved in total_dos.dat file')
-        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon._primitive, 1, is_const_interval=True)
+        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
         points = []
         for i in range(len(bands)):
             if i==0 or (bands[i-1][1]!=bands[i][0]).any():
@@ -180,10 +201,9 @@ class MLFFWorker():
         """
 
         if self.nx and self.ny and self.nz:
-            try:
-                os.remove('BORN')
-            except OSError:
-                pass
+            if os.path.isfile('BORN'):
+                print('INFO: BORN file found in the current folder.')
+                print('INFO: Unless it is there on purpose to include NAC, please remove it.')
             try:
                 os.remove('FORCE_SETS')
             except OSError:

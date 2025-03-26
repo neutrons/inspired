@@ -1,9 +1,8 @@
+import warnings
+warnings.simplefilter("ignore")
 import sys
 import os
 import shutil
-import warnings
-
-warnings.simplefilter("ignore")
 from qtpy.QtWidgets import (QApplication, QMainWindow, QFileDialog, QHeaderView, QDialog, QAbstractItemView)
 import torch
 from inspired.gui.ui_inspired import Ui_INSPIRED
@@ -81,8 +80,6 @@ class INSPIRED(QMainWindow):
         sys_config = os.path.join(self.root_path, 'config')
         self.predictor_path = os.path.join(self.root_path, 'model')
         self.dft_database_path = os.path.join(self.root_path, 'dftdb')
-        self.mace_model_file = os.path.join(self.root_path, 'mlff', '2023-08-14-mace-universal.model')
-        self.m3gnet_model_path = os.path.join(self.root_path, 'mlff', 'M3GNet-MP-2021.2.8-PES')
         if not os.path.isfile(user_config) and not os.path.isfile(sys_config):
             print('INFO: config file not found, using default paths.')
             return
@@ -103,10 +100,6 @@ class INSPIRED(QMainWindow):
             self.predictor_path = path_dict['predictor_path']
         if 'dft_database_path' in path_dict and path_dict['dft_database_path']!='default':
             self.dft_database_path = path_dict['dft_database_path']
-        if 'mace_model_file' in path_dict and path_dict['mace_model_file']!='default':
-            self.mace_model_file = path_dict['mace_model_file']
-        if 'm3gnet_model_path' in path_dict and path_dict['m3gnet_model_path']!='default':
-            self.m3gnet_model_path = path_dict['m3gnet_model_path']
 
 
 
@@ -130,12 +123,6 @@ class INSPIRED(QMainWindow):
         if not os.path.isfile(os.path.join(self.dft_database_path,'crystals.dat')):
             print('ERROR: DFT database file (crystals.dat) could not be found in the specified path. Please reset in config file or Preferences in the Menu.')
             self.set_preferences()
-        if not os.path.isfile(self.mace_model_file):
-            print('ERROR: MACE model file cannot be found. Please reset in config file or Preferences in the Menu.')
-            self.set_preferences()
-        if not os.path.isdir(self.m3gnet_model_path):
-            print('ERROR: M3GNet model path does not exist. Please reset in config file or Preferences in the Menu.')
-            self.set_preferences()
 
 
     def set_preferences(self):
@@ -143,7 +130,7 @@ class INSPIRED(QMainWindow):
         Set and check paths
         """
 
-        self.set_paths.init_paths(self.predictor_path,self.dft_database_path,self.mace_model_file,self.m3gnet_model_path)
+        self.set_paths.init_paths(self.predictor_path,self.dft_database_path)
         self.set_paths.exec()
         self.setup_paths()
         self.check_paths()
@@ -286,6 +273,8 @@ class INSPIRED(QMainWindow):
             self.atoms_dft = read(filename, format='vasp')
         except:
             print('ERROR: Failed to load structure model')
+            print('INFO: The file containing the unit cell structure must be POSCAR-unitcell')
+            print('INFO: If it is POSCAR or CONTCAR, please rename it to POSCAR-unitcell')
         else:
             sg = get_spacegroup(self.atoms_dft)
             form = self.atoms_dft.get_chemical_formula()
@@ -357,7 +346,10 @@ class INSPIRED(QMainWindow):
         if not self.atoms_mlff:
             print('ERROR: No structure loaded.')
             return
-        self.mlff_worker.run_opt_and_dos(self.mace_model_file,self.m3gnet_model_path,self.atoms_mlff,potential_index=self.ui.comboBox_mlff_model.currentIndex(),
+        self.mlff_worker.run_opt_and_dos(self.atoms_mlff,
+                                         potential_index=self.ui.comboBox_mlff_model.currentIndex(),
+                                         use_specific_model=self.ui.checkBox_mlff_model.isChecked(),
+                                         mlff_model_name=self.ui.lineEdit_mlff_model_name.displayText(),
                                          lmin=self.ui.lineEdit_lmin_mlff.displayText(),
                                          fmax=self.ui.lineEdit_fmax_mlff.displayText(),
                                          nmax=self.ui.lineEdit_nmax_mlff.displayText(),

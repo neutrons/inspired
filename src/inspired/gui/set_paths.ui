@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>469</width>
-    <height>272</height>
+    <height>176</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,49 +47,6 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_dft_path">
-        <property name="text">
-         <string>Browse</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="title">
-      <string>Location of MLFF models:</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>MACE model file:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="pushButton_m3gnet_path">
-        <property name="text">
-         <string>Browse</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_mace_path"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>M3GNet model folder:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_m3gnet_path"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton_mace_path">
         <property name="text">
          <string>Browse</string>
         </property>
@@ -185,38 +142,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_mace_path</sender>
-   <signal>clicked()</signal>
-   <receiver>SetPaths</receiver>
-   <slot>browse_mace()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>190</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>206</x>
-     <y>152</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_m3gnet_path</sender>
-   <signal>clicked()</signal>
-   <receiver>SetPaths</receiver>
-   <slot>browse_m3gnet()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>220</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>206</x>
-     <y>152</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButton_quit</sender>
    <signal>clicked()</signal>
    <receiver>SetPaths</receiver>
@@ -224,7 +149,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>458</x>
-     <y>261</y>
+     <y>289</y>
     </hint>
     <hint type="destinationlabel">
      <x>234</x>
@@ -239,8 +164,8 @@
    <slot>save_paths()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>377</x>
-     <y>261</y>
+     <x>288</x>
+     <y>289</y>
     </hint>
     <hint type="destinationlabel">
      <x>234</x>
@@ -255,8 +180,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>340</x>
-     <y>249</y>
+     <x>369</x>
+     <y>289</y>
     </hint>
     <hint type="destinationlabel">
      <x>234</x>
@@ -278,8 +203,9 @@
   <slot>browse_dftdb()</slot>
   <slot>browse_dp_model()</slot>
   <slot>browse_mace()</slot>
-  <slot>browse_m3gnet()</slot>
   <slot>save_paths()</slot>
   <slot>quit_inspired()</slot>
+  <slot>browse_mattersim()</slot>
+  <slot>browse_molcrysmace()</slot>
  </slots>
 </ui>

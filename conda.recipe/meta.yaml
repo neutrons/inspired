@@ -36,22 +36,12 @@ requirements:
 
   run:
     - python
-    - pymace
-    - qtpy
-    - pyqt==5.*
-    - pyg
-    - pytorch
-    - phonopy==2.32.0
     - pandas
-    - seekpath
-    - matgl
-    - chgnet
-    - pymatgen==2024.5.1
+    - qtpy
     - spglib==2.4.0
-    - mkl==2024.0
-    - pytorch-sparse
-    - pytorch-cluster
-    - pytorch-scatter
+    - seekpath
+    - phonopy==2.26.6
+    - pymace
 
   test:
     imports:

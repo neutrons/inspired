@@ -4,7 +4,9 @@ import shutil
 import pandas as pd
 import phonopy
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
+from phonopy.file_IO import parse_BORN
 from inspired.gui.oclimax import OCLIMAX
+
 
 class DFTWorker():
     """calculate INS spectra from available entries in the DFT database (or user-supplied DFT results)
@@ -98,7 +100,12 @@ class DFTWorker():
                       primitive_matrix=[[1,0,0], [0,1,0], [0,0,1]],
                       unitcell_filename="POSCAR-unitcell")
 
-        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon._primitive, 1, is_const_interval=True)
+        if os.path.isfile('BORN'):
+            nac_params = parse_BORN(phonon.primitive, filename="BORN")
+            nac_params['factor'] = 14.4
+            phonon.set_nac_params(nac_params)
+
+        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
         points = []
         for i in range(len(bands)):
             if i==0 or (bands[i-1][1]!=bands[i][0]).any():

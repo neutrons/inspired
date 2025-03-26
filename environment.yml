@@ -1,8 +1,6 @@
 name: inspired-dev
 channels:
   - conda-forge
-  - pytorch
-  - pyg
 dependencies:
   - anaconda-client
   - boa
@@ -14,20 +12,24 @@ dependencies:
   - pre-commit
   - python == 3.9.*
   - python-build
-  - pymatgen==2024.5.1
-  - spglib==2.4.0
   - versioningit
   - pandas
-  - pyqt==5.*
   - qtpy
-  - phonopy==2.32.0
+  - spglib==2.4.0
   - seekpath
-  - matgl
-  - chgnet
-  - mkl==2024.0 # solves the pytorch error
-  - pytorch::pytorch
+  - phonopy==2.26.6
   - pymace
-  - pyg
-  - pytorch-sparse
-  - pytorch-cluster
-  - pytorch-scatter
+  - pip
+  - pip:
+    - --extra-index-url https://download.pytorch.org/whl/cpu
+    - --find-links https://pytorch-geometric.com/whl/torch-2.2.0+cpu.html
+    - torch==2.2.0
+    - torchvision==0.17.0 
+    - torchaudio==2.2.0
+    - torch-geometric==2.5.3
+    - torch-sparse
+    - torch-scatter
+    - torch-cluster
+    - mattersim==1.0.0rc9
+    - sevenn==0.10.4
+    - pyqt5
