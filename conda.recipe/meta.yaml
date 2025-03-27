@@ -38,10 +38,10 @@ requirements:
     - python
     - pandas
     - qtpy
-    - spglib==2.4.0
+    - spglib==2.6.0
     - seekpath
-    - phonopy==2.26.6
-    - pymace
+    - phonopy==2.28.0
+    - pymace==0.3.10
 
   test:
     imports:

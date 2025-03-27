@@ -2,18 +2,17 @@
 name = "inspired"
 description = "Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design"
 dynamic = ["version"]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "pyqt5",
-    "torch==2.2.0",
-    "torchvision==0.17.0", 
-    "torchaudio==2.2.0",
-    "torch-geometric==2.5.3",
-    "torch-sparse",
-    "torch-scatter",
-    "torch-cluster",
-    "mattersim==1.0.0rc9",
-    "sevenn==0.10.4"
+    "torch==2.5.1",
+    "torch-geometric==2.6.1",
+    "torch-sparse==0.6.18",
+    "torch-scatter==2.1.2",
+    "torch-cluster==1.6.3",
+    "mattersim==1.1.2",
+    "sevenn==0.11.0",
+    "e3nn==0.5.0",
+    "pyqt5"
 ]
 license = { text = "GPL3.0" }
 
