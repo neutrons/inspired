@@ -76,7 +76,7 @@ class MLFFWorker():
             if use_specific_model and mlff_model_name is not None:
                 calculator = mace_mp(model=mlff_model_name, default_dtype="float64", device=device)
             else:
-                calculator = mace_mp(model='medium', default_dtype="float64", device=device)
+                calculator = mace_mp(model='medium-mpa-0', default_dtype="float64", device=device)
         elif potential_index == 2:  # MACE-OFF
             if use_specific_model and mlff_model_name is not None:
                 calculator = mace_off(model=mlff_model_name, default_dtype="float64", device=device)
@@ -87,7 +87,7 @@ class MLFFWorker():
             if use_specific_model and mlff_model_name is not None:
                 calculator = SevenNetCalculator(model=mlff_model_name, device=device)
             else:
-                calculator = SevenNetCalculator(model='7net-0', device=device)
+                calculator = SevenNetCalculator(model='7net-mf-ompa', modal='mpa', device=device)
         struc.set_calculator(calculator)
         dyn = FIRE(struc)
         dyn.run(fmax=fmax, steps=nmax)
