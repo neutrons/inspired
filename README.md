@@ -98,7 +98,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
 
 ### Option 2
-1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed.  
+1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. Also install git if it is missing.
 
 2. Go to a location where you would like to install the program (e.g., $HOME/software), run:
    
