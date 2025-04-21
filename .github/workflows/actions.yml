@@ -14,11 +14,14 @@ jobs:
         run:
           shell: bash -l {0}
       steps:
-        - uses: actions/checkout@v4
-        - uses: mamba-org/setup-micromamba@v1
+        - name: Checkout
+          uses: actions/checkout@v4
           with:
             fetch-tags: true
             fetch-depth: 0
+        - name: Micromamba    
+          uses: mamba-org/setup-micromamba@v1
+          with:
             environment-file: environment.yml
             cache-environment-key: ${{ runner.os }}-env-${{ hashFiles('**/environment.yml') }}
             cache-downloads-key: ${{ runner.os }}-downloads-${{ hashFiles('**/environment.yml') }}
