@@ -19,6 +19,7 @@ jobs:
           with:
             fetch-depth: 100
             fetch-tags: true
+            ref: ${{ github.ref }}
         - name: Micromamba    
           uses: mamba-org/setup-micromamba@v1
           with:
