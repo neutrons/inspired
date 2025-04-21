@@ -17,6 +17,7 @@ jobs:
         - uses: actions/checkout@v4
         - uses: mamba-org/setup-micromamba@v1
           with:
+            fetch-tags: true
             environment-file: environment.yml
             cache-environment-key: ${{ runner.os }}-env-${{ hashFiles('**/environment.yml') }}
             cache-downloads-key: ${{ runner.os }}-downloads-${{ hashFiles('**/environment.yml') }}
