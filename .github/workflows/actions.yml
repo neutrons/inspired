@@ -17,7 +17,8 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
           with:
-            fetch-depth: 0
+            fetch-depth: 100
+            fetch-tags: true
         - name: Micromamba    
           uses: mamba-org/setup-micromamba@v1
           with:
