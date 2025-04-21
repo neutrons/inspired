@@ -18,6 +18,7 @@ jobs:
         - uses: mamba-org/setup-micromamba@v1
           with:
             fetch-tags: true
+            fetch-depth: 0
             environment-file: environment.yml
             cache-environment-key: ${{ runner.os }}-env-${{ hashFiles('**/environment.yml') }}
             cache-downloads-key: ${{ runner.os }}-downloads-${{ hashFiles('**/environment.yml') }}
