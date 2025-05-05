@@ -675,7 +675,7 @@ class Ui_INSPIRED(object):
         self.label_Nmax.setToolTip(_translate("INSPIRED", "Maximum number of structural relaxation steps"))
         self.label_Nmax.setText(_translate("INSPIRED", "Nmax"))
         self.checkBox_relax_cell.setToolTip(_translate("INSPIRED", "Relax cell using calculated stresses in optimization"))
-        self.checkBox_relax_cell.setText(_translate("INSPIRED", "Relex cell"))
+        self.checkBox_relax_cell.setText(_translate("INSPIRED", "Relax cell"))
         self.pushButton_opt_phonon_mlff.setText(_translate("INSPIRED", "Structure optimization + Phonon calculation"))
         self.groupBox_8.setTitle(_translate("INSPIRED", "Step 4"))
         self.pushButton_setup_oclimax_mlff.setText(_translate("INSPIRED", "Set up INS simulation"))

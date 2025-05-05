@@ -599,7 +599,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                     <string>Relax cell using calculated stresses in optimization</string>
                    </property>
                    <property name="text">
-                    <string>Relex cell</string>
+                    <string>Relax cell</string>
                    </property>
                   </widget>
                  </item>

@@ -1,4 +1,4 @@
-name: inspired-dev 
+name: inspired-dev
 channels:
   - conda-forge
 dependencies:
