@@ -2,11 +2,14 @@ from ase import Atoms
 #from ase.phonons import Phonons
 from ase.io import read, write
 from ase.optimize import FIRE
+from ase.constraints import ExpCellFilter
 from pymatgen.io.ase import AseAtomsAdaptor
 from pymatgen.core import Structure
 import numpy as np
 import math
 import os
+import io
+import contextlib
 from phonopy import Phonopy
 from phonopy.interface.calculator import read_crystal_structure
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
@@ -15,18 +18,13 @@ from phonopy.file_IO import parse_BORN
 import torch
 from inspired.gui.oclimax import OCLIMAX
 
-from mattersim.forcefield.potential import MatterSimCalculator
-from mace.calculators import mace_mp
-from mace.calculators import mace_off
-from sevenn.calculator import SevenNetCalculator
-
 
 class MLFFWorker():
     def __init__(self):
         self.oclimax = OCLIMAX()
         self.nx = self.ny = self.nz = None
 
-    def run_opt_and_dos(self, struc=None, potential_index=0,use_specific_model=False,mlff_model_name=None,lmin=12.0,fmax=0.01,nmax=100,delta=0.03):
+    def run_opt_and_dos(self, struc=None, potential_index=0,use_specific_model=False,mlff_model_name=None,lmin=12.0,fmax=0.01,nmax=100,delta=0.03,relax_cell=False):
         """structure optimization and phonon calculation with MLFF
         """
 
@@ -67,30 +65,56 @@ class MLFFWorker():
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         print('INFO: Running structural optimization...')
         if potential_index == 0:    # MatterSim
+            from mattersim.forcefield.potential import MatterSimCalculator
             torch.set_default_dtype(torch.float32)
             if use_specific_model and mlff_model_name is not None:
-                calculator = MatterSimCalculator(load_path=mlff_model_name, device=device)
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = MatterSimCalculator(load_path=mlff_model_name, device=device)
             else:
-                calculator = MatterSimCalculator(load_path='MatterSim-v1.0.0-5M.pth', device=device)
-        elif potential_index == 1:  # MACE-MP
-            if use_specific_model and mlff_model_name is not None:
-                calculator = mace_mp(model=mlff_model_name, default_dtype="float64", device=device)
-            else:
-                calculator = mace_mp(model='medium-mpa-0', default_dtype="float64", device=device)
-        elif potential_index == 2:  # MACE-OFF
-            if use_specific_model and mlff_model_name is not None:
-                calculator = mace_off(model=mlff_model_name, default_dtype="float64", device=device)
-            else:
-                calculator = mace_off(model='medium', default_dtype="float64", device=device)
-        elif potential_index == 3:  # SevenNet
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = MatterSimCalculator(load_path='MatterSim-v1.0.0-5M.pth', device=device)
+        elif potential_index == 1:  # ORB v3
+            from orb_models.forcefield import pretrained
+            from orb_models.forcefield.calculator import ORBCalculator
+            with contextlib.redirect_stderr(io.StringIO()) as f:
+                orbff = pretrained.orb_v3_conservative_inf_omat(device=device, precision="float32-high")
+            calculator = ORBCalculator(orbff, device=device)
+        elif potential_index == 2:  # SevenNet
+            from sevenn.calculator import SevenNetCalculator
             torch.set_default_dtype(torch.float32)
             if use_specific_model and mlff_model_name is not None:
-                calculator = SevenNetCalculator(model=mlff_model_name, device=device)
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = SevenNetCalculator(model=mlff_model_name, device=device)
             else:
-                calculator = SevenNetCalculator(model='7net-mf-ompa', modal='mpa', device=device)
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = SevenNetCalculator(model='7net-mf-ompa', modal='mpa', device=device)
+        elif potential_index == 3:  # MACE
+            from mace.calculators import mace_mp
+            if use_specific_model and mlff_model_name is not None:
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = mace_mp(model=mlff_model_name, default_dtype="float64", device=device)
+            else:
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = mace_mp(model='medium-mpa-0', default_dtype="float64", device=device)
+        elif potential_index == 4:  # MACE-OFF
+            from mace.calculators import mace_off
+            if use_specific_model and mlff_model_name is not None:
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = mace_off(model=mlff_model_name, default_dtype="float64", device=device)
+            else:
+                with contextlib.redirect_stderr(io.StringIO()) as f:
+                    calculator = mace_off(model='medium', default_dtype="float64", device=device)
         struc.set_calculator(calculator)
-        dyn = FIRE(struc)
-        dyn.run(fmax=fmax, steps=nmax)
+        if relax_cell:
+            ecf = ExpCellFilter(struc)
+            dyn = FIRE(ecf)
+        else:
+            dyn = FIRE(struc)
+        try:
+            dyn.run(fmax=fmax, steps=nmax)
+        except Exception as error:
+            print('ERROR: Simulation failed.', error)
+            return
         atoms_relaxed = dyn.atoms.copy()
         write('POSCAR-unitcell', atoms_relaxed, direct=True, format='vasp')
         print('INFO: Structural optimization finished.')
@@ -179,7 +203,8 @@ class MLFFWorker():
         print('INFO: Plotting phonon dispersion and DOS. For large unitcells this may take a few moments.')
         print('INFO: Frequency unit in plot is THz. 1 THz = 4.136 meV = 33.356 cm-1')
         print('INFO: Phonon DOS data will be saved in total_dos.dat file')
-        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
+        with contextlib.redirect_stderr(io.StringIO()) as f:
+            bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
         points = []
         for i in range(len(bands)):
             if i==0 or (bands[i-1][1]!=bands[i][0]).any():

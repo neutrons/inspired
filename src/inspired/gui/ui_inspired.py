@@ -249,6 +249,7 @@ class Ui_INSPIRED(object):
         self.comboBox_mlff_model.addItem("")
         self.comboBox_mlff_model.addItem("")
         self.comboBox_mlff_model.addItem("")
+        self.comboBox_mlff_model.addItem("")
         self.verticalLayout_12.addWidget(self.comboBox_mlff_model)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -266,30 +267,33 @@ class Ui_INSPIRED(object):
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.gridLayout_9 = QtWidgets.QGridLayout()
         self.gridLayout_9.setObjectName("gridLayout_9")
-        self.lineEdit_nmax_mlff = QtWidgets.QLineEdit(self.groupBox_7)
-        self.lineEdit_nmax_mlff.setObjectName("lineEdit_nmax_mlff")
-        self.gridLayout_9.addWidget(self.lineEdit_nmax_mlff, 0, 5, 1, 1)
         self.label_Fmax = QtWidgets.QLabel(self.groupBox_7)
         self.label_Fmax.setObjectName("label_Fmax")
         self.gridLayout_9.addWidget(self.label_Fmax, 0, 2, 1, 1)
-        self.label_Lmin = QtWidgets.QLabel(self.groupBox_7)
-        self.label_Lmin.setObjectName("label_Lmin")
-        self.gridLayout_9.addWidget(self.label_Lmin, 0, 0, 1, 1)
-        self.label_Nmax = QtWidgets.QLabel(self.groupBox_7)
-        self.label_Nmax.setObjectName("label_Nmax")
-        self.gridLayout_9.addWidget(self.label_Nmax, 0, 4, 1, 1)
-        self.label_delta = QtWidgets.QLabel(self.groupBox_7)
-        self.label_delta.setObjectName("label_delta")
-        self.gridLayout_9.addWidget(self.label_delta, 0, 6, 1, 1)
         self.lineEdit_lmin_mlff = QtWidgets.QLineEdit(self.groupBox_7)
         self.lineEdit_lmin_mlff.setObjectName("lineEdit_lmin_mlff")
         self.gridLayout_9.addWidget(self.lineEdit_lmin_mlff, 0, 1, 1, 1)
+        self.lineEdit_nmax_mlff = QtWidgets.QLineEdit(self.groupBox_7)
+        self.lineEdit_nmax_mlff.setObjectName("lineEdit_nmax_mlff")
+        self.gridLayout_9.addWidget(self.lineEdit_nmax_mlff, 0, 5, 1, 1)
         self.lineEdit_fmax_mlff = QtWidgets.QLineEdit(self.groupBox_7)
         self.lineEdit_fmax_mlff.setObjectName("lineEdit_fmax_mlff")
         self.gridLayout_9.addWidget(self.lineEdit_fmax_mlff, 0, 3, 1, 1)
+        self.label_delta = QtWidgets.QLabel(self.groupBox_7)
+        self.label_delta.setObjectName("label_delta")
+        self.gridLayout_9.addWidget(self.label_delta, 0, 6, 1, 1)
+        self.label_Lmin = QtWidgets.QLabel(self.groupBox_7)
+        self.label_Lmin.setObjectName("label_Lmin")
+        self.gridLayout_9.addWidget(self.label_Lmin, 0, 0, 1, 1)
         self.lineEdit_delta_mlff = QtWidgets.QLineEdit(self.groupBox_7)
         self.lineEdit_delta_mlff.setObjectName("lineEdit_delta_mlff")
         self.gridLayout_9.addWidget(self.lineEdit_delta_mlff, 0, 7, 1, 1)
+        self.label_Nmax = QtWidgets.QLabel(self.groupBox_7)
+        self.label_Nmax.setObjectName("label_Nmax")
+        self.gridLayout_9.addWidget(self.label_Nmax, 0, 4, 1, 1)
+        self.checkBox_relax_cell = QtWidgets.QCheckBox(self.groupBox_7)
+        self.checkBox_relax_cell.setObjectName("checkBox_relax_cell")
+        self.gridLayout_9.addWidget(self.checkBox_relax_cell, 0, 8, 1, 1)
         self.verticalLayout_18.addLayout(self.gridLayout_9)
         self.pushButton_opt_phonon_mlff = QtWidgets.QPushButton(self.groupBox_7)
         self.pushButton_opt_phonon_mlff.setObjectName("pushButton_opt_phonon_mlff")
@@ -398,7 +402,7 @@ class Ui_INSPIRED(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 664, 719))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 650, 422))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_19.setObjectName("verticalLayout_19")
@@ -656,19 +660,22 @@ class Ui_INSPIRED(object):
         self.groupBox_6.setTitle(_translate("INSPIRED", "Step 2"))
         self.label_30.setText(_translate("INSPIRED", "Choose a pre-trained MLFF model (see About for references):"))
         self.comboBox_mlff_model.setItemText(0, _translate("INSPIRED", "MatterSim"))
-        self.comboBox_mlff_model.setItemText(1, _translate("INSPIRED", "MACE-MP"))
-        self.comboBox_mlff_model.setItemText(2, _translate("INSPIRED", "MACE-OFF (for organic materials containing only H, C, N, O, F, P, S, Cl, Br, and I)"))
-        self.comboBox_mlff_model.setItemText(3, _translate("INSPIRED", "SevenNet"))
+        self.comboBox_mlff_model.setItemText(1, _translate("INSPIRED", "ORB v3"))
+        self.comboBox_mlff_model.setItemText(2, _translate("INSPIRED", "SevenNet"))
+        self.comboBox_mlff_model.setItemText(3, _translate("INSPIRED", "MACE"))
+        self.comboBox_mlff_model.setItemText(4, _translate("INSPIRED", "MACE-OFF (for organic materials containing only H, C, N, O, F, P, S, Cl, Br, and I)"))
         self.checkBox_mlff_model.setText(_translate("INSPIRED", "Use specific model:"))
         self.groupBox_7.setTitle(_translate("INSPIRED", "Step 3"))
         self.label_Fmax.setToolTip(_translate("INSPIRED", "Maximum force in relaxed structure (eV/A)"))
         self.label_Fmax.setText(_translate("INSPIRED", "Fmax"))
+        self.label_delta.setToolTip(_translate("INSPIRED", "Step size for finite displacement calculation (A)"))
+        self.label_delta.setText(_translate("INSPIRED", "delta"))
         self.label_Lmin.setToolTip(_translate("INSPIRED", "Minimum size of supercell (A) or supercell dimension in nx ny nz (the supercell will be nx*ny*nz of the unit cell)"))
         self.label_Lmin.setText(_translate("INSPIRED", "Lmin/Dim"))
         self.label_Nmax.setToolTip(_translate("INSPIRED", "Maximum number of structural relaxation steps"))
         self.label_Nmax.setText(_translate("INSPIRED", "Nmax"))
-        self.label_delta.setToolTip(_translate("INSPIRED", "Step size for finite displacement calculation (A)"))
-        self.label_delta.setText(_translate("INSPIRED", "delta"))
+        self.checkBox_relax_cell.setToolTip(_translate("INSPIRED", "Relax cell using calculated stresses in optimization"))
+        self.checkBox_relax_cell.setText(_translate("INSPIRED", "Relax cell"))
         self.pushButton_opt_phonon_mlff.setText(_translate("INSPIRED", "Structure optimization + Phonon calculation"))
         self.groupBox_8.setTitle(_translate("INSPIRED", "Step 4"))
         self.pushButton_setup_oclimax_mlff.setText(_translate("INSPIRED", "Set up INS simulation"))
@@ -742,16 +749,18 @@ class Ui_INSPIRED(object):
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">7.            Hjorth Larsen, A.;  Jørgen Mortensen, J.;  Blomqvist, J.;  Castelli, I. E.;  Christensen, R.;  Dułak, M.;  Friis, J.;  Groves, M. N.;  Hammer, B.;  Hargus, C.;  Hermes, E. D.;  Jennings, P. C.;  Bjerre Jensen, P.;  Kermode, J.;  Kitchin, J. R.;  Leonhard Kolsbjerg, E.;  Kubal, J.;  Kaasbjerg, K.;  Lysgaard, S.;  Bergmann Maronsson, J.;  Maxson, T.;  Olsen, T.;  Pastewka, L.;  Peterson, A.;  Rostgaard, C.;  Schiøtz, J.;  Schütt, O.;  Strange, M.;  Thygesen, K. S.;  Vegge, T.;  Vilhelmsen, L.;  Walter, M.;  Zeng, Z.; Jacobsen, K. W., The atomic simulation environment—a Python library for working with atoms. <span style=\" font-style:italic;\">Journal of Physics: Condensed Matter </span><span style=\" font-weight:700;\">2017,</span> <span style=\" font-style:italic;\">29</span> (27), 273002. </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">8.            (MACE) Batatia, I.;  Kovacs, D. P.;  Simm, G.;  Ortner, C.; Csányi, G., MACE: Higher order equivariant message passing neural networks for fast and accurate force fields. <span style=\" font-style:italic;\">Advances in Neural Information Processing Systems </span><span style=\" font-weight:700;\">2022,</span> <span style=\" font-style:italic;\">35</span>, 11423-11436. </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">9.            (MACE) Batatia, I.;  Batzner, S.;  Kovács, D. P.;  Musaelian, A.;  Simm, G. N.;  Drautz, R.;  Ortner, C.;  Kozinsky, B.; Csányi, G., The design space of E (3)-equivariant atom-centered interatomic potentials. <span style=\" font-style:italic;\">arXiv preprint arXiv:2205.06643 </span><span style=\" font-weight:700;\">2022</span>. </p>\n"
-"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">10.         (MACE-MP) Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. <span style=\" font-style:italic;\">arXiv preprint arXiv:2401.00096 </span><span style=\" font-weight:700;\">2023</span>. (MACE-OFF) Kovács, D. P. et al. MACE-OFF: Transferable Short Range Machine Learning Force Fields for Organic Molecules. <span style=\" font-style:italic;\">arXiv preprint arXiv:2312.15211 </span><span style=\" font-weight:700;\">2023</span>.</p>\n"
-"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">11.         (MatterSim) Yang, H. et al. MatterSim: A Deep Learning Atomistic Model Across Elements, Temperatures and Pressures. <span style=\" font-style:italic;\">arXiv preprint arXiv:2405.04967</span> <span style=\" font-weight:700;\">2024.</span> https://github.com/microsoft/mattersim. </p>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">12.         (SevenNet) Park, Y., Kim, J., Hwang, S., Han, S., Scalable Parallel Algorithm for Graph Neural Network Interatomic Potentials in Molecular Dynamics Simulations. <span style=\" font-style:italic;\">J. Chem. Theory Comput.</span> <span style=\" font-weight:700;\">2024</span>, 20, 11, 4857–4868. https://github.com/MDIL-SNU/SevenNet. </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">13.         Hinuma, Y.; Pizzi, G.; Kumagai, Y.; Oba, F.; Tanaka, I., Band structure diagram paths based on crystallography. <span style=\" font-style:italic;\">Comp. Mat. Sci.</span> <span style=\" font-weight:700;\">2017</span>, 128, 140.</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">10.         (MACE-MP) Batatia, I.;  Benner, P.;  Chiang, Y.;  Elena, A. M.;  Kovács, D. P.;  Riebesell, J.;  Advincula, X. R.;  Asta, M.;  Baldwin, W. J.; Bernstein, N., A foundation model for atomistic materials chemistry. <span style=\" font-style:italic;\">arXiv preprint arXiv:2401.00096 </span><span style=\" font-weight:700;\">2023</span>. </p>\n"
+"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">11.         (MACE-OFF) Kovács, D. P. et al. MACE-OFF: Transferable Short Range Machine Learning Force Fields for Organic Molecules. <span style=\" font-style:italic;\">arXiv preprint arXiv:2312.15211 </span><span style=\" font-weight:700;\">2023</span>.</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">12.         (MatterSim) Yang, H. et al. MatterSim: A Deep Learning Atomistic Model Across Elements, Temperatures and Pressures. <span style=\" font-style:italic;\">arXiv preprint arXiv:2405.04967</span> <span style=\" font-weight:700;\">2024.</span> https://github.com/microsoft/mattersim. </p>\n"
+"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">13.         (ORB v3) Rhodes, B.; Vandenhaute, S.; Šimkus, V.; Gin, J.; Godwin, J.; Duignan, T.; Neumann, M; Orb-v3: atomistic simulation at scale. <span style=\" font-style:italic;\">arXiv preprint arXiv:2504.06231</span> <span style=\" font-weight:700;\">2025</span>. https://github.com/orbital-materials/orb-models</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">14.         (SevenNet) Park, Y., Kim, J., Hwang, S., Han, S., Scalable Parallel Algorithm for Graph Neural Network Interatomic Potentials in Molecular Dynamics Simulations. <span style=\" font-style:italic;\">J. Chem. Theory Comput.</span> <span style=\" font-weight:700;\">2024</span>, 20, 11, 4857–4868. https://github.com/MDIL-SNU/SevenNet. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">15.         Hinuma, Y.; Pizzi, G.; Kumagai, Y.; Oba, F.; Tanaka, I., Band structure diagram paths based on crystallography. <span style=\" font-style:italic;\">Comp. Mat. Sci.</span> <span style=\" font-weight:700;\">2017</span>, 128, 140.</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">14.         Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. <span style=\" font-weight:700;\">2018,</span> arXiv:1808.01590</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">16.         Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. <span style=\" font-weight:700;\">2018,</span> arXiv:1808.01590</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">15.         Geiger, M.; Smidt, T., e3nn: Euclidean neural networks. <span style=\" font-weight:700;\">2022,</span> doi:10.48550/ARXIV.2207.09453.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">17.         Geiger, M.; Smidt, T., e3nn: Euclidean neural networks. <span style=\" font-weight:700;\">2022,</span> doi:10.48550/ARXIV.2207.09453.</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">16.         Geiger, M.; et al., Euclidean neural networks: e3nn. <span style=\" font-weight:700;\">2022,</span> doi:10.5281/zenodo.6459381.</p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">18.         Geiger, M.; et al., Euclidean neural networks: e3nn. <span style=\" font-weight:700;\">2022,</span> doi:10.5281/zenodo.6459381.</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.abouttab), _translate("INSPIRED", "About"))
         self.label_cwd.setText(_translate("INSPIRED", "Current Working Directory:"))
         self.menuMenu.setTitle(_translate("INSPIRED", "Menu"))

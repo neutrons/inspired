@@ -4,13 +4,14 @@ description = "Inelastic Neutron Scattering Prediction for Instantaneous Results
 dynamic = ["version"]
 requires-python = ">=3.10"
 dependencies = [
-    "torch==2.5.1",
-    "torch-geometric==2.6.1",
-    "torch-sparse==0.6.18",
-    "torch-scatter==2.1.2",
-    "torch-cluster==1.6.3",
-    "mattersim==1.1.2",
-    "sevenn==0.11.0",
+    "torch==2.6.0",
+    "torch-geometric",
+    "torch-sparse",
+    "torch-scatter",
+    "torch-cluster",
+    "mattersim",
+    "sevenn",
+    "orb-models",
     "e3nn==0.5.0",
     "pyqt5"
 ]
