@@ -353,7 +353,8 @@ class INSPIRED(QMainWindow):
                                          lmin=self.ui.lineEdit_lmin_mlff.displayText(),
                                          fmax=self.ui.lineEdit_fmax_mlff.displayText(),
                                          nmax=self.ui.lineEdit_nmax_mlff.displayText(),
-                                         delta=self.ui.lineEdit_delta_mlff.displayText())
+                                         delta=self.ui.lineEdit_delta_mlff.displayText(),
+                                         relax_cell=self.ui.checkBox_relax_cell.isChecked())
         self.mlff_opt = True
 
     def setup_oclimax_mlff(self):

@@ -1,6 +1,8 @@
 import os
 import re
 import shutil
+import io
+import contextlib
 import pandas as pd
 import phonopy
 from phonopy.phonon.band_structure import get_band_qpoints_by_seekpath
@@ -104,8 +106,8 @@ class DFTWorker():
             nac_params = parse_BORN(phonon.primitive, filename="BORN")
             nac_params['factor'] = 14.4
             phonon.set_nac_params(nac_params)
-
-        bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
+        with contextlib.redirect_stderr(io.StringIO()) as f:
+            bands, labels, path_connections = get_band_qpoints_by_seekpath(phonon.primitive, 1, is_const_interval=True)
         points = []
         for i in range(len(bands)):
             if i==0 or (bands[i-1][1]!=bands[i][0]).any():
