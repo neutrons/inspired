@@ -1,3 +1,8 @@
+exclude: "examples/.*|.*\\.mat$"
+
+ci:
+    skip: [pixi-lock-check]
+
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.6.0
@@ -5,26 +10,18 @@ repos:
     - id: check-added-large-files
       args: [--maxkb=8192]
     - id: check-merge-conflict
-    - id: check-yaml
-      args: [--allow-multiple-documents]
-      exclude: "conda.recipe/meta.yaml"
-    - id: end-of-file-fixer
-      exclude: "tests/cis_tests/.*"
     - id: trailing-whitespace
-      exclude: "tests/cis_tests/.*"
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.6.2
   hooks:
     - id: ruff
       args: [--fix, --exit-non-zero-on-fix]
-      exclude: "tests/cis_tests/.*"
     - id: ruff-format
-      exclude: "tests/cis_tests/.*"
-      exclude: pixi.lock
+      exclude: "pixi.lock"
 - repo: local
   hooks:
     - id: pixi-lock-check
       name: pixi-lock-check
       entry: bash -c "pixi lock --check"
       stage: pre-push
-      language: system      
+      language: system
