@@ -61,7 +61,7 @@ ignore = ["D203", # conflict with D211
           "D213", # conflict with D212
           "D205", # conflicts
           "D400", "D401","D404", "N806", "N802", "N803", "D107", "D100","D101", "D102","E741", "D415","D414", # Unnecessary
-          "D104", # maybe todo
+          "D104","E402", "N801", "F841","F821","C901","E501","E712", "BLE001","E722","ARG002","A002","N812","C901", # maybe todo
           "N815"]
 unfixable = ["F401"]
 # Add additional 3rd par
