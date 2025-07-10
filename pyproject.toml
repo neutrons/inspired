@@ -2,7 +2,7 @@
 name = "inspired"
 description = "Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design"
 dynamic = ["version"]
-requires-python = "==3.10"
+requires-python = ">=3.13"
 license = { text = "GPL3.0" }
 readme = "README.md"
 keywords = ["neutrons", "inelastic", "prediction"]

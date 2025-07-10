@@ -98,7 +98,16 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
 
 ### Option 2
-1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/linux/) or [Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/) for Linux if it is not already installed. Also install git if it is missing.
+1. Install [Pixi](https://pixi.sh/) for managing environments, dependencies, packaging, and task execution. (if it is not already installed).
+
+   Pixi installation e.g. for Linux:
+
+   ```bash
+
+   curl -fsSL https://pixi.sh/install.sh | sh
+
+   ```
+   Also install git, if it is missing.
 
 2. Go to a location where you would like to install the program (e.g., $HOME/software), run:
    
@@ -110,15 +119,44 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
    
     (Note: to get updated code in the future, you can simply run “git pull” in this folder)
 
-3. With conda initiated, run the following commands in the project's root directory (inspired):
+3. Download the repository. Setup/Update the environment
 
-    `conda env create`
+   ```bash
+   pixi install
+   ```
 
-    `conda activate inspired-dev`
 
-    `pip install -e . `
+4. Enter the environment
 
-4. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
+   ```bash
+   pixi shell
+
+   ```
+
+   Any change to pyproject.toml, e.g. new dependencies, requires updating the pixi.lock file and including it in the commit.
+
+   ```bash
+
+   pixi lock
+
+   ```
+
+5. Explore Available Tasks
+
+   Use the following command to list all project-defined tasks:
+
+   ```bash
+   pixi run
+   
+   ```
+
+   Example tasks:
+
+   - `build-conda`: build the Conda package
+   - `conda-publish`: publish the built artifacts
+   - `clean-*`: clean build artifacts   
+
+6. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
    
     `wget https://zenodo.org/records/11478889/files/dftdb.tar.gz`
 
@@ -129,7 +167,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
     `tar zxvf model.tar.gz`
 
 
-5. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
+7. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
    
     `inspired`
 
