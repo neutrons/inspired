@@ -131,7 +131,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
    ```
 
-5. Explore other pixi Functions (optionally)
+5. Explore other Pixi Functions (optionally)
    Enter the environment
 
    ```bash
