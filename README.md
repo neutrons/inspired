@@ -124,14 +124,9 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
    ```bash
    pixi install
    ```
-4. Install inspired
 
-   ```bash
-   pixi run python -m pip install -e .
+4. Explore other Pixi Functions (optionally)
 
-   ```
-
-5. Explore other Pixi Functions (optionally)
    Enter the environment
 
    ```bash
@@ -147,7 +142,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
    ```
 
-6. Explore Available Tasks (optionally)
+5. Explore Available Tasks (optionally)
 
    Use the following command to list all project-defined tasks:
 
