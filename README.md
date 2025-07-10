@@ -229,3 +229,6 @@ Bowen Han, Andrei T. Savici, Mingda Li, Yongqiang Cheng, [INSPIRED: Inelastic Ne
 16.	Togo, A.; Tanaka, I., Spglib: a software library for crystal symmetry search. 2018, arXiv:1808.01590
 17.	Geiger, M.; Smidt, T., e3nn: Euclidean neural networks. 2022, doi:10.48550/ARXIV.2207.09453.
 18.	Geiger, M.; et al., Euclidean neural networks: e3nn. 2022, doi:10.5281/zenodo.6459381.
+
+
+[![CI](https://github.com/neutrons/inspired/actions/workflows/actions.yml/badge.svg?branch=next)](https://github.com/neutrons/inspired/actions/workflows/actions.yml)
