@@ -162,7 +162,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
    Example tasks:
 
    - `conda-build`: build the Conda package
-   - `conda-publish`: publish the built artifacts
+   - `audit-deps`: audit the package dependencies for vulnerabilities
    - `clean-*`: clean build artifacts
 
 6. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:

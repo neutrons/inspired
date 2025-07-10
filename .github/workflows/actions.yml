@@ -11,55 +11,118 @@ env:
   PKG_NAME: inspired
 
 jobs:
-  conda-build:
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          shell: bash -l {0}
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 100
-            fetch-tags: true
-            ref: ${{ github.ref }}
-        - name: Micromamba
-          uses: mamba-org/setup-micromamba@v1
-          with:
-            environment-file: environment.yml
-            cache-environment-key: ${{ runner.os }}-env-${{ hashFiles('**/environment.yml') }}
-            cache-downloads-key: ${{ runner.os }}-downloads-${{ hashFiles('**/environment.yml') }}
-            condarc: |
-              channels:
-                - conda-forge
-        - name: install in editable mode
-          shell: bash -l {0}
-          run: |
-            pip install -e .
-        - name: building python wheel
-          shell: bash -l {0}
-          run: |
-            python -m build --wheel --no-isolation
-            check-wheel-contents dist/inspired-*.whl
-        - name: build conda package
-          shell: bash -l {0}
-          run: |
-            # set up environment
-            cd conda.recipe
-            echo "versioningit $(versioningit ../)"
-            # build the package
-            CHANNELS="--channel conda-forge"
-            VERSION=$(versioningit ../) conda mambabuild $CHANNELS --output-folder . .
-            conda verify noarch/inspired*.tar.bz2
-        - name: upload conda package to anaconda
-          shell: bash -l {0}
-          if: startsWith(github.ref, 'refs/tags/v')
-          env:
-            ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
-            IS_RC: ${{ contains(github.ref, 'rc') }}
-          run: |
-            # label is main or rc depending on the tag-name
-            CONDA_LABEL="main"
-            if [ "${IS_RC}" = "true" ]; then CONDA_LABEL="rc"; fi
-            echo pushing ${{ github.ref }} with label $CONDA_LABEL
-            anaconda upload --label $CONDA_LABEL conda.recipe/noarch/inspired*.tar.bz2
+
+  build:
+    name: Conda build with Pixi
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 100
+          fetch-tags: true
+          ref: ${{ github.ref }}
+
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.8.10
+        with:
+          pixi-version: v0.48.2
+
+      - name: Build Conda package
+        run: pixi run conda-build
+
+      - name: upload conda package as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-conda-package
+          path: ${{ env.PKG_NAME }}-*.conda
+
+  conda-verify:
+    name: Conda Verify
+    needs: build
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: ${{ github.ref }}
+
+      - name: Setup micromamba
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: test
+          init-shell: bash
+          create-args: >-
+            python=3.13
+
+      - name: Download conda package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact-conda-package
+          path: /tmp/local-channel/linux-64
+
+      - name: Install the package
+        run: |
+          micromamba install --yes -c conda-forge conda-build conda-index
+          python -m conda_index /tmp/local-channel
+          micromamba install -c /tmp/local-channel -c conda-forge ${{ env.PKG_NAME }}
+
+      - name: Verify the installation
+        run: |
+          conda_version=$(micromamba list "${{ env.PKG_NAME }}" | awk -v pkg="${{ env.PKG_NAME }}" '$1 == pkg { print $2 }')
+          echo "Conda version: $conda_version"
+          python_version=$(python -c "import ${{ env.PKG_NAME }}; print(${{ env.PKG_NAME }}.__version__)")
+          echo "Python version: $python_version"
+          if [ "$conda_version" != "$python_version" ]; then
+            echo "Version mismatch!"
+            exit 1
+          else
+            echo "Versions match."
+          fi
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-24.04
+    needs: [conda-verify]
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 100
+          fetch-tags: true
+          ref: ${{ github.ref }}
+
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.8.10
+        with:
+          pixi-version: v0.48.2
+
+      - name: Download previous conda package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact-conda-package
+
+      - name: Get artifact conda package filename
+        run: |
+          echo "Files downloaded:"
+          ls
+          # Get the first file
+          FILE_NAME=$(ls ./${{ env.PKG_NAME }}-*.conda)
+          echo "Conda package file to publish: $FILE_NAME"
+
+      - name: Upload package to anaconda
+        env:
+          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+          IS_RC: ${{ contains(github.ref, 'rc') }}
+        run: |
+          # label is main or rc depending on the tag-name
+          CONDA_LABEL="main"
+          if [ "${IS_RC}" = "true" ]; then CONDA_LABEL="rc"; fi
+          echo pushing ${{ github.ref }} with label $CONDA_LABEL
+          pixi run anaconda upload --label $CONDA_LABEL --user neutrons ${{ env.PKG_NAME }}-*.conda
