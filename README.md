@@ -127,6 +127,7 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
 4. Explore other Pixi Functions (optionally)
 
+
    Enter the environment
 
    ```bash
