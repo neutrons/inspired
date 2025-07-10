@@ -30,7 +30,7 @@ jobs:
     - name: pylint
       run: pixi run pre-commit run -a ruff
 
-    - name: Install shiver
+    - name: Install inspired
       run: pixi run python -m pip install -e .
 
   build:
