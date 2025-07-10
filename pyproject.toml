@@ -2,56 +2,53 @@
 name = "inspired"
 description = "Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design"
 dynamic = ["version"]
-requires-python = ">=3.10"
-dependencies = [
-    "torch==2.6.0",
-    "torch-geometric",
-    "torch-sparse",
-    "torch-scatter",
-    "torch-cluster",
-    "mattersim",
-    "sevenn",
-    "orb-models",
-    "e3nn==0.5.0",
-    "pyqt5"
-]
+requires-python = "==3.10"
 license = { text = "GPL3.0" }
+readme = "README.md"
+keywords = ["neutrons", "inelastic", "prediction"]
 
 [project.urls]
 homepage = "https://github.com/neutrons/inspired/"
+repository = "https://github.com/neutrons/inspired/"
+documentation = "https://github.com/neutrons/inspired/"
+
+[project.gui-scripts]
+inspired = "inspired.inspired:gui"
 
 [build-system]
 requires = [
-    "setuptools",
-    "wheel",
-    "toml",
-    "versioningit"
+  "hatchling",
+  "versioningit"
 ]
-build-backend = "setuptools.build_meta"
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "versioningit"
+
+[tool.hatch.build]
+artifacts = ["*.yml", "*.yaml", "*.json"]
+
+[tool.hatch.build.hooks.versioningit-onbuild]
+source-file = "src/inspired/_version.py"
+build-file = "inspired/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/inspired"]
 
 [tool.versioningit.vcs]
 method = "git"
 default-tag = "0.2.0"
 
 [tool.versioningit.next-version]
-method = "minor-release"
+method = "minor"
 
 [tool.versioningit.format]
 distance = "{next_version}.dev{distance}"
-dirty = "{version}+d{build_date:%Y%m%d}"
-distance-dirty = "{next_version}.dev{distance}+d{build_date:%Y%m%d%H%M}"
+dirty = "{version}"
+distance-dirty = "{next_version}.dev{distance}"
 
 [tool.versioningit.write]
 file = "src/inspired/_version.py"
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.package-data]
-"*" = ["*.yml","*.yaml","*.ini","*.json","*.pt","*.model","oclimax*","*.ui", "config"]
-
-[project.gui-scripts]
-inspired = "inspired.inspired:gui"
 
 [tool.pylint]
 max-line-length = 120
@@ -62,3 +59,128 @@ disable = ["too-many-locals",
            "duplicate-code"
 ]
 extension-pkg-whitelist = ["PyQt5"]
+ignore = ["pixi.lock"]
+
+# ------------------ #
+# Pixi configuration #
+# ------------------ #
+[tool.pixi.workspace]
+preview = ["pixi-build"] # Need this to access pixi-build feature
+platforms = ["linux-64"]
+channels = [
+  "conda-forge",
+  "https://prefix.dev/pixi-build-backends",
+]
+
+[tool.pixi.package]
+name = "inspired"
+version = "0.0.0" # placeholder, can be updated by task sync-version
+
+[tool.pixi.package.build]
+backend = { name = "pixi-build-python", version = "0.1.*" }
+
+[tool.pixi.package.host-dependencies]
+hatchling = "*"
+versioningit = "*"
+
+[tool.pixi.package.run-dependencies]
+#dependencies for the conda package - for inspired to run
+pandas = "*"
+qtpy = "*"
+spglib = "*"
+seekpath = "*"
+phonopy= "*"
+fsspec= "*"
+pymatgen="*"
+#pymace = "*" #conflict
+
+[tool.pixi.dependencies]
+# Conda package dependencies for the local environment though pixi
+pandas = "*"
+qtpy = "*"
+spglib = "*"
+seekpath = "*"
+phonopy= "*"
+fsspec= "*"
+pymatgen="*"
+#pymace = "*" #conflict
+
+[tool.pixi.pypi-dependencies]
+# PyPI dependencies for the local environment though pixi
+#including this package to allow local editable installs
+inspired = { path = ".", editable = true }
+torch = "==2.7.1"
+torch-geometric = "*"
+torch-sparse = "*"
+torch-scatter = "*"
+torch-cluster = "*"
+sevenn = "*"
+e3nn= "*"
+pyqt5 = "*"
+#mattersim = ">=1.1.2" 
+#orb-models = ">=0.5.4" #conflict
+
+
+[tool.pixi.pypi-options]
+extra-index-urls = ["https://download.pytorch.org/whl/cpu"]
+find-links = [{url ="https://pytorch-geometric.com/whl/torch-2.7.0%2Bcpu.html" }]
+
+[tool.pixi.environments]
+#environment definitions with feature dependencies
+default = { features = ["package", "developer","docs","test",], solve-group = "default" }
+
+[tool.pixi.feature.package.dependencies]
+#conda package
+anaconda-client = ">=1.13.0"
+check-wheel-contents = ">=0.6.2"
+versioningit = ">=3.2.0"
+#python package
+pip = "*"
+
+[tool.pixi.feature.package.pypi-dependencies]
+toml-cli = "*"
+
+#code analysis tools
+[tool.pixi.feature.developer.dependencies]
+pip = ">=25.1.1"
+pip-audit = ">=2.9.0"
+pre-commit = ">=4.2.0"
+pylint = "*"
+codecov = ">=2.1.13"
+
+#readthedocs
+[tool.pixi.feature.docs.dependencies]
+sphinx = ">=8"
+sphinx_rtd_theme = ">=3.0.1"
+
+#pytest
+[tool.pixi.feature.test.dependencies]
+pytest = ">=8.4.1"
+pytest-qt = ">=4.4.0"
+pytest-cov = ">=6.2.1"
+pytest-mock = ">=3.14.1"
+pytest-xvfb = ">=3.1.1"
+
+[tool.pixi.tasks]
+# Packaging
+conda-build-command = { cmd = "pixi build", description = "Wrapper for building the conda package - used by `conda-build`" }
+conda-build = { description = "Build the conda package", depends-on = [
+    "sync-version",
+    "conda-build-command",
+    "reset-version",
+] }
+conda-publish = { cmd = "anaconda upload *.conda", description = "Publish the .conda package to anaconda.org", depends-on = [
+    "conda-build",
+] }
+# Misc
+audit-deps = { cmd = "pip-audit --local -s osv", description = "Audit the package dependencies for vulnerabilities" }
+clean = { cmd = 'rm -rf .pytest_cache .ruff_cache **/*.egg-info **/dist **/__pycache__ **/_version.py', description = "Clean up various caches and build artifacts" }
+clean-conda = { cmd = "rm -f *.conda", description = "Clean the local .conda build artifacts" }
+clean-docs = { cmd = "rm -rf docs/_build", description = "Clean up documentation build artifacts" }
+clean-all = { description = "Clean all artifacts", depends-on = [
+    "clean",
+    "clean-conda",
+    "clean-docs",
+] }
+sync-version = { cmd = 'version=$(python -m versioningit); toml set tool.pixi.package.version "$version" --toml-path pyproject.toml', description = "Sync pyproject.toml version with Git version" }
+reset-version = { cmd = "toml set tool.pixi.package.version \"0.0.0\" --toml-path pyproject.toml", description = "Reset the package version to 0.0.0" }
