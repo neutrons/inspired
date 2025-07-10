@@ -146,13 +146,20 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
    Use the following command to list all project-defined tasks:
 
    ```bash
-   pixi run
+   pixi run list
    
    ```
 
+  Run each task:
+
+   ```bash
+   pixi run <task>
+   
+   ```
+   
    Example tasks:
 
-   - `build-conda`: build the Conda package
+   - `conda-build`: build the Conda package
    - `conda-publish`: publish the built artifacts
    - `clean-*`: clean build artifacts   
 
