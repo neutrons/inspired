@@ -150,13 +150,13 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
    
    ```
 
-  Run each task:
+   Run each task:
 
    ```bash
    pixi run <task>
    
    ```
-   
+      
    Example tasks:
 
    - `conda-build`: build the Conda package
