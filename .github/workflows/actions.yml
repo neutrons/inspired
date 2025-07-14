@@ -96,7 +96,7 @@ jobs:
         run: |
           conda_version=$(micromamba list "${{ env.PKG_NAME }}" | awk -v pkg="${{ env.PKG_NAME }}" '$1 == pkg { print $2 }')
           echo "Conda version: $conda_version"
-          python_version=$(inspired --version)")
+          python_version=$(python -c "from ${{ env.PKG_NAME }} import version; print(version.__version__)")
           echo "Python version: $python_version"
           if [ "$conda_version" != "$python_version" ]; then
             echo "Version mismatch!"
