@@ -2,7 +2,7 @@
 name = "inspired"
 description = "Inelastic Neutron Scattering Prediction for Instantaneous Results and Experimental Design"
 dynamic = ["version"]
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 license = { text = "GPL3.0" }
 readme = "README.md"
 keywords = ["neutrons", "inelastic", "prediction"]
@@ -97,7 +97,6 @@ seekpath = "*"
 phonopy= "*"
 fsspec= "*"
 pymatgen="*"
-#pymace = "*" #conflict
 
 [tool.pixi.dependencies]
 # Conda package dependencies for the local environment though pixi
@@ -108,7 +107,6 @@ seekpath = "*"
 phonopy= "*"
 fsspec= "*"
 pymatgen="*"
-#pymace = "*" #conflict
 
 [tool.pixi.pypi-dependencies]
 # PyPI dependencies for the local environment though pixi
@@ -120,9 +118,10 @@ torch-sparse = "*"
 torch-scatter = "*"
 torch-cluster = "*"
 sevenn = "*"
-e3nn= "*"
+e3nn= "==0.5.0"
 pyqt5 = "*"
-#mattersim = ">=1.1.2"
+pymace = "*"
+mattersim = ">=1.1.2"
 #orb-models = ">=0.5.4" #conflict
 
 
