@@ -976,9 +976,9 @@ packages:
   timestamp: 1736252433366
 - pypi: ./
   name: inspired
-  version: 0.5.0.dev13
-  sha256: ec42f9c05e025eef4d5ad1864d881db8a67a419069c879d53c488eeee47bbac4
-  requires_python: '>=3.13'
+  version: 0.5.0.dev16
+  sha256: e246f02ff65903168dc908e90925b320c2d49bc450375c16d1a31ea631c2a31b
+  requires_python: '>=3.12'
   editable: true
 - pypi: https://download.pytorch.org/whl/Jinja2-3.1.4-py3-none-any.whl
   name: jinja2
