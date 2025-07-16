@@ -50,65 +50,30 @@ jobs:
           pixi-version: v0.48.2
 
       - name: Build Conda package
-        run: pixi run conda-build
+        run: |
+          pixi run conda-build
+          mkdir -p /tmp/local-channel/linux-64
+          cp *.conda /tmp/local-channel/linux-64
 
-      - name: upload conda package as artifact
+      - name: Verify conda package
+        uses: neutrons/conda-verify@main
+        with:
+          package-name: inspired
+          local-channel: /tmp/local-channel
+          python-version: "3.10"
+          extra-channels: conda-forge
+
+      - name: Upload conda package as artifact
         uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           name: artifact-conda-package
           path: ${{ env.PKG_NAME }}-*.conda
 
-  conda-verify:
-    name: Conda Verify
-    needs: build
-    runs-on: ubuntu-24.04
-    defaults:
-      run:
-        shell: bash -el {0}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
-          ref: ${{ github.ref }}
-
-      - name: Setup micromamba
-        uses: mamba-org/setup-micromamba@v2
-        with:
-          environment-name: test
-          init-shell: bash
-          python-version: '3.12'
-
-      - name: Download conda package artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: artifact-conda-package
-          path: /tmp/local-channel/linux-64
-
-      - name: Install the package
-        run: |
-          micromamba install --yes -c conda-forge conda-build conda-index python=3.12
-          python -m conda_index /tmp/local-channel
-          micromamba install -c /tmp/local-channel -c conda-forge ${{ env.PKG_NAME }}
-
-      - name: Verify the installation
-        run: |
-          conda_version=$(micromamba list "${{ env.PKG_NAME }}" | awk -v pkg="${{ env.PKG_NAME }}" '$1 == pkg { print $2 }')
-          echo "Conda version: $conda_version"
-          python_version=$(python -c "from ${{ env.PKG_NAME }} import version; print(version.__version__)")
-          echo "Python version: $python_version"
-          if [ "$conda_version" != "$python_version" ]; then
-            echo "Version mismatch!"
-            exit 1
-          else
-            echo "Versions match."
-          fi
-
   publish:
     name: Publish
     runs-on: ubuntu-24.04
-    needs: [conda-verify]
+    needs: [tests, build]
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout
