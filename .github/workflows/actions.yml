@@ -60,7 +60,7 @@ jobs:
         with:
           package-name: inspired
           local-channel: /tmp/local-channel
-          python-version: "3.10"
+          python-version: "3.12"
           extra-channels: conda-forge
 
       - name: Upload conda package as artifact
