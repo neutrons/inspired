@@ -1,21 +1,19 @@
 import pandas as pd
-
-from qtpy.QtWidgets import QTableView, QApplication
-from qtpy.QtCore import QAbstractTableModel, Qt, QModelIndex
-
+from qtpy.QtCore import QAbstractTableModel, QModelIndex, Qt
 
 # Modified from and example given in the link below
 # https://doc.qt.io/qtforpython-6/examples/example_external_pandas.html
 
+
 class PandasModel(QAbstractTableModel):
-    """A model to interface a Qt view with pandas dataframe """
+    """A model to interface a Qt view with pandas dataframe"""
 
     def __init__(self, dataframe: pd.DataFrame, parent=None):
         QAbstractTableModel.__init__(self, parent)
         self._dataframe = dataframe
 
     def rowCount(self, parent=QModelIndex()) -> int:
-        """ Override method from QAbstractTableModel
+        """Override method from QAbstractTableModel
 
         Return row count of the pandas DataFrame
         """
@@ -46,9 +44,7 @@ class PandasModel(QAbstractTableModel):
 
         return None
 
-    def headerData(
-        self, section: int, orientation: Qt.Orientation, role: Qt.ItemDataRole
-    ):
+    def headerData(self, section: int, orientation: Qt.Orientation, role: Qt.ItemDataRole):
         """Override method from QAbstractTableModel
 
         Return dataframe index as vertical header data and columns as horizontal header data.
@@ -61,4 +57,3 @@ class PandasModel(QAbstractTableModel):
                 return str(self._dataframe.index[section])
 
         return None
-
