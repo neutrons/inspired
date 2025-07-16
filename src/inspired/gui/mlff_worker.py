@@ -83,14 +83,7 @@ class MLFFWorker:
             else:
                 with contextlib.redirect_stderr(io.StringIO()) as f:
                     calculator = MatterSimCalculator(load_path="MatterSim-v1.0.0-5M.pth", device=device)
-        elif potential_index == 1:  # ORB v3
-            from orb_models.forcefield import pretrained
-            from orb_models.forcefield.calculator import ORBCalculator
-
-            with contextlib.redirect_stderr(io.StringIO()) as f:
-                orbff = pretrained.orb_v3_conservative_inf_omat(device=device, precision="float32-high")
-            calculator = ORBCalculator(orbff, device=device)
-        elif potential_index == 2:  # SevenNet
+        elif potential_index == 1:  # SevenNet
             from sevenn.calculator import SevenNetCalculator
 
             torch.set_default_dtype(torch.float32)
@@ -100,6 +93,14 @@ class MLFFWorker:
             else:
                 with contextlib.redirect_stderr(io.StringIO()) as f:
                     calculator = SevenNetCalculator(model="7net-mf-ompa", modal="mpa", device=device)
+        '''
+        elif potential_index == 2:  # ORB v3
+            from orb_models.forcefield import pretrained
+            from orb_models.forcefield.calculator import ORBCalculator
+
+            with contextlib.redirect_stderr(io.StringIO()) as f:
+                orbff = pretrained.orb_v3_conservative_inf_omat(device=device, precision="float32-high")
+            calculator = ORBCalculator(orbff, device=device)
         elif potential_index == 3:  # MACE
             from mace.calculators import mace_mp
 
@@ -118,6 +119,7 @@ class MLFFWorker:
             else:
                 with contextlib.redirect_stderr(io.StringIO()) as f:
                     calculator = mace_off(model="medium", default_dtype="float64", device=device)
+        '''
         struc.set_calculator(calculator)
         if relax_cell:
             ecf = ExpCellFilter(struc)

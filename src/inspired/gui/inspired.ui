@@ -496,22 +496,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </item>
                  <item>
                   <property name="text">
-                   <string>ORB v3</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
                    <string>SevenNet</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>MACE</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>MACE-OFF (for organic materials containing only H, C, N, O, F, P, S, Cl, Br, and I)</string>
                   </property>
                  </item>
                 </widget>
@@ -819,7 +804,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>650</width>
+             <width>647</width>
              <height>422</height>
             </rect>
            </property>
