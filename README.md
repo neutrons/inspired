@@ -139,7 +139,9 @@ Note: The VM desktop resolution can be changed at "Preferences->LXQt Settings->M
 
    ```bash
 
-   pixi lock
+   pixi install # for updating the environment
+   or
+   pixi lock # for updating the lock-file
 
    ```
 
