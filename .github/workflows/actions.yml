@@ -78,7 +78,7 @@ jobs:
         with:
           environment-name: test
           init-shell: bash
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Download conda package artifact
         uses: actions/download-artifact@v4
