@@ -30,7 +30,7 @@ artifacts = ["*.yml", "*.yaml", "*.json"]
 
 [tool.hatch.build.hooks.versioningit-onbuild]
 source-file = "src/inspired/_version.py"
-build-file = "inspired/_version.py"
+build-file = "src/inspired/_version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/inspired"]
