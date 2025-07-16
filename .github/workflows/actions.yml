@@ -88,7 +88,7 @@ jobs:
 
       - name: Install the package
         run: |
-          micromamba install --yes -c conda-forge conda-build conda-index
+          micromamba install --yes -c conda-forge conda-build conda-index python=3.12
           python -m conda_index /tmp/local-channel
           micromamba install -c /tmp/local-channel -c conda-forge ${{ env.PKG_NAME }}
 
