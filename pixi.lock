@@ -1381,9 +1381,9 @@ packages:
   timestamp: 1736252433366
 - pypi: ./
   name: inspired
-  version: 0.5.0.dev20
-  sha256: 97bafbc5cebb399558a541ca773337ac4a99d6a42f20416c8f9e3efa66ca3c64
-  requires_python: ==3.12
+  version: 0.5.0.dev22
+  sha256: d964721373ec8b95289e7e66e2a3c121692850eaa11bc432a5097d8def3c265e
+  requires_python: ~=3.12
   editable: true
 - pypi: https://files.pythonhosted.org/packages/15/aa/0aca39a37d3c7eb941ba736ede56d689e7be91cab5d9ca846bde3999eba6/isodate-0.7.2-py3-none-any.whl
   name: isodate
