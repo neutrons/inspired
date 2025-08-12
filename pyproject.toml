@@ -150,6 +150,9 @@ pre-commit = ">=4.2.0"
 ruff = "*"
 codecov = ">=2.1.13"
 
+[tool.pixi.activation.env]
+OMP_NUM_THREADS  = "1"
+
 [tool.pixi.tasks]
 # Packaging
 conda-build-command = { cmd = "pixi build", description = "Wrapper for building the conda package - used by `conda-build`" }
