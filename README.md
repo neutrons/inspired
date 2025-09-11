@@ -80,16 +80,10 @@ INSPIRED can also be installed locally on your personal computer. The current ve
 3. Download the repository. Setup/Update the environment
 
     ```bash
-    pixi install
-    ```
-
-4. Enter the environment
-
-    ```bash
     pixi shell
     ```
 
-5. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
+4. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
 
     ```bash
     wget https://zenodo.org/records/11478889/files/dftdb.tar.gz
@@ -98,7 +92,7 @@ INSPIRED can also be installed locally on your personal computer. The current ve
     tar zxvf model.tar.gz
     ```
 
-6. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
+5. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
 
     ```bash
     inspired
@@ -106,23 +100,28 @@ INSPIRED can also be installed locally on your personal computer. The current ve
 
     when you run the program for the first time, it may ask you to specify the paths to the DFT database and ML models. Set them to where you downloaded/extracted the files, and the main user interface should pop up.
 
+6. When you are done exit the inspired and the pixi environment
+
+    ```bash
+    exit
+    ```
 
 ### Option 2: Install INSPIRED as a conda environment ([v0.4.1](https://github.com/neutrons/inspired#package-versions))
 
-1. Install a conda environment manager for Linux, if not already installed. It can be [miniforge](https://github.com/conda-forge/miniforge), [miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/), or [anaconda](https://docs.anaconda.com/free/anaconda/install/linux/). Also install [git](https://github.com/git-guides/install-git) if it is missing. 
+1. Install a conda environment manager for Linux, if not already installed. It can be [miniforge](https://github.com/conda-forge/miniforge), [miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/), or [anaconda](https://docs.anaconda.com/free/anaconda/install/linux/). Also install [git](https://github.com/git-guides/install-git) if it is missing.
 
 2. Go to a location where you would like to install the program (e.g., $HOME/software), run:
-   
+
     ```bash
-    git clone -b conda041 https://github.com/neutrons/inspired.git
+    git clone --depth 1 --branch v0.4.1 https://github.com/neutrons/inspired.git
     ```
-        
+
     After the download, you should see a folder named “inspired”. Go to the folder by running:
-   
+
     ```bash
     cd inspired
     ```
-   
+
 4. With conda initiated, run the following commands in the project's root directory (inspired):
 
     ```bash
@@ -132,7 +131,7 @@ INSPIRED can also be installed locally on your personal computer. The current ve
     ```
 
 5. To download the latest DFT database and ML models from Zenodo and extract the files, go to (create) a folder where you want to keep these files, run:
-   
+
     ```bash
     wget https://zenodo.org/records/11478889/files/dftdb.tar.gz
     wget https://zenodo.org/records/10723108/files/model.tar.gz
@@ -141,7 +140,7 @@ INSPIRED can also be installed locally on your personal computer. The current ve
     ```
 
 6. If all packages are installed successfully, you may now go to a working directory of your choice and start INSPIRED by running:
-   
+
     ```bash
     inspired
     ```
@@ -155,11 +154,11 @@ INSPIRED can also be installed locally on your personal computer. The current ve
 
 2. Install WSL: search `Command Prompt` in Windows search bar, right click, choose `Run as administrator`. Type `wsl.exe --install` and run. This will install WSL on your computer.
 
-3. Install Ubuntu: Most users do not use Administrator as default account. Therefore, open a new `Command Prompt` window (this time NOT as administrator), and run `wsl.exe --install` again. It will install [Ubuntu Linux](https://ubuntu.com/) under your account. 
+3. Install Ubuntu: Most users do not use Administrator as default account. Therefore, open a new `Command Prompt` window (this time NOT as administrator), and run `wsl.exe --install` again. It will install [Ubuntu Linux](https://ubuntu.com/) under your account.
 
 4. Start Ubuntu: search 'Ubuntu' in Windows search bar, click the Ubuntu App. The pop-up window will be a Linux terminal.
 
-5. Additional setup you may need in the Ubuntu terminal: 
+5. Additional setup you may need in the Ubuntu terminal:
 
     ```bash
     sudo apt-get update
