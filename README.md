@@ -77,7 +77,7 @@ INSPIRED can also be installed locally on your personal computer. The current ve
     cd inspired
     ```
 
-3. Download the repository. Setup/Update the environment
+3. Create (first time only) and activate the environment
 
     ```bash
     pixi shell
@@ -100,11 +100,14 @@ INSPIRED can also be installed locally on your personal computer. The current ve
 
     when you run the program for the first time, it may ask you to specify the paths to the DFT database and ML models. Set them to where you downloaded/extracted the files, and the main user interface should pop up.
 
-6. When you are done exit the inspired and the pixi environment
+6. When you are done, close INSPIRED and exit the pixi environment
 
     ```bash
     exit
     ```
+
+    The environment can be activated again by going to the `inspired` folder and run `pixi shell`.
+   
 
 ### Option 2: Install INSPIRED as a conda environment ([v0.4.1](https://github.com/neutrons/inspired#package-versions))
 
