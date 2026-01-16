@@ -471,6 +471,7 @@ if __name__ == "__main__":
 
 def gui():
     """Main entry point for Qt application"""
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
     # print version and exit
     input_flags = sys.argv[1::]
     if "--v" in input_flags or "--version" in input_flags:
