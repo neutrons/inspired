@@ -6,7 +6,7 @@ import os
 import numpy as np
 import torch
 from ase import Atoms
-from ase.constraints import ExpCellFilter
+from ase.filters import ExpCellFilter
 
 # from ase.phonons import Phonons
 from ase.io import write
