@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   tests:
-    name: Unit tests
+    name: Testing Suite
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,20 +37,14 @@ jobs:
           # See: https://github.com/prefix-dev/pixi/pull/3092
           run-install: false
 
+      - name: pylint
+        run: pixi run pre-commit run -a ruff
+
       - name: Install dependencies (skip local package)
         run: pixi install --frozen --skip ${{ env.PKG_NAME }}
 
       - name: Install local package
         run: pixi run pip install --no-deps -e .
-
-      - name: Run unit tests
-        run: pixi run xvfb-run --server-args="-screen 0 1920x1080x24" -a python -m pytest --cov=src --cov-report=xml --cov-report=term
-
-      - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v5
-        if: github.actor != 'dependabot[bot]'
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
 
   conda-build:
     name: Build conda package
