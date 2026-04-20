@@ -84,7 +84,6 @@ jobs:
           package-name: ${{ env.PKG_NAME }}
           module-name: ${{ env.MODULE_NAME }}
           local-channel: /tmp/local-channel
-          python-version: "3.11"
 
       - name: Upload conda package as artifact
         uses: actions/upload-artifact@v7
