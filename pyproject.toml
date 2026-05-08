@@ -121,6 +121,8 @@ sevenn = "*"
 #e3nn= "==0.5.0"
 pyqt5 = "*"
 mattersim = ">=1.1.2"
+torchvision = "== 0.22.1"
+torchaudio = "==2.7.1"
 
 
 [tool.pixi.pypi-options]
