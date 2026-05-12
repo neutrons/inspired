@@ -95,8 +95,11 @@ qtpy = "*"
 spglib = "*"
 seekpath = "*"
 phonopy= "==2.28.0"
+phono3py = "*"
 fsspec= "*"
 pymatgen="*"
+libblas = "*"
+liblapack = "*"
 
 [tool.pixi.dependencies]
 # Conda package dependencies for the local environment though pixi
@@ -105,8 +108,11 @@ qtpy = "*"
 spglib = "*"
 seekpath = "*"
 phonopy= "==2.28.0"
+phono3py = "*"
 fsspec= "*"
 pymatgen="*"
+libblas = "*"
+liblapack = "*"
 
 [tool.pixi.pypi-dependencies]
 # PyPI dependencies for the local environment though pixi
@@ -121,6 +127,8 @@ sevenn = "*"
 #e3nn= "==0.5.0"
 pyqt5 = "*"
 mattersim = ">=1.1.2"
+torchvision = "== 0.22.1"
+torchaudio = "==2.7.1"
 
 
 [tool.pixi.pypi-options]
