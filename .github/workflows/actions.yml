@@ -79,7 +79,7 @@ jobs:
           cp *.conda /tmp/local-channel/linux-64
 
       - name: Verify conda package
-        uses: neutrons/conda-actions/pkg-verify@main
+        uses: neutrons/conda-actions/pkg-verify@a618e80c01fc33d89e2c87aae16df7a53f466eb6
         with:
           package-name: ${{ env.PKG_NAME }}
           module-name: ${{ env.MODULE_NAME }}
