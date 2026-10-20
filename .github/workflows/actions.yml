@@ -77,14 +77,21 @@ jobs:
           pixi run conda-build
           mkdir -p /tmp/local-channel/linux-64
           cp *.conda /tmp/local-channel/linux-64
+      
+      - name: Build conda environment
+        id: build
+        uses: neutrons/gh-actions/pkg-install@v2.1
+        with:
+          package-name: ${{ env.PKG_NAME }}
+          local-channel: /tmp/local-channel
+          python-version: "3.12"
 
       - name: Verify conda package
-        uses: neutrons/conda-actions/pkg-verify@a618e80c01fc33d89e2c87aae16df7a53f466eb6
+        uses: neutrons/gh-actions/pkg-verify@v2.1
         with:
           package-name: ${{ env.PKG_NAME }}
           module-name: ${{ env.MODULE_NAME }}
-          local-channel: /tmp/local-channel
-          python-version: "3.12"
+          conda-env-name: ${{ steps.build.outputs.conda-env }}
 
       - name: Upload conda package as artifact
         uses: actions/upload-artifact@v7
@@ -123,7 +130,7 @@ jobs:
           name: artifact-conda-package
 
       - name: Upload package to anaconda
-        uses: neutrons/conda-actions/publish@main
+        uses: neutrons/gh-actions/publish@v2.1
         with:
           anaconda-token: ${{ secrets.ANACONDA_TOKEN }}
           organization: neutrons
@@ -131,7 +138,7 @@ jobs:
 
       - name: Remove old packages
         if: github.ref == 'refs/heads/next'
-        uses: neutrons/conda-actions/pkg-remove@v1
+        uses: neutrons/gh-actions/pkg-remove@v2.1
         with:
           anaconda_token: ${{ secrets.ANACONDA_TOKEN }}
           organization: neutrons
