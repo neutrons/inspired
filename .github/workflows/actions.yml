@@ -78,8 +78,8 @@ jobs:
           mkdir -p /tmp/local-channel/linux-64
           cp *.conda /tmp/local-channel/linux-64
       
-      - name: Build conda environment
-        id: build
+      - name: Install conda environment and package
+        id: conda-install
         uses: neutrons/gh-actions/pkg-install@v2.1
         with:
           package-name: ${{ env.PKG_NAME }}
@@ -91,7 +91,7 @@ jobs:
         with:
           package-name: ${{ env.PKG_NAME }}
           module-name: ${{ env.MODULE_NAME }}
-          conda-env-name: ${{ steps.build.outputs.conda-env }}
+          conda-env-name: ${{ steps.conda-install.outputs.conda-env }}
 
       - name: Upload conda package as artifact
         uses: actions/upload-artifact@v7
